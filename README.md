@@ -42,3 +42,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## generate component
+If you want to generate component install extension : https://marketplace.visualstudio.com/items?itemName=ricardo-emerson.create-react-tsx-component
+In File>Preferences>Settings find  Extensions > Create React TSX, and change
+
+To file extension tsx and less
+
+To generate component in any folder just click that folder with RMB and choose => Create React JS Styled Component <=, and voila, done.
