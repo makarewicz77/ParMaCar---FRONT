@@ -1,7 +1,7 @@
 class Detail{
     field: string;
     value: string;
-    constructor(obj:detail){
+    constructor(obj:Detail){
         this.field = obj.field;
         this.value = obj.value;
     }
