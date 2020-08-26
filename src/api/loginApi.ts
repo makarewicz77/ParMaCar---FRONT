@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { crud, Mutation } from "../hooks";
+import { crud } from "../hooks";
 import { User } from "../models/user";
 import { baseLoginUrl, baseUserUrl, baseLogoutUrl } from "./urls";
 

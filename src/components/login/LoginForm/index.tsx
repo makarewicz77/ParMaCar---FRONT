@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import "./styles.less";
@@ -8,6 +9,7 @@ import { LoginApi } from "../../../api/loginApi";
 import { User } from "../../../models/user";
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
+
 type loginProps ={
   setLogedUser: Function,
 }
