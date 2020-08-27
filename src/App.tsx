@@ -6,7 +6,11 @@ import 'antd/dist/antd.css'
 function App() {
   return (
     <div className="App">
-      <Test test="string" test2={2}></Test>
+      <div className="top_bar">
+        <div className="login_btn_div">
+          <Test test="string" test2={2}></Test>
+        </div>
+      </div>
     </div>
   );
 }

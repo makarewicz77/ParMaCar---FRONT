@@ -1,0 +1,30 @@
+.login_btn {
+  text-align: right;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.logout_btn {
+  text-align: right;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.home_div {
+  display: block;
+}
+
+.home_logged_in {
+  display: inline-flex;
+  height: 50px;
+  line-height: 50px;
+  align-items: baseline;
+}
+
+.welcome {
+  color: white;
+}
+
+.home_page {
+  text-align: center;
+}
