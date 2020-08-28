@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import "./styles.less";
+import './index.css';
 import { useFormWithRef, addHours } from "../../../utils/utils";
 import { FormInstance } from "antd/lib/form";
 import { useMutation } from "../../../hooks";
@@ -43,7 +44,7 @@ const LoginForm: React.FC<loginProps> = ({setLogedUser}) => {
   };
 
   return (
-    <div>
+    <div className="login_form_div">
       <Form
         {...layout}
         name="basic"
