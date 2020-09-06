@@ -4,48 +4,63 @@ import { Router } from 'react-router-dom';
 import { type } from 'os';
 import Item from 'antd/lib/list/Item';
 import { strict } from 'assert';
+import axios from 'axios';
+import { VCategory } from '../../views/Category/category';
+import categoriesReducer, { fetchCategories, initialCategoriesState } from '../../redux/reducers/categoriesReducer';
 
 type catProps = {
   id?: number,
   name?: string
 }
 
-const Categories: React.FC<catProps> = ({ id, name }) => {
+const Categories: React.FC<catProps> = () => {
 
-  var tmpCatList: string[] = [];
-  const [catList, setCatList] = useState({});
-
-  async function fetchData() {
-    const res = await fetch("http://127.0.0.1:8000/api/categories/?format=json");
-    res
-      .json()
-      .then(res => setCatList(res))
-      .catch(error => console.log(error));
-  }
+  const [categories, dispatch] = React.useReducer(
+    categoriesReducer,
+    initialCategoriesState
+  );
 
   useEffect(() => {
-    fetchData();
-  });
+    const onLoad = () => {
+      fetchCategories()(dispatch);
+    };
 
-  // catList.forEach(item => {
-  //   var tmp = tmpCatList.find(elem => elem.id === item.id);
-  // });
+    window.addEventListener('load', onLoad);
 
-  for(let i=0; i<JSON.stringify(catList).split("{").length-1; i++){
-    tmpCatList.push(JSON.stringify(catList).split("{")[i+1].split("\"")[5]);
-  }
+    return () => {
+      window.removeEventListener('load', onLoad);
+    }
+
+  }, []);
+
+  const createCatList = (catList: VCategory[]) =>
+    catList
+      .map((c: any) => {
+        if (c.parent_id == null) {
+          return (
+            <>
+              <h4 id={c.id}>
+                {c.name}
+              </h4>
+            </>
+          )
+        } else {
+          return (
+            <>
+              <h4 id={c.id}>
+                {c.name}
+              </h4>
+            </>
+          )
+        }
+      })
 
   return (
     <>
-      <h1>categories</h1>
-      {/* {JSON.stringify(catList).split("{")[1].split("\"")[5]} */}
-      <hr/>
-      {/* {tmpCatList.forEach(e => { return e })} */}
-      <hr/>
-      {tmpCatList[0]}
-      {tmpCatList[1]}
-      {tmpCatList[2]}
-      <hr/>
+      <h1>Categories</h1>
+      <hr />
+      {createCatList(categories.category)}
+      <hr />
     </>
   );
 };
