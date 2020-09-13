@@ -1,6 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 import "./App.css";
 import Test from "./components/test";
+import Categories from "./components/Categories";
 import "antd/dist/antd.css";
 
 function App() {
