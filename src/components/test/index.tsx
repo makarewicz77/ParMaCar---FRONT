@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./styles.less";
+import "./index.css";
 import { Link, Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import LoginForm from "../login/LoginForm";
 import { Button } from "antd";
@@ -19,7 +20,7 @@ const Test: React.FC<props> = ({ test, test2 }) => {
   const history = useHistory();
   const logout = () => {
     removeCookie("token")
-    LoginApi.logoutUser(cookies.token,setLogedUser)
+    LoginApi.logoutUser(cookies.token, setLogedUser)
     //history.push('/home')
   }
   React.useEffect(() => {
@@ -28,27 +29,29 @@ const Test: React.FC<props> = ({ test, test2 }) => {
   }, []);
   return (
     <Router>
-      <div>
+      <div className="home_div">
         {logedUser === undefined && (
-          <Button type="primary">
+          <Button className="login_btn" type="primary">
             <Link to="/login">Zaloguj sie</Link>
           </Button>
         )}
         {logedUser !== undefined && (
-          <div>
-            <h5>Witaj {logedUser?.username}</h5>
-            <Button type="primary" onClick={() => logout()}>
+          <div className="home_logged_in">
+            <h5 className="welcome">Witaj {logedUser?.username}</h5>
+            <Button className="logout_btn" type="primary" onClick={() => logout()}>
               <Link to="/home">Wyloguj się</Link>
             </Button>
           </div>
         )}
 
-        <Switch>
-          <Route path="/login">
-            <LoginForm setLogedUser={setLogedUser} />
-          </Route>
-          <Route path="/home">Welcome! This is homepage</Route>
-        </Switch>
+        <div className="home_page">
+          <Switch>
+            <Route path="/login">
+              <LoginForm setLogedUser={setLogedUser} />
+            </Route>
+            <Route path="/home">Welcome! This is homepage</Route>
+          </Switch>
+        </div>
       </div>
     </Router>
   );
