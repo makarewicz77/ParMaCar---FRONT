@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./styles.less";
+import "./index.css";
 import { Link, Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import LoginForm from "../login/LoginForm";
 import { Button, Row, Col } from "antd";
@@ -16,7 +17,7 @@ type props = {
 
 const Test: React.FC<props> = () => {
   const [logedUser, setLogedUser] = useState<User>();
-  const [cookies,, removeCookie] = useCookies(["token"]);
+  const [cookies, , removeCookie] = useCookies(["token"]);
   const logout = () => {
     removeCookie("token");
     LoginApi.logoutUser(cookies.token, setLogedUser);
@@ -48,7 +49,7 @@ const Test: React.FC<props> = () => {
             )}
             {logedUser !== undefined && (
               <div>
-                <UserOptions user={logedUser}  logout={logout}/>
+                <UserOptions user={logedUser} logout={logout} />
               </div>
             )}
           </Col>
@@ -60,12 +61,14 @@ const Test: React.FC<props> = () => {
               <Link to="/home">Wyloguj się</Link>
         </Button>*/}
 
-        <Switch>
-          <Route path="/login">
-            <LoginForm setLogedUser={setLogedUser}/>
-          </Route>
-          <Route path="/home">Welcome! This is homepage</Route>
-        </Switch>
+        <div className="home_page">
+          <Switch>
+            <Route path="/login">
+              <LoginForm setLogedUser={setLogedUser} />
+            </Route>
+            <Route path="/home">Welcome! This is homepage</Route>
+          </Switch>
+        </div>
       </div>
     </Router>
   );

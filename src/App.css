@@ -1,5 +1,13 @@
+div#root {
+  /* background-color: rgb(85, 120, 190); biały tekst */
+  background-color: rgb(110, 140, 200); /* czarny tekst */
+}
+
 .App {
-  text-align: center;
+  /* text-align: center; */
+  margin: 0 auto;
+  width: 1150px;
+  height: 1200px;
 }
 
 .App-logo {
@@ -34,5 +42,27 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.top_bar {
+  /* background-color: mediumblue; */
+  /* background-color: midnightblue; */
+  background-color: navy;
+
+  display: block;
+  height: 50px;
+  line-height: 50px;
+}
+
+.login_btn_div {
+  text-align: right;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .App {
+    width: 95%;
+    min-width: 500px;
   }
 }
