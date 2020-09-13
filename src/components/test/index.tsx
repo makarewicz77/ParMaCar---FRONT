@@ -3,46 +3,63 @@ import "./styles.less";
 import "./index.css";
 import { Link, Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import LoginForm from "../login/LoginForm";
-import { Button } from "antd";
+import { Button, Row, Col } from "antd";
 import { User } from "../../models/user";
 import { useCookies } from "react-cookie";
-import { useMutation } from "../../hooks";
 import { LoginApi } from "../../api/loginApi";
-import { useHistory } from "react-router-dom";
+import "antd/dist/antd.css";
+import UserOptions from "../login/UserOptions";
+
 type props = {
   test?: string;
   test2?: number;
 };
 
-const Test: React.FC<props> = ({ test, test2 }) => {
+const Test: React.FC<props> = () => {
   const [logedUser, setLogedUser] = useState<User>();
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-  const history = useHistory();
+  const [cookies, , removeCookie] = useCookies(["token"]);
   const logout = () => {
-    removeCookie("token")
-    LoginApi.logoutUser(cookies.token, setLogedUser)
+    removeCookie("token");
+    LoginApi.logoutUser(cookies.token, setLogedUser);
     //history.push('/home')
-  }
+  };
   React.useEffect(() => {
     if (cookies.token === undefined) setLogedUser(undefined);
     else LoginApi.getUser(cookies.token, setLogedUser);
-  }, []);
+  }, [cookies.token]);
   return (
     <Router>
-      <div className="home_div">
-        {logedUser === undefined && (
-          <Button className="login_btn" type="primary">
-            <Link to="/login">Zaloguj sie</Link>
-          </Button>
-        )}
-        {logedUser !== undefined && (
-          <div className="home_logged_in">
-            <h5 className="welcome">Witaj {logedUser?.username}</h5>
-            <Button className="logout_btn" type="primary" onClick={() => logout()}>
+      <div>
+        <Row>
+          <Col xs={12} sm={3} md={2} lg={1}>
+            test
+          </Col>
+          <Col xs={6} sm={6} md={8} lg={10}>
+            test
+          </Col>
+          <Col xs={6} sm={3} md={2} lg={1}>
+            test
+          </Col>
+          <Col xs={6} sm={6} md={8} lg={10}>
+            {" "}
+            {logedUser === undefined && (
+              <Button type="primary">
+                <Link to="/login">Zaloguj sie</Link>
+              </Button>
+            )}
+            {logedUser !== undefined && (
+              <div>
+                <UserOptions user={logedUser} logout={logout} />
+              </div>
+            )}
+          </Col>
+        </Row>
+        {/*
+        
+  <h2>Witaj {logedUser?.username}</h2>
+            <Button type="primary" onClick={() => logout()}>
               <Link to="/home">Wyloguj się</Link>
-            </Button>
-          </div>
-        )}
+        </Button>*/}
 
         <div className="home_page">
           <Switch>
