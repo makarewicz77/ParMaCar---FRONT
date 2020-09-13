@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import './styles.css';
-import { Router } from 'react-router-dom';
-import { type } from 'os';
-import Item from 'antd/lib/list/Item';
-import { strict } from 'assert';
-import axios from 'axios';
-import { VCategory } from '../../views/Category/category';
-import categoriesReducer, { fetchCategories, initialCategoriesState } from '../../redux/reducers/categoriesReducer';
+import React, { useEffect, useReducer } from "react";
+import "./styles.css";
+import { Category } from "../../models/category";
+import categoriesReducer, {
+  fetchCategories,
+  initialCategoriesState,
+} from "../../redux/reducers/categoriesReducer";
 
 type catProps = {
-  id?: number,
-  name?: string
-}
+  id?: number;
+  name?: string;
+};
 
 const Categories: React.FC<catProps> = () => {
-
-  const [categories, dispatch] = React.useReducer(
+  const [categories, dispatch] = useReducer(
     categoriesReducer,
     initialCategoriesState
   );
@@ -25,35 +22,29 @@ const Categories: React.FC<catProps> = () => {
       fetchCategories()(dispatch);
     };
 
-    window.addEventListener('load', onLoad);
+    window.addEventListener("load", onLoad);
 
     return () => {
-      window.removeEventListener('load', onLoad);
-    }
-
+      window.removeEventListener("load", onLoad);
+    };
   }, []);
 
-  const createCatList = (catList: VCategory[]) =>
-    catList
-      .map((c: any) => {
-        if (c.parent_id == null) {
-          return (
-            <>
-              <h4 id={c.id}>
-                {c.name}
-              </h4>
-            </>
-          )
-        } else {
-          return (
-            <>
-              <h4 id={c.id}>
-                {c.name}
-              </h4>
-            </>
-          )
-        }
-      })
+  const createCatList = (catList: Category[]) =>
+    catList.map((c: any) => {
+      if (c.parent_id == null) {
+        return (
+          <>
+            <h4 id={c.id}>{c.name}</h4>
+          </>
+        );
+      } else {
+        return (
+          <>
+            <h4 id={c.id}>{c.name}</h4>
+          </>
+        );
+      }
+    });
 
   return (
     <>
