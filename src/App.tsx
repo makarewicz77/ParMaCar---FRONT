@@ -1,8 +1,8 @@
-import React from 'react';
-import './App.css';
-import Test from './components/test'
-import Categories from './components/categories'
-import 'antd/dist/antd.css'
+import React from "react";
+import "./App.css";
+import Test from "./components/test";
+import Categories from "./components/Categories";
+import "antd/dist/antd.css";
 
 function App() {
   return (
