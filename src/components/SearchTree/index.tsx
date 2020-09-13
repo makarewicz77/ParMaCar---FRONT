@@ -33,9 +33,6 @@ const SearchTree: React.FC = () => {
 
   const { Search } = Input;
 
-  //const x = 4; //  ilość wierszy - u nas liczba kategorii
-  //const y = 2; //  ilość rozwijanych
-  //const z = 0; //  głębokość
   const gData: any = [];
 
   const getParentKey = (key: number, tree: number[]) => {
@@ -63,37 +60,21 @@ const SearchTree: React.FC = () => {
     const preKey = _preKey || "0";
     const tns = _tns || gData;
     const p_id = prev_id || -1;
-
     const tab_prev: number[] = [];
-    const children = [];
-    // for (let i = 0; i < x; i++) {
-    //   const key = `${preKey}-${i}`;
-    //   tns.push({ title: key, key });
-    //   if (i < y) {
-    //     children.push(key);
-    //   }
-    // }
-    // if (_level < 0) {
-    //   return tns;
-    // }
-    // const level = _level - 1;
-    // children.forEach((key, index) => {
-    //   tns[index].children = [];
-    //   return generateData(level, key, tns[index].children);
-    // });
+    const children: string[] = [];
 
-    for (let i = 0; i < cat.length; i++) {
+    cat.forEach((k, i) => {
       const key = `${preKey}-${cat[i].id}`;
       if (counter >= 0) {
         if (cat[i].parent_id == null) {
           tns.push({ title: cat[i].name, key });
+          if (cat[i + 1] != null && cat[i + 1].parent_id == null)
+            tab_prev.push(-1);
         } else {
           children.push(cat[i].name);
-          const tmp: any = cat.find((x) => x.id === cat[i].parent_id)?.id;
+          const tmp: any = cat[i].parent_id;
           if (tab_prev.find((x) => x === tmp) == null) {
             tab_prev.push(tmp);
-          } else {
-            tab_prev.push(-1);
           }
         }
       } else if (counter < 0) {
@@ -101,7 +82,7 @@ const SearchTree: React.FC = () => {
           tns.push({ title: cat[i].name, key });
         }
       }
-    }
+    });
 
     if (counter < 0) return tns;
 
@@ -114,7 +95,6 @@ const SearchTree: React.FC = () => {
         tab_prev[index] !== -1
       ) {
         tns[index].children = [];
-        console.log(tab_prev[index]);
         return generateData(
           new_counter,
           key,
@@ -122,8 +102,6 @@ const SearchTree: React.FC = () => {
           tns[index].children,
           cat
         );
-      } else {
-        //return generateData(new_counter, key, null, categories.category);
       }
     });
   };
@@ -197,7 +175,6 @@ const SearchTree: React.FC = () => {
 
   return (
     <>
-      <h1>SearchTree</h1>
       <div>
         <Search
           style={{ marginBottom: 8 }}

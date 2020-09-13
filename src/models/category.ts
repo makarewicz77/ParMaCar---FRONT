@@ -1,7 +1,8 @@
 export class Category {
   id: number;
   name: string;
-  parent_id: number | null;
+  parent_id: number;
+
   constructor(obj: Category) {
     this.id = obj.id;
     this.name = obj.name;
