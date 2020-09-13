@@ -1,0 +1,14 @@
+{
+  "loginForm": {
+    "password": "Hasło",
+    "logIn": "Zaloguj się"
+  },
+  "registerForm": {
+    "password": "Password",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "email": "Adres e-mail",
+    "repeatPassword": "Powtórz hasło",
+    "signUp": "Załóż konto"
+  }
+}

@@ -3,12 +3,14 @@ import "./styles.less";
 import "./index.css";
 import { Link, Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import LoginForm from "../login/LoginForm";
-import { Button, Row, Col } from "antd";
+import { Button, Row, Col, Modal } from "antd";
 import { User } from "../../models/user";
 import { useCookies } from "react-cookie";
 import { LoginApi } from "../../api/loginApi";
 import "antd/dist/antd.css";
 import UserOptions from "../login/UserOptions";
+import Categories from "../categories";
+import RegisterForm from "../login/RegisterForm";
 
 type props = {
   test?: string;
@@ -23,6 +25,7 @@ const Test: React.FC<props> = () => {
     LoginApi.logoutUser(cookies.token, setLogedUser);
     //history.push('/home')
   };
+  const [modalVisible, setModalVisible] = useState(false);
   React.useEffect(() => {
     if (cookies.token === undefined) setLogedUser(undefined);
     else LoginApi.getUser(cookies.token, setLogedUser);
@@ -43,9 +46,18 @@ const Test: React.FC<props> = () => {
           <Col xs={6} sm={6} md={8} lg={10}>
             {" "}
             {logedUser === undefined && (
-              <Button type="primary">
-                <Link to="/login">Zaloguj sie</Link>
-              </Button>
+              <>
+                <Button
+                  type="primary"
+                  className="login_button"
+                  onClick={() => setModalVisible(true)}
+                >
+                  <Link to="/login">Zaloguj sie</Link>
+                </Button>
+                <Button type="primary" className="register_button">
+                  <Link to="/register">Zarejestruj sie</Link>
+                </Button>
+              </>
             )}
             {logedUser !== undefined && (
               <div>
@@ -64,9 +76,25 @@ const Test: React.FC<props> = () => {
         <div className="home_page">
           <Switch>
             <Route path="/login">
-              <LoginForm setLogedUser={setLogedUser} />
+              <Modal
+                title="Logowanie"
+                visible={modalVisible}
+                footer={null}
+                onCancel={() => setModalVisible(false)}
+                keyboard
+              >
+                <LoginForm setLogedUser={setLogedUser} />
+              </Modal>
             </Route>
-            <Route path="/home">Welcome! This is homepage</Route>
+            <Route path="/register">
+              <RegisterForm />
+            </Route>
+            <Route path="/home">
+              Welcome! This is homepage
+              <div className="cat_list_div">
+                <Categories />
+              </div>
+            </Route>
           </Switch>
         </div>
       </div>

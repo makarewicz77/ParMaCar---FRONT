@@ -1,25 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from "react";
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button, message, Modal } from "antd";
 import "./styles.less";
-import './index.css';
+import "./index.css";
 import { useFormWithRef, addHours } from "../../../utils/utils";
 import { FormInstance } from "antd/lib/form";
 import { useMutation } from "../../../hooks";
 import { LoginApi } from "../../../api/loginApi";
 import { User } from "../../../models/user";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useTranslation } from "react-i18next";
+import { LoadingOutlined } from "@ant-design/icons";
 
-type loginProps ={
-  setLogedUser: Function,
-}
+type loginProps = {
+  setLogedUser: Function;
+};
 
-const LoginForm: React.FC<loginProps> = ({setLogedUser}) => {
+const LoginForm: React.FC<loginProps> = ({ setLogedUser }) => {
   const history = useHistory();
   const layout = {
-    labelCol: { span: 10 },
-    wrapperCol: { span: 4 },
+    labelCol: { span: 8 },
+    wrapperCol: { span: 12 },
   };
   const tailLayout = {
     wrapperCol: { span: 26 },
@@ -28,23 +30,27 @@ const LoginForm: React.FC<loginProps> = ({setLogedUser}) => {
     console.log("Failed:", errorInfo);
   };
   const ref = useRef<FormInstance>(null);
+  const { t, i18n } = useTranslation("common");
   const [form] = useFormWithRef(ref);
+  const [loading, setLoading] = useState(false);
   const [login] = useMutation(LoginApi.create);
-  const [cookies, setCookie] = useCookies(['token']);
+  const [cookies, setCookie] = useCookies(["token"]);
   const onSave = (partialUser: Partial<User>) => {
+    setLoading(true);
     login(partialUser).then((res: any) => {
-      setLogedUser(res.data.user);
-      console.log(res);
-      if (res.data === undefined)
-        message.error("Wprowadzono niepoprawne dane. Wprowadź prawidłowe dane",2000);
-      else {
+      if (!res.error) {
+        setLogedUser(res.data.user);
         message.success("Udało się zalogować");
-        setCookie("token", res.data.token, {expires:addHours(8)})
+        setCookie("token", res.data.token, { expires: addHours(8) });
+        setLoading(false);
         history.push("/home");
+      } else {
+        message.error("Wprowadzono niepoprawne dane. Wprowadź prawidłowe dane");
+        setTimeout(() => message.destroy(), 2000);
+        setLoading(false);
       }
     });
   };
-
   return (
     <div className="login_form_div">
       <Form
@@ -61,15 +67,13 @@ const LoginForm: React.FC<loginProps> = ({setLogedUser}) => {
         >
           <Input />
         </Form.Item>
-
         <Form.Item
-          label="Password"
+          label={t("loginForm.password")}
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password />
         </Form.Item>
-
         <Button
           type="primary"
           htmlType="submit"
@@ -81,8 +85,11 @@ const LoginForm: React.FC<loginProps> = ({setLogedUser}) => {
           }
           {...tailLayout}
         >
-          Submit
+          {loading && <LoadingOutlined />} {t("loginForm.logIn")}
         </Button>
+        <h4 className="register_info">
+          Nie masz jeszcze konta? <Link to="/register">Zarejestruj się</Link>
+        </h4>
       </Form>
     </div>
   );
