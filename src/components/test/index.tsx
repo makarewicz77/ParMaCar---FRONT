@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 import { LoginApi } from "../../api/loginApi";
 import "antd/dist/antd.css";
 import UserOptions from "../login/UserOptions";
-import Categories from "../categories";
+import Categories from "../Categories";
 import RegisterForm from "../login/RegisterForm";
 
 type props = {
@@ -90,9 +90,12 @@ const Test: React.FC<props> = () => {
               <RegisterForm />
             </Route>
             <Route path="/home">
-              Welcome! This is homepage
-              <div className="cat_list_div">
-                <Categories />
+              <div>
+                <div>Welcome! This is homepage</div>
+                <div className="cat_list_div">
+                  <Categories />
+                </div>
+                <div></div>
               </div>
             </Route>
           </Switch>

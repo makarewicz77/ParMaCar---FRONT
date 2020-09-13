@@ -2,12 +2,7 @@ import React from "react";
 import "./styles.css";
 import SearchTree from "../SearchTree";
 
-type catProps = {
-  id?: number;
-  name?: string;
-};
-
-const Categories: React.FC<catProps> = () => {
+const Categories: React.FC = () => {
   return (
     <>
       <h1>Categories</h1>

@@ -32,3 +32,7 @@
 .register_button {
   margin-left: 10px;
 }
+
+.cat_list_div {
+  float: left;
+}

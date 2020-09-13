@@ -138,7 +138,7 @@ const SearchTree: React.FC = () => {
         return null;
       })
       .filter(
-        (item: any, i: number, self: any) => item && self.indexOf(item) === i
+        (item: any, i: any, self: any) => item && self.indexOf(item) === i
       );
     setState({
       expandedKeys,
@@ -175,12 +175,12 @@ const SearchTree: React.FC = () => {
 
   return (
     <>
-      <div>
-        <Search
+      <div className="tree_menu_div">
+        {/* <Search
           style={{ marginBottom: 8 }}
           placeholder="Search"
           onChange={onChange}
-        />
+        /> */}
         <Tree
           onExpand={onExpand}
           expandedKeys={expandedKeys}

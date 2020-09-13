@@ -1,1 +1,12 @@
 /* The component style is inserted here. */
+
+.tree_menu_div {
+  float: left;
+  display: contents;
+}
+
+.ant-tree-list-holder-inner {
+  background: linear-gradient(white, #1890ff);
+  border-style: solid;
+  border-width: thin;
+}
