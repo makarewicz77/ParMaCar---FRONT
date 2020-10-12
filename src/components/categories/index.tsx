@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import SearchTree from "../SearchTree";
+import SearchTree from "../../views/SearchTree";
 
 const Categories: React.FC = () => {
   return (

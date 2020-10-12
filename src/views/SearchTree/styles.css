@@ -10,3 +10,11 @@
   border-style: solid;
   border-width: thin;
 }
+
+.ant-tree-treenode.ant-tree-treenode-switcher-close {
+  margin-right: 10px;
+}
+
+.ant-tree-treenode.ant-tree-treenode-switcher-open {
+  margin-right: 10px;
+}

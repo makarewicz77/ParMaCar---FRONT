@@ -35,4 +35,11 @@
 
 .cat_list_div {
   float: left;
+  /* min-width: 218px; */
+  overflow: hidden;
+}
+
+.prod_list_div {
+  float: left;
+  overflow: hidden;
 }

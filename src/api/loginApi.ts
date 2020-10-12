@@ -18,11 +18,11 @@ export const LoginApi = {
   },
   logoutUser:(token: string, setLogedUser:Function)=>{
     axios
-    .request({
-      url: baseLogoutUrl,
-      headers: { Authorization: "Token " + token },
-      method: "POST"
-    })
-    .then((res) => setLogedUser(undefined));
+      .request({
+        url: baseLogoutUrl,
+        headers: { Authorization: "Token " + token },
+        method: "POST"
+      })
+      .then((res) => setLogedUser(undefined));
   }
 };

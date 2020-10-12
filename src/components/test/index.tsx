@@ -11,6 +11,7 @@ import "antd/dist/antd.css";
 import UserOptions from "../login/UserOptions";
 import Categories from "../Categories";
 import RegisterForm from "../login/RegisterForm";
+import Products from "../Products";
 
 type props = {
   test?: string;
@@ -73,7 +74,7 @@ const Test: React.FC<props> = () => {
               <Link to="/home">Wyloguj się</Link>
         </Button>*/}
 
-        <div className="home_page">
+        <div className="test_div">
           <Switch>
             <Route path="/login">
               <Modal
@@ -90,12 +91,14 @@ const Test: React.FC<props> = () => {
               <RegisterForm />
             </Route>
             <Route path="/home">
-              <div>
+              <div className="home_page">
                 <div>Welcome! This is homepage</div>
                 <div className="cat_list_div">
                   <Categories />
                 </div>
-                <div></div>
+                <div className="prod_list_div">
+                  <Products />
+                </div>
               </div>
             </Route>
           </Switch>

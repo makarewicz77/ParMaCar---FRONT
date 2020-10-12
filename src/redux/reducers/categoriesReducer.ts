@@ -8,6 +8,7 @@ import {
 } from "../actions/categoriesActions";
 import axios from "axios";
 import { Category } from "../../models/category";
+import { baseCategoriesUrl } from "../../api/urls";
 
 export const initialCategoriesState = {
   error: null,
@@ -19,7 +20,7 @@ export function fetchCategories() {
   return (dispatch: any) => {
     dispatch(fetchCategoryBegin());
     axios
-      .get<Category[]>("http://127.0.0.1:8000/api/categories/?format=json")
+      .get<Category[]>(baseCategoriesUrl)
       .then((res) => res.data)
       .then((res) => dispatch(fetchCategorySuccess(res)))
       .catch((error) => dispatch(fetchCategoryFailure(error)));
