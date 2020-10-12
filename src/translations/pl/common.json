@@ -10,5 +10,8 @@
     "email": "Adres e-mail",
     "repeatPassword": "Powtórz hasło",
     "signUp": "Załóż konto"
+  },
+  "product":{
+    "value":"zł."
   }
 }
