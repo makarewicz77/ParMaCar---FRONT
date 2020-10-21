@@ -1,8 +1,11 @@
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import Form from "antd/lib/form";
 import { FormInstance } from "antd/lib/form/Form";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
+import { LoginApi } from "../../../api/loginApi";
+import { User } from "../../../models/user";
 import { useFormWithRef } from "../../../utils/utils";
 
 import "./styles.css";
@@ -20,6 +23,12 @@ const RegisterForm: React.FC = () => {
   const [form] = useFormWithRef(ref);
   const tailLayout = {
     wrapperCol: { span: 26 },
+  };
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const onSave = (partialUser: Partial<User>) => {
+    setLoading(true);
+    LoginApi.registerUser(partialUser);
   };
   return (
     <div className="register_form">
@@ -50,14 +59,14 @@ const RegisterForm: React.FC = () => {
           name="first_name"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
-          <Input />
+          <Input autoComplete="newpassword" />
         </Form.Item>
         <Form.Item
           label={t("registerForm.lastName")}
           name="last_name"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
-          <Input />
+          <Input autoComplete="newpassword" />
         </Form.Item>
 
         <Form.Item
@@ -80,7 +89,7 @@ const RegisterForm: React.FC = () => {
           onClick={() =>
             ref.current
               ?.validateFields()
-              //.then(onSave)
+              .then(onSave)
               .catch(() => {})
           }
           {...tailLayout}

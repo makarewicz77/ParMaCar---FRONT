@@ -9,9 +9,10 @@ import { useCookies } from "react-cookie";
 import { LoginApi } from "../../api/loginApi";
 import "antd/dist/antd.css";
 import UserOptions from "../login/UserOptions";
-import Categories from "../Categories";
 import RegisterForm from "../login/RegisterForm";
-
+import { Product } from "../../models/product";
+import { ProductApi } from "../../api/productApi";
+import ProductList from "../products/ProductList";
 type props = {
   test?: string;
   test2?: number;
@@ -25,11 +26,14 @@ const Test: React.FC<props> = () => {
     LoginApi.logoutUser(cookies.token, setLogedUser);
     //history.push('/home')
   };
+  const [products, setProducts] = useState([] as Product[]);
   const [modalVisible, setModalVisible] = useState(false);
   React.useEffect(() => {
     if (cookies.token === undefined) setLogedUser(undefined);
     else LoginApi.getUser(cookies.token, setLogedUser);
+    ProductApi.getAllProducts(setProducts);
   }, [cookies.token]);
+  console.log(products);
   return (
     <Router>
       <div>
@@ -92,7 +96,7 @@ const Test: React.FC<props> = () => {
             <Route path="/home">
               Welcome! This is homepage
               <div className="cat_list_div">
-                <Categories />
+                <ProductList products={products} />
               </div>
             </Route>
           </Switch>

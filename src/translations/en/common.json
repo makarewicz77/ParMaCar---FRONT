@@ -10,5 +10,8 @@
     "email": "E-mail",
     "repeatPassword": "Repeat password",
     "signUp": "Sign up"
+  },
+  "product":{
+    "value":"PLN"
   }
 }
