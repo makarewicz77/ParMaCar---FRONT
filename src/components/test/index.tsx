@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 import { LoginApi } from "../../api/loginApi";
 import "antd/dist/antd.css";
 import UserOptions from "../login/UserOptions";
-import Categories from "../Categories";
+import Categories from "../categories";
 import RegisterForm from "../login/RegisterForm";
 import Products from "../Products";
 
