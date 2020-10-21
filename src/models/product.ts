@@ -1,11 +1,10 @@
-class Detail {
-  field: string;
-  value: string;
-
-  constructor(obj: Detail) {
-    this.field = obj.field;
-    this.value = obj.value;
-  }
+class Detail{
+    key: string;
+    value: string;
+    constructor(obj:Detail){
+        this.key = obj.key;
+        this.value = obj.value;
+    }
 }
 
 export class Product {
@@ -19,8 +18,8 @@ export class Product {
   gross: number;
   VAT: number;
   producer: string;
-  specifaction: Detail[];
-
+  specifactions: Detail[];
+  image: string;
   constructor(obj: Product) {
     this.id = obj.id;
     this.name = obj.name;
@@ -32,6 +31,7 @@ export class Product {
     this.gross = obj.gross;
     this.VAT = obj.VAT;
     this.producer = obj.producer;
-    this.specifaction = obj.specifaction;
+    this.specifactions = obj.specifactions;
+    this.image = obj.image;
   }
 }

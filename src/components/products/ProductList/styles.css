@@ -1,0 +1,41 @@
+/* The component style is inserted here. */
+
+.products_list {
+  float: left;
+}
+.product_image{
+  width: 160px;
+  height: 160px;
+}
+
+.ant-card-body{
+  padding: 0px;
+}
+
+.product_name{
+  padding-top: 4px;
+  font-size: 15px;
+  float: right;
+}
+
+.product_short_description{
+  float: left;
+  font-size: 12px;
+  line-height: 11px;
+}
+
+.product_price{
+  float: right;
+}
+
+.product_producer{
+  float: left;
+  margin-bottom: 5px;
+}
+.product_div_short{
+  height: 60px;
+  display: table-caption;
+}
+.product_div_long{
+  height: 80px;
+}
