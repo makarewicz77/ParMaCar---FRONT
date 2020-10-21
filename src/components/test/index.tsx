@@ -31,7 +31,7 @@ const Test: React.FC<props> = () => {
   const [modalVisible, setModalVisible] = useState(false);
   React.useEffect(() => {
     if (cookies.token === undefined) setLogedUser(undefined);
-    else LoginApi.getUser(cookies.token, setLogedUser);
+    //else LoginApi.getUser(cookies.token, setLogedUser); //  odkomentować jak będzie zrobiony GET na usera
     ProductApi.getAllProducts(setProducts);
   }, [cookies.token]);
   console.log(products);
