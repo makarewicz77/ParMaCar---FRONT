@@ -12,7 +12,8 @@ import UserOptions from "../login/UserOptions";
 import RegisterForm from "../login/RegisterForm";
 import { Product } from "../../models/product";
 import { ProductApi } from "../../api/productApi";
-import ProductList from "../products/ProductList";
+import ProductList from "../Products/ProductList";
+import Categories from "../categories";
 type props = {
   test?: string;
   test2?: number;
@@ -30,7 +31,7 @@ const Test: React.FC<props> = () => {
   const [modalVisible, setModalVisible] = useState(false);
   React.useEffect(() => {
     if (cookies.token === undefined) setLogedUser(undefined);
-    else LoginApi.getUser(cookies.token, setLogedUser);
+    //else LoginApi.getUser(cookies.token, setLogedUser); //  odkomentować jak będzie zrobiony GET na usera
     ProductApi.getAllProducts(setProducts);
   }, [cookies.token]);
   console.log(products);
@@ -77,7 +78,7 @@ const Test: React.FC<props> = () => {
               <Link to="/home">Wyloguj się</Link>
         </Button>*/}
 
-        <div className="home_page">
+        <div className="test_div">
           <Switch>
             <Route path="/login">
               <Modal
@@ -94,9 +95,14 @@ const Test: React.FC<props> = () => {
               <RegisterForm />
             </Route>
             <Route path="/home">
-              Welcome! This is homepage
-              <div className="cat_list_div">
-                <ProductList products={products} />
+              <div className="home_page">
+                <div>Welcome! This is homepage</div>
+                <div className="cat_list_div">
+                  <Categories />
+                </div>
+                <div className="prod_list_div">
+                  <ProductList products={products} />
+                </div>
               </div>
             </Route>
           </Switch>

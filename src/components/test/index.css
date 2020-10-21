@@ -32,3 +32,14 @@
 .register_button {
   margin-left: 10px;
 }
+
+.cat_list_div {
+  float: left;
+  /* min-width: 218px; */
+  overflow: hidden;
+  margin: 0 30px 0 0;
+}
+
+.prod_list_div {
+  overflow: hidden;
+}

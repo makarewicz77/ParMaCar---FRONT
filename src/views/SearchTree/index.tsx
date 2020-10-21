@@ -1,13 +1,16 @@
 import React, { useState, useReducer, useEffect } from "react";
 import "./styles.css";
-import { Tree, Input } from "antd";
+import { Tree } from "antd";
 import categoriesReducer, {
   fetchCategories,
   initialCategoriesState,
 } from "../../redux/reducers/categoriesReducer";
 import { Category } from "../../models/category";
+import slugify from "react-slugify";
+import { useHistory } from "react-router-dom";
 
 const SearchTree: React.FC = () => {
+  let history = useHistory();
   const [categories, dispatch] = useReducer(
     categoriesReducer,
     initialCategoriesState
@@ -19,7 +22,6 @@ const SearchTree: React.FC = () => {
     };
 
     window.addEventListener("load", onLoad);
-
     return () => {
       window.removeEventListener("load", onLoad);
     };
@@ -31,24 +33,7 @@ const SearchTree: React.FC = () => {
     autoExpandParent: true,
   });
 
-  const { Search } = Input;
-
   const gData: any = [];
-
-  const getParentKey = (key: number, tree: number[]) => {
-    let parentKey: any;
-    for (let i = 0; i < tree.length; i++) {
-      const node: any = tree[i];
-      if (node.children) {
-        if (node.children.some((item: any) => item.key === key)) {
-          parentKey = node.key;
-        } else if (getParentKey(key, node.children)) {
-          parentKey = getParentKey(key, node.children);
-        }
-      }
-    }
-    return parentKey;
-  };
 
   const generateData = (
     counter: number,
@@ -128,23 +113,14 @@ const SearchTree: React.FC = () => {
     });
   };
 
-  const onChange = (e: any) => {
-    const { value } = e.target;
-    const expandedKeys = dataList
-      .map((item: any) => {
-        if (item.title.indexOf(value) > -1) {
-          return getParentKey(item.key, gData);
-        }
-        return null;
-      })
-      .filter(
-        (item: any, i: number, self: any) => item && self.indexOf(item) === i
-      );
-    setState({
-      expandedKeys,
-      searchValue: value,
-      autoExpandParent: true,
-    });
+  const onSelect = (title: any) => {
+    if (title !== undefined && categories.category !== undefined) {
+      const index: number = parseInt(title.toString().split("-").pop());
+      const cat_name = categories.category.find(
+        (x: { id: number }) => x.id === index
+      ).name;
+      history.push(`/${slugify(cat_name)}`);
+    }
   };
 
   const { searchValue, expandedKeys, autoExpandParent } = state;
@@ -175,17 +151,13 @@ const SearchTree: React.FC = () => {
 
   return (
     <>
-      <div>
-        <Search
-          style={{ marginBottom: 8 }}
-          placeholder="Search"
-          onChange={onChange}
-        />
+      <div className="tree_menu_div">
         <Tree
           onExpand={onExpand}
           expandedKeys={expandedKeys}
           autoExpandParent={autoExpandParent}
           treeData={loop(gData)}
+          onSelect={onSelect}
         />
       </div>
     </>

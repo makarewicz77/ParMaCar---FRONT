@@ -1,0 +1,20 @@
+/* The component style is inserted here. */
+
+.tree_menu_div {
+  float: left;
+  display: contents;
+}
+
+.ant-tree-list-holder-inner {
+  background: linear-gradient(white, #1890ff);
+  border-style: solid;
+  border-width: thin;
+}
+
+.ant-tree-treenode.ant-tree-treenode-switcher-close {
+  margin-right: 10px;
+}
+
+.ant-tree-treenode.ant-tree-treenode-switcher-open {
+  margin-right: 10px;
+}

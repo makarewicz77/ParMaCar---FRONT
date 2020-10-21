@@ -26,7 +26,7 @@ export class Product {
     this.category_id = obj.category_id;
     this.price = obj.price;
     this.description = obj.description;
-    this.quantity = obj.quantity
+    this.quantity = obj.quantity;
     this.net = obj.net;
     this.gross = obj.gross;
     this.VAT = obj.VAT;
