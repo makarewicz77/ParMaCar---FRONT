@@ -116,12 +116,13 @@ const SearchTree: React.FC = () => {
   const onSelect = (title: any) => {
     if (title !== undefined && categories.category !== undefined) {
       const index: number = parseInt(title.toString().split("-").pop());
-      const cat = categories.category.find(
+      const cat: Category = categories.category.find(
         (x: { id: number }) => x.id === index
       );
       if (cat !== undefined) {
         const cat_name = cat.name;
-        history.push(`category/${slugify(cat_name)}/`);
+        const id = cat.id;
+        history.push(`/category/${slugify(cat_name)}/${id}/`,{id:id, category:cat_name});
         // const location = `/${slugify(cat_name)}/`;
         // return (
         //   <>

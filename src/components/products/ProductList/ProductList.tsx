@@ -6,7 +6,7 @@ import { Card, Col, Popover, Row } from "antd";
 import { cutDescription, getImageUrl } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
 import noAvailable from "../../../static/noavailable.jpg";
-
+import { useLocation } from "react-router-dom"
 type productsListProps = {
   products: Product[];
 };

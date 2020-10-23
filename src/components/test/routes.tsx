@@ -13,8 +13,7 @@ export const Routes: React.FC = () => (
   </Switch>
 );
 
-function PrivateRoute({ Component, ...rest }: any) {
-  console.log(...rest);
+export function PrivateRoute({ Component, ...rest }: any) {
   return (
     <Route
       {...rest}
