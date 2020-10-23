@@ -7,7 +7,7 @@ import categoriesReducer, {
 } from "../../redux/reducers/categoriesReducer";
 import { Category } from "../../models/category";
 import slugify from "react-slugify";
-import { useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 const SearchTree: React.FC = () => {
   let history = useHistory();
@@ -116,10 +116,20 @@ const SearchTree: React.FC = () => {
   const onSelect = (title: any) => {
     if (title !== undefined && categories.category !== undefined) {
       const index: number = parseInt(title.toString().split("-").pop());
-      const cat_name = categories.category.find(
+      const cat = categories.category.find(
         (x: { id: number }) => x.id === index
-      ).name;
-      history.push(`/${slugify(cat_name)}`);
+      );
+      if (cat !== undefined) {
+        const cat_name = cat.name;
+        history.push(`category/${slugify(cat_name)}/`);
+        // const location = `/${slugify(cat_name)}/`;
+        // return (
+        //   <>
+        //     <Redirect to={location} push={true} />
+        //     {console.log(location)}
+        //   </>
+        // );
+      }
     }
   };
 

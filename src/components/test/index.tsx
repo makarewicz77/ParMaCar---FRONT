@@ -14,6 +14,7 @@ import { Product } from "../../models/product";
 import { ProductApi } from "../../api/productApi";
 import ProductList from "../Products/ProductList";
 import Categories from "../categories";
+import { Routes } from "./routes";
 type props = {
   test?: string;
   test2?: number;
@@ -34,7 +35,7 @@ const Test: React.FC<props> = () => {
     //else LoginApi.getUser(cookies.token, setLogedUser); //  odkomentować jak będzie zrobiony GET na usera
     ProductApi.getAllProducts(setProducts);
   }, [cookies.token]);
-  console.log(products);
+
   return (
     <Router>
       <div>
