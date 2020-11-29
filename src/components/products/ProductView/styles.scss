@@ -1,0 +1,204 @@
+/* The component style is inserted here. */
+
+.container {
+    &-categories {
+        width: 13%;
+        float: left;
+        overflow: hidden;
+        margin: 0 30px 0 0;
+    }
+    .product {
+        &-description {
+            padding-top: 20px;
+            .ant-breadcrumb {
+                border: 1px solid lightsteelblue;
+                padding: 5px;
+                width: fit-content;
+                a:hover {
+                    color: pink;
+                }
+                .ant-breadcrumb-link {
+                    .text {
+                        color: #4671fd;
+                        display: inline;
+                    }
+                     :hover {
+                        color: #2000F0;
+                    }
+                }
+            }
+            text-align: left;
+            width: 84%;
+            float: left;
+             :after {
+                clear: both;
+            }
+            &__column {
+                float: left;
+                padding: 10px;
+                &-2 {
+                    .ant-input-number-input {
+                        text-align: center;
+                    }
+                    .ant-btn {
+                        background-color: rgba(128, 128, 128, 0.3);
+                        margin-left: 10px;
+                        &:hover {
+                            background-color: rgba(128, 128, 128, 0.6);
+                            color: black;
+                            border: 1px solid rgba(128, 128, 128, 0.6);
+                        }
+                        &:focus {
+                            background-color: rgba(128, 128, 128, 0.6);
+                            color: black;
+                            border: 1px solid rgba(128, 128, 128, 0.6);
+                        }
+                    }
+                    width: 80%;
+                    h1 {
+                        line-height: normal;
+                    }
+                    h2 {
+                        line-height: normal;
+                    }
+                    h3 {
+                        line-height: normal;
+                    }
+                    h4 {
+                        line-height: normal;
+                    }
+                    &__producer {
+                        line-height: 10px;
+                    }
+                    &__net {
+                        font-size: 15px;
+                        opacity: 0.4;
+                    }
+                }
+            }
+            &__image {
+                width: 200px;
+                height: 200px;
+            }
+            &__specification {
+                width: 300px;
+            }
+        }
+    }
+    .ant-table-thead {
+        .ant-table-cell {
+            font-size: 14px;
+            padding: 5px;
+        }
+    }
+    .ant-table-tbody {
+        .ant-table-cell {
+            font-size: 12px;
+            padding: 3px;
+        }
+    }
+}
+
+.ant-modal-content {
+    margin: auto;
+    width: fit-content;
+    background-color: rgb(243, 240, 255);
+}
+
+.ant-modal-header {
+    background-color: rgb(231, 229, 250);
+}
+
+.footer {
+    &-content {
+        display: grid;
+    }
+}
+
+.ant-modal-footer button+button {
+    margin: 0;
+}
+
+.ant-modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.3)
+}
+
+.ant-modal-footer button:nth-child(1) {
+    margin-bottom: 10px;
+    background-color: rgba(128, 128, 128, 0.6);
+    border: 1px solid rgba(87, 77, 77, 0.5);
+    font-weight: bold;
+    &:hover {
+        background-color: rgba(128, 128, 128, 0.9);
+        color: black;
+        border: 1px solid rgba(128, 128, 128, 0.9);
+    }
+    &:focus {
+        background-color: rgba(128, 128, 128, 0.9);
+        color: black;
+        border: 1px solid rgba(128, 128, 128, 0.9);
+    }
+}
+
+.ant-modal-body {
+    .login-button {
+        margin-bottom: 10px;
+        background-color: rgba(128, 128, 128, 0.6);
+        border: 1px solid rgba(87, 77, 77, 0.5);
+        font-weight: bold;
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.9);
+            color: black;
+            border: 1px solid rgba(128, 128, 128, 0.9);
+        }
+        &:focus {
+            background-color: rgba(128, 128, 128, 0.9);
+            color: black;
+            border: 1px solid rgba(128, 128, 128, 0.9);
+        }
+    }
+}
+
+.ant-modal-footer button:nth-child(2) {
+    background-color: rgba(128, 128, 128, 0.3);
+    border: 1px solid rgba(87, 77, 77, 0.5);
+    &:hover {
+        background-color: rgba(128, 128, 128, 0.6);
+        color: black;
+        border: 1px solid rgba(128, 128, 128, 0.6);
+    }
+    &:focus {
+        background-color: rgba(128, 128, 128, 0.6);
+        color: black;
+        border: 1px solid rgba(128, 128, 128, 0.6);
+    }
+}
+
+.product {
+    &-modal {
+        &__title {
+            text-align: center;
+        }
+        &__image {
+            width: 150px;
+            height: 150px;
+            padding: 0px 5px;
+        }
+        &__name {
+            font-size: 14px;
+            padding-left: 10px;
+        }
+        &__price {
+            text-align: right;
+            font-size: 14px;
+        }
+    }
+}
+
+.ant-card-body {
+    padding: 12px;
+    .product-modal__price {
+        text-align: right;
+        font-size: 18px;
+    }
+}

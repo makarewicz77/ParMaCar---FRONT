@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import "./App.css";
-import Test from "./components/test";
-import "antd/dist/antd.css";
+import Home from './components/home/Home'
 import Helmet from "react-helmet";
 
 function App() {
@@ -13,7 +12,7 @@ function App() {
             <Helmet>
               <title>ParMaCar</title>
             </Helmet>
-            <Test test="string" test2={2}></Test>
+            <Home test="string" test2={2}></Home>
           </div>
         </div>
       </div>

@@ -1,0 +1,65 @@
+.login_btn {
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.logout_btn {
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.home_div {
+    display: block;
+}
+
+.home_logged_in {
+    display: inline-flex;
+    height: 50px;
+    line-height: 50px;
+    align-items: baseline;
+}
+
+.welcome {
+    color: white;
+}
+
+.home_page {
+    text-align: center;
+}
+
+.register_button {
+    margin-left: 10px;
+}
+
+.cat_list_div {
+    float: left;
+    /* min-width: 218px; */
+    overflow: hidden;
+    margin: 0 30px 0 0;
+}
+
+.prod_list_div {
+    overflow: hidden;
+    border-top: 1px solid rgba(120, 120, 120, 0.3);
+    border-left: 1px solid rgba(120, 120, 120, 0.3);
+}
+
+.logo {
+    width: 500px;
+}
+
+.main-div {
+    text-align: center;
+}
+
+.home_page {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.navbar_logo {
+    max-width: 150px;
+    max-height: 150px;
+}

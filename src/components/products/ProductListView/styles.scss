@@ -1,0 +1,40 @@
+/* The component style is inserted here. */
+
+.category {
+    &-list {
+        float: left;
+        /* min-width: 218px; */
+        overflow: hidden;
+        margin: 0 30px 0 0;
+    }
+    &-baner {
+        background-color: rgba(128, 128, 128, 0.3);
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__name {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &-content {
+                font-size: 30px;
+                font-weight: bold;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.products {
+    &-counter {
+        display: flex;
+    }
+    &-sort {
+        display: flex;
+        justify-content: flex-end;
+        &__select {
+            margin-left: 10px;
+        }
+    }
+}

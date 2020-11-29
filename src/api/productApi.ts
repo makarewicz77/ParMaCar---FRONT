@@ -12,4 +12,13 @@ export const ProductApi = {
       })
       .then((res) => setProducts(res.data));
   },
+  getProduct:(id:number, setProduct:Function) =>{
+    axios
+      .request({
+        url: `${baseProductsUrl}${id}/`,
+        //TODO
+        //headers: { Authorization: "Token " + token }, w przyszlosci token do bezpieczenstwa calej naszej aplikacji sie przyda
+      })
+      .then((res) => setProduct(res.data));
+  }
 };

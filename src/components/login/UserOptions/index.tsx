@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./styles.less";
 import { Dropdown, Menu, message } from "antd";
@@ -8,17 +8,19 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { User } from "../../../models/user";
+import { useMutation } from "../../../hooks";
+import { UserContext } from "../../../contexts/UserContext";
 
 type userProps = {
   user: User;
-  logout: Function;
 };
 
-const UserOptions: React.FC<userProps> = ({ user, logout }) => {
+const UserOptions: React.FC<userProps> = ({ user }) => {
+  const userContext = useContext(UserContext);
   const handleMenuClick = (e: any) => {
     if (e.key === "1") message.error("Nie ma jeszcze tej funkcjonalności xD");
     if (e.key === "2") {
-      logout();
+      userContext.logout()
     }
   };
   const menu = (
@@ -32,7 +34,7 @@ const UserOptions: React.FC<userProps> = ({ user, logout }) => {
     </Menu>
   );
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div>
       <Dropdown.Button
         overlay={menu}
         placement="bottomCenter"

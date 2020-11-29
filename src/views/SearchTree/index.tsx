@@ -7,7 +7,7 @@ import categoriesReducer, {
 } from "../../redux/reducers/categoriesReducer";
 import { Category } from "../../models/category";
 import slugify from "react-slugify";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const SearchTree: React.FC = () => {
   let history = useHistory();
@@ -17,14 +17,7 @@ const SearchTree: React.FC = () => {
   );
 
   useEffect(() => {
-    const onLoad = () => {
       fetchCategories()(dispatch);
-    };
-
-    window.addEventListener("load", onLoad);
-    return () => {
-      window.removeEventListener("load", onLoad);
-    };
   }, []);
 
   const [state, setState] = useState({

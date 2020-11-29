@@ -1,0 +1,51 @@
+    .login_form_div {
+        margin-top: 25px;
+        text-align: center;
+    }
+    
+    .register_info {
+        margin-top: 10px;
+    }
+    
+    .remember-cointainer {
+        margin-top: -15px;
+        margin-bottom: 15px;
+    }
+    
+    .ant-divider-horizontale {
+        margin: 14px 0 !important;
+    }
+    
+    .checkbox {
+        .ant-checkbox-checked {
+            .ant-checkbox-inner {
+                background-color: gray;
+                border-color: white;
+            }
+            &:hover {
+                background-color: rgba(128, 128, 128, 0.9);
+                color: black;
+                border: 1px solid black;
+            }
+            &:focus {
+                background-color: rgba(128, 128, 128, 0.9);
+                color: black;
+                border: 1px solid black;
+            }
+        }
+        .ant-checkbox {
+            border: 1px solid rgba(0, 0, 0, 0.5);
+        }
+        .ant-checkbox-input {
+            &:hover {
+                background-color: rgba(128, 128, 128, 0.9);
+                color: black;
+                border: 1px solid rgba(128, 128, 128, 0.9);
+            }
+            &:focus {
+                background-color: rgba(128, 128, 128, 0.9);
+                color: black;
+                border: 1px solid rgba(128, 128, 128, 0.9);
+            }
+        }
+    }

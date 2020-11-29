@@ -5,8 +5,9 @@ import "./styles.scss";
 import { Card, Col, Popover, Row } from "antd";
 import { cutDescription, getImageUrl } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
-import noAvailable from "../../../static/noavailable.jpg";
-import { useLocation } from "react-router-dom"
+import noAvailable from "../../../static/images/noavailable.jpg";
+import { useHistory } from "react-router-dom"
+import slugify from "react-slugify";
 type productsListProps = {
   products: Product[];
 };
@@ -19,13 +20,28 @@ const fullDescription = (description: string) => {
   );
 };
 
+export const fullPriceDetails = (vat: number, net : number) => {
+  return(
+    <div className="products_list-item_detail-price">
+      <p><strong>Cena netto:</strong> {net} zł.</p>
+      <p><strong>VAT:</strong> {vat} %</p>
+    </div>
+  )
+}
+
+
 const ProductList: React.FC<productsListProps> = ({ products }) => {
+  let history = useHistory();
   const { t } = useTranslation("common");
+  const goToProduct = (product:Product) =>{
+    //history.push(`/product/`)
+    history.push(`/product/${slugify(product.name)}/${product.id}/`,{id:product.id});
+  }
   return (
     <>
       {products.length > 0 ? (
-        <div>
-          <Row className="products_list" gutter={16}>
+        <div className="products_list-container">
+          <Row className="products-list" gutter={16}>
             {products.map((product: Product) => {
               return (
                 <div className="products_list-item" key={product.id}>
@@ -52,6 +68,7 @@ const ProductList: React.FC<productsListProps> = ({ products }) => {
                           </h5>
                         </>
                       }
+                      onClick={() => goToProduct(product)}
                     >
                       {product.description.length > 55 ? (
                         <Popover content={fullDescription(product.description)}>
@@ -80,9 +97,11 @@ const ProductList: React.FC<productsListProps> = ({ products }) => {
                           </p>
                         </div>
                       )}
-                      <h5 className="products_list-item-price">
-                        {product.gross} {t("product.value")}
-                      </h5>
+                      <Popover content={fullPriceDetails(product.vat, product.net)} title="Szczegóły ceny">
+                        <h5 className="products_list-item-price">
+                          {product.gross} {t("product.value")}
+                        </h5>
+                      </Popover>
                     </Card>
                   </Col>
                 </div>

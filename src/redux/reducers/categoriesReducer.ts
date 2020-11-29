@@ -27,6 +27,16 @@ export function fetchCategories() {
   };
 }
 
+export function fetchCategory(id:number) {
+  return (dispatch: any) => {
+    dispatch(fetchCategoryBegin());
+    axios
+      .get<Category[]>(`${baseCategoriesUrl}${id}/`)
+      .then((res) => res.data)
+      .then((res) => dispatch(fetchCategorySuccess(res)))
+      .catch((error) => dispatch(fetchCategoryFailure(error)));
+  };
+}
 export default function categoriesReducer(
   state = initialCategoriesState,
   action: any

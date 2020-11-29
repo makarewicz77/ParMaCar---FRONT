@@ -1,17 +1,39 @@
 {
-  "loginForm": {
-    "password": "Hasło",
-    "logIn": "Zaloguj się"
-  },
-  "registerForm": {
-    "password": "Password",
-    "firstName": "Imię",
-    "lastName": "Nazwisko",
-    "email": "Adres e-mail",
-    "repeatPassword": "Powtórz hasło",
-    "signUp": "Załóż konto"
-  },
-  "product":{
-    "value":"zł."
-  }
+    "allProducts": "Wszystkie produkty",
+    "categories": "Kategorie",
+    "homePage": "Strona główna",
+    "loginForm": {
+        "logIn": "Zaloguj się",
+        "loginError": "Login nie może być pusty!",
+        "password": "Hasło",
+        "passwordError": "Hasło nie może być puste!",
+        "rememberMe": "Zapamiętaj mnie"
+
+    },
+    "registerForm": {
+        "email": "Adres e-mail",
+        "firstName": "Imię",
+        "lastName": "Nazwisko",
+        "password": "Password",
+        "repeatPassword": "Powtórz hasło",
+        "signUp": "Załóż konto"
+    },
+    "product": {
+        "amount": "Ilość produktów",
+        "backToShopping": "Wróć do zakupów",
+        "goToCart": "Przejdź do koszyka",
+        "noSpecification": "Produkt nie posiada specyfikacji",
+        "priceGross": "Cena brutto",
+        "priceNet": "Cena netto",
+        "sortBy": "Sortuj po",
+        "successfullyAdded": "Pomyślnie dodano do koszyka",
+        "warranty": "Gwarancja",
+        "value": "zł."
+    },
+    "warrantyYear_0": "{{count}} rok",
+    "warrantyYear_1": "{{count}} lata",
+    "warrantyYear_2": "{{count}} lat",
+    "warrantyMonth_0": "{{count}} miesiąc",
+    "warrantyMonth_1": "{{count}} miesiące",
+    "warrantyMonth_2": "{{count}} miesięcy"
 }

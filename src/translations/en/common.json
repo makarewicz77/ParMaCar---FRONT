@@ -1,17 +1,39 @@
 {
-  "loginForm": {
-    "password": "Password",
-    "logIn": "Log in"
-  },
-  "registerForm": {
-    "password": "Password",
-    "firstName": "First name",
-    "lastName": "Last name",
-    "email": "E-mail",
-    "repeatPassword": "Repeat password",
-    "signUp": "Sign up"
-  },
-  "product":{
-    "value":"PLN"
-  }
+    "allProducts": "All products",
+    "categories": "Categories",
+    "homePage": "Home page",
+    "loginForm": {
+        "loginError": "Please input your username!",
+        "logIn": "Log in",
+        "password": "Password",
+        "passwordError": "Please input your password!",
+        "rememberMe": "Remember me"
+    },
+    "registerForm": {
+        "email": "E-mail",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "password": "Password",
+        "repeatPassword": "Repeat password",
+        "signUp": "Sign up"
+    },
+    "product": {
+        "amount": "Amount of products",
+        "backToShopping": "Back to shopping",
+        "goToCart": "Go to cart",
+        "noSpecification": "Product doesn't have specification",
+        "priceGross": "Gross price",
+        "priceNet": "Net price",
+        "sortBy": "Sort by",
+        "successfullyAdded": "Successfully added to cart",
+        "warranty": "Warranty",
+        "value": "PLN"
+
+    },
+    "warrantyYear_0": "{{count}} year",
+    "warrantyYear_1": "{{count}} years",
+    "warrantyYear_2": "{{count}} years",
+    "warrantyMonth_0": "{{count}} month",
+    "warrantyMonth_1": "{{count}} months",
+    "warrantyMonth_2": "{{count}} months"
 }

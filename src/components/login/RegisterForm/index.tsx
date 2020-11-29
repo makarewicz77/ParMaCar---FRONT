@@ -1,10 +1,9 @@
-import { Button, Input, message } from "antd";
+import { Button, Input } from "antd";
 import Form from "antd/lib/form";
 import { FormInstance } from "antd/lib/form/Form";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
-import { LoginApi } from "../../../api/loginApi";
+import { UserContext } from "../../../contexts/UserContext";
 import { User } from "../../../models/user";
 import { useFormWithRef } from "../../../utils/utils";
 
@@ -24,11 +23,11 @@ const RegisterForm: React.FC = () => {
   const tailLayout = {
     wrapperCol: { span: 26 },
   };
-  const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const user = useContext(UserContext)
   const onSave = (partialUser: Partial<User>) => {
     setLoading(true);
-    LoginApi.registerUser(partialUser);
+    user.registerUser(partialUser);
   };
   return (
     <div className="register_form">
