@@ -1,6 +1,7 @@
 /* The component style is inserted here. */
 
 .container {
+    overflow: auto;
     &-categories {
         width: 13%;
         float: left;

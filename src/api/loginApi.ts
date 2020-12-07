@@ -5,6 +5,7 @@ import {
   baseUserUrl,
   baseLogoutUrl,
   baseRegisterUrl,
+  baseUsersUrl,
 } from "./urls";
 
 type UserParams = {};
@@ -39,4 +40,10 @@ export const LoginApi = {
       })
       .then((res) => console.log(res));
   },
+  getUsersByGroup: (group: string) =>{
+    return axios.request({
+      url: `${baseUsersUrl}?group=${group}`,
+      method: 'GET',
+    })
+  }
 };

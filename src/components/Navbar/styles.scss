@@ -3,5 +3,11 @@
 .navbar {
     &-cart {
         font-size: 25px;
+        &__badge {
+            .ant-scroll-number {
+                background-color: black;
+                height: 15px;
+            }
+        }
     }
 }

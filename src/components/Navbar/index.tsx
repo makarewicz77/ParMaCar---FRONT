@@ -1,7 +1,7 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Button, Col, Row } from "antd";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import { User } from "../../models/user";
 import { LogoIcon } from "../../utils/utils";
@@ -14,7 +14,7 @@ type NavbarProps = {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ user, setModalVisible }) => {
+const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({ user, setModalVisible, history }) => {
   const count = useContext(CartContext).count;
   return (
     <>
@@ -28,8 +28,8 @@ const Navbar: React.FC<NavbarProps> = ({ user, setModalVisible }) => {
           <Link to="/home">Produkty</Link>
         </Col>
         <Col xs={6} sm={3} md={2} lg={1}>
-          <Badge count={count}>
-            <ShoppingCartOutlined className="navbar-cart" />
+          <Badge count={count} size="small" className="navbar-cart__badge" >
+            <ShoppingCartOutlined className="navbar-cart" onClick={()=> history.push(`/cart`)}/>
           </Badge>
         </Col>
         <Col xs={6} sm={6} md={8} lg={10}>
@@ -59,4 +59,4 @@ const Navbar: React.FC<NavbarProps> = ({ user, setModalVisible }) => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

@@ -26,6 +26,7 @@ const RegisterForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const user = useContext(UserContext)
   const onSave = (partialUser: Partial<User>) => {
+    console.log(loading);
     setLoading(true);
     user.registerUser(partialUser);
   };

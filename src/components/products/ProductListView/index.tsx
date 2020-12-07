@@ -75,8 +75,7 @@ const ProductListView: React.FC<props> = ({ location }) => {
         dispatchPr
       );
   }, [sort]);
-  console.log(categoryRed.loading);
-  console.log(category);
+
   return (
     <div>
       <div className="category-baner">

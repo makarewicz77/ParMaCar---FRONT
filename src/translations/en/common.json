@@ -1,6 +1,12 @@
 {
     "allProducts": "All products",
     "categories": "Categories",
+    "cart": {
+        "clearCart": "Clear cart",
+        "continueShopping": "Continue shopping",
+        "submitOrder": "Submit your order",
+        "toPay": "To pay"
+    },
     "homePage": "Home page",
     "loginForm": {
         "loginError": "Please input your username!",

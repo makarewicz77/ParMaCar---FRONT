@@ -14,8 +14,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { UserContext } from "../../../contexts/UserContext";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
 
-type loginProps = {
-};
+type loginProps = {};
 
 const LoginForm: React.FC<loginProps> = () => {
   const history = useHistory();
@@ -38,37 +37,40 @@ const LoginForm: React.FC<loginProps> = () => {
   const [checked, setChecked] = useState(false);
   const onSave = (partialUser: Partial<User>) => {
     setLoading(true);
-    user.loginUser(partialUser).then((res: any) => {
-      if (!res.error) {
-        message.success("Udało się zalogować");
-        setCookie("token", res.data.token, { expires: addHours(8) });
-        setLoading(false);
-        history.push("/home");
-      } else {
+    user
+      .loginUser(partialUser)
+      .then((res: any) => {
+        if (!res.error) {
+          message.success("Udało się zalogować");
+          setCookie("token", res.data.token, { expires: addHours(8) });
+          setLoading(false);
+          history.push("/home");
+        }
+      })
+      .catch((e) => {
         message.error("Wprowadzono niepoprawne dane. Wprowadź prawidłowe dane");
         setTimeout(() => message.destroy(), 2000);
         setLoading(false);
-      }
-    });
+      });
   };
-  console.log(localStorage.getItem('remember'));
-  const rememberMe = () =>{
-    const rmbr = localStorage.getItem('remember');
-    if(rmbr === null)
-      {
-
-      }
-    else if(rmbr === 'true')
-    {
-
+  console.log(localStorage.getItem("remember"));
+  const rememberMe = () => {
+    const rmbr = localStorage.getItem("remember");
+    if (rmbr === null) {
+      localStorage.removeItem("login");
+      localStorage.removeItem("password");
+    } else if (rmbr === "true") {
+      localStorage.setItem("login", form.getFieldValue("username"));
+      localStorage.setItem("password", form.getFieldValue("password"));
+    } else {
+      if (localStorage.getItem("login")) localStorage.removeItem("login");
+      if (localStorage.getItem("password")) localStorage.removeItem("password");
+      if (localStorage.getItem("remember")) localStorage.removeItem("remember");
     }
-    else{
-
-    }
-  }
-  const onChange=(e: CheckboxChangeEvent)=>{
-    localStorage.setItem('remember',e.target.checked.toString())
-  }
+  };
+  const onChange = (e: CheckboxChangeEvent) => {
+    localStorage.setItem("remember", e.target.checked.toString());
+  };
   return (
     <div className="login_form_div">
       <Form
@@ -82,6 +84,7 @@ const LoginForm: React.FC<loginProps> = () => {
           label="Login"
           name="username"
           rules={[{ required: true, message: "Please input your username!" }]}
+          initialValue={localStorage.getItem("login")}
         >
           <Input />
         </Form.Item>
@@ -89,12 +92,19 @@ const LoginForm: React.FC<loginProps> = () => {
           label={t("loginForm.password")}
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
+          initialValue={localStorage.getItem("password")}
         >
           <Input.Password />
         </Form.Item>
-                <div className="remember-cointainer">
-          <Checkbox className="checkbox" onChange={onChange}>{t('loginForm.rememberMe')}</Checkbox>
-          </div>
+        <div className="remember-cointainer">
+          <Checkbox
+            className="checkbox"
+            onChange={onChange}
+            defaultChecked={localStorage.getItem("remember") ? true : false}
+          >
+            {t("loginForm.rememberMe")}
+          </Checkbox>
+        </div>
         <Button
           className="login-button"
           type="primary"
@@ -110,7 +120,7 @@ const LoginForm: React.FC<loginProps> = () => {
         >
           {loading && <LoadingOutlined />} {t("loginForm.logIn")}
         </Button>
-        <Divider className="ant-divider-horizontale"/>
+        <Divider className="ant-divider-horizontale" />
         <h4 className="register_info">
           Nie masz jeszcze konta? <Link to="/register">Zarejestruj się</Link>
         </h4>

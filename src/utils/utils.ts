@@ -32,3 +32,11 @@ export const getWarranty = (t: TFunction, warranty: string) => {
   const months = t("warrantyMonth", { count: Number(warrs[1]) });
   return `${warrs[0] && warrs[0] !== "0" ? years : ""} ${warrs[1] && warrs[1] !== "0" ? months : ""}`;
 };
+
+export const getLinkToProduct = (id:number,name:string) =>{
+  return `/product/${name}/${id}/`
+}
+
+export const getLinkToCategory = (id:number, name:string) =>{
+  return `/category/${name}/${id}/`
+}

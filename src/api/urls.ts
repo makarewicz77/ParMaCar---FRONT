@@ -8,3 +8,4 @@ export const baseProductsUrl = `${environment.apiUrl}api/products/`;
 export const baseCategoriesUrl = `${environment.apiUrl}api/categories/`;
 export const baseCartUrl = `${environment.apiUrl}api/cart/`;
 export const baseCartLineUrl = `${environment.apiUrl}api/cart-lines/`
+export const baseUsersUrl = `${environment.apiUrl}api/auth/users/`

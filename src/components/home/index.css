@@ -52,6 +52,9 @@
 
 .main-div {
     text-align: center;
+    background-color: white;
+    padding: 20px;
+    overflow: auto;
 }
 
 .home_page {
@@ -60,6 +63,6 @@
 }
 
 .navbar_logo {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 130px;
+    max-height: 130px;
 }

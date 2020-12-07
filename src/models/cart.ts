@@ -9,6 +9,7 @@ export class CartLine{
     product_gross : number;
     product_image: string;
     quantity: number;
+    available_quantity: number;
     constructor(obj: CartLine){
         this.id = obj.id;
         this.cart = obj.cart;
@@ -18,6 +19,7 @@ export class CartLine{
         this.product_net = obj.product_net;
         this.product_gross = obj.product_gross;
         this.product_image = obj.product_image;
+        this.available_quantity = obj.available_quantity;
     }
 }
 
@@ -25,10 +27,14 @@ export class Cart{
     id: number;
     line: CartLine[];
     user: number;
+    sum_gross: number;
+    sum_net: number;
     constructor(obj: Cart){
         this.id = obj.id;
         this.line = obj.line;
         this.user = obj.user;
+        this.sum_gross = obj.sum_gross;
+        this.sum_net = obj.sum_net;
     }
 }
 

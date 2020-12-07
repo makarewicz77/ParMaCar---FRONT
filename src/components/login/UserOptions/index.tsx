@@ -8,19 +8,21 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { User } from "../../../models/user";
-import { useMutation } from "../../../hooks";
 import { UserContext } from "../../../contexts/UserContext";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 type userProps = {
   user: User;
-};
+} & RouteComponentProps;
 
-const UserOptions: React.FC<userProps> = ({ user }) => {
+const UserOptions: React.FC<userProps> = ({ user, history }) => {
   const userContext = useContext(UserContext);
   const handleMenuClick = (e: any) => {
-    if (e.key === "1") message.error("Nie ma jeszcze tej funkcjonalności xD");
+    if (e.key === "1") {
+      history.push("/user-config");
+    }
     if (e.key === "2") {
-      userContext.logout()
+      userContext.logout();
     }
   };
   const menu = (
@@ -46,4 +48,4 @@ const UserOptions: React.FC<userProps> = ({ user }) => {
   );
 };
 
-export default UserOptions;
+export default withRouter(UserOptions);

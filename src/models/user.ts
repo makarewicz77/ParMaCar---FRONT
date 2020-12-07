@@ -1,5 +1,6 @@
 export class User {
   id: number;
+  avatar: string;
   name?: string;
   first_name?: string;
   last_name?: string;
@@ -14,5 +15,6 @@ export class User {
     this.email = obj.email;
     this.username = obj.username;
     this.password = obj.password;
+    this.avatar = obj.avatar;
   }
 }

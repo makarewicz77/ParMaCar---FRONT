@@ -1,8 +1,6 @@
-import { message } from "antd";
 import { AxiosResponse } from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { CartApi } from "../api/cartApi";
 import { LoginApi } from "../api/loginApi";
 import { User } from "../models/user";
 
@@ -24,12 +22,11 @@ export const UserContext = createContext<UserContextInterface>({
 });
 
 export const UserProvider: React.FC = ({ children }) => {
-  const [cart, setCart] = useState({});
+  const [, setCart] = useState({});
   const [user, setUser] = useState<User | undefined>(undefined);
   const [cookies, , removeCookie] = useCookies(["token"]);
-  const [token, setToken] = useState<string>("");
+  const [, setToken] = useState<string>("");
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const id = 2;
   const registerUser = (user: Partial<User>) => {
     LoginApi.registerUser(user);
   };
@@ -40,12 +37,11 @@ export const UserProvider: React.FC = ({ children }) => {
       setUser(res.data.user);
       setIsLogged(true);
     })
-    .catch(message.error("Podano nieprawidłoweo dane"))
     return response;
   };
   const logout = () => {
     removeCookie("token");
-    LoginApi.logoutUser(cookies.token).then((res) => setUser(undefined));
+    LoginApi.logoutUser(cookies.token).then(() => setUser(undefined));
   };
   useEffect(() => {
     if (cookies.token === undefined) setUser(undefined);

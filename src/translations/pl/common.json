@@ -1,6 +1,12 @@
 {
     "allProducts": "Wszystkie produkty",
     "categories": "Kategorie",
+    "cart": {
+        "clearCart": "Wyczyść koszyk",
+        "continueShopping": "Kontynuuj zakupy",
+        "submitOrder": "Złóż zamówienie",
+        "toPay": "Do zapłaty"
+    },
     "homePage": "Strona główna",
     "loginForm": {
         "logIn": "Zaloguj się",
