@@ -7,20 +7,25 @@ import categoriesReducer, {
 } from "../../redux/reducers/categoriesReducer";
 import { Category } from "../../models/category";
 import slugify from "react-slugify";
-import { useHistory } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
-const SearchTree: React.FC = () => {
-  let history = useHistory();
+interface CategoryState {
+  expandedKeys: never[];
+  searchValue: string;
+  autoExpandParent: boolean;
+}
+
+const SearchTree: React.FC<RouteComponentProps> = ({ history }) => {
   const [categories, dispatch] = useReducer(
     categoriesReducer,
     initialCategoriesState
   );
 
   useEffect(() => {
-      fetchCategories()(dispatch);
+    fetchCategories()(dispatch);
   }, []);
 
-  const [state, setState] = useState({
+  const [state, setState] = useState<CategoryState>({
     expandedKeys: [],
     searchValue: "",
     autoExpandParent: true,
@@ -115,14 +120,10 @@ const SearchTree: React.FC = () => {
       if (cat !== undefined) {
         const cat_name = cat.name;
         const id = cat.id;
-        history.push(`/category/${slugify(cat_name)}/${id}/`,{id:id, category:cat_name});
-        // const location = `/${slugify(cat_name)}/`;
-        // return (
-        //   <>
-        //     <Redirect to={location} push={true} />
-        //     {console.log(location)}
-        //   </>
-        // );
+        history.push(`/category/${slugify(cat_name)}/${id}/`, {
+          id: id,
+          category: cat_name,
+        });
       }
     }
   };
@@ -168,4 +169,4 @@ const SearchTree: React.FC = () => {
   );
 };
 
-export default SearchTree;
+export default withRouter(SearchTree);

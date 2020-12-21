@@ -7,17 +7,19 @@ import { useFormWithRef, addHours } from "../../../utils/utils";
 import { FormInstance } from "antd/lib/form";
 import { LoginApi } from "../../../api/loginApi";
 import { User } from "../../../models/user";
-import { Link, useHistory } from "react-router-dom";
+import {
+  Link,
+  RouteComponentProps,
+  useHistory,
+  withRouter,
+} from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useTranslation } from "react-i18next";
 import { LoadingOutlined } from "@ant-design/icons";
 import { UserContext } from "../../../contexts/UserContext";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
 
-type loginProps = {};
-
-const LoginForm: React.FC<loginProps> = () => {
-  const history = useHistory();
+const LoginForm: React.FC<RouteComponentProps> = ({ history }) => {
   const layout = {
     labelcol: { span: 8 },
     wrappercol: { span: 12 },
@@ -25,35 +27,31 @@ const LoginForm: React.FC<loginProps> = () => {
   const tailLayout = {
     wrapperCol: { span: 26 },
   };
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
   const ref = useRef<FormInstance>(null);
-  const { t, i18n } = useTranslation("common");
+  const { t } = useTranslation("common");
   const [form] = useFormWithRef(ref);
   const [loading, setLoading] = useState(false);
   const [cookies, setCookie] = useCookies(["token"]);
   const user = useContext(UserContext);
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
   const onSave = (partialUser: Partial<User>) => {
     setLoading(true);
     user
       .loginUser(partialUser)
       .then((res: any) => {
         if (!res.error) {
-          message.success("Udało się zalogować");
+          message.success(t("loginForm.successLogin"));
           setCookie("token", res.data.token, { expires: addHours(8) });
           setLoading(false);
-          history.push("/home");
+          history.push("/");
         }
       })
       .catch((e) => {
-        message.error("Wprowadzono niepoprawne dane. Wprowadź prawidłowe dane");
+        message.error(t("loginForm.error"));
         setTimeout(() => message.destroy(), 2000);
         setLoading(false);
       });
   };
-  console.log(localStorage.getItem("remember"));
   const rememberMe = () => {
     const rmbr = localStorage.getItem("remember");
     if (rmbr === null) {
@@ -77,13 +75,12 @@ const LoginForm: React.FC<loginProps> = () => {
         {...layout}
         name="basic"
         initialValues={{ remember: true }}
-        onFinishFailed={onFinishFailed}
         form={form}
       >
         <Form.Item
           label="Login"
           name="username"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[{ required: true, message: t("loginForm.loginError") }]}
           initialValue={localStorage.getItem("login")}
         >
           <Input />
@@ -91,7 +88,7 @@ const LoginForm: React.FC<loginProps> = () => {
         <Form.Item
           label={t("loginForm.password")}
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[{ required: true, message: t("loginForm.passwordError") }]}
           initialValue={localStorage.getItem("password")}
         >
           <Input.Password />
@@ -122,11 +119,12 @@ const LoginForm: React.FC<loginProps> = () => {
         </Button>
         <Divider className="ant-divider-horizontale" />
         <h4 className="register_info">
-          Nie masz jeszcze konta? <Link to="/register">Zarejestruj się</Link>
+          {t("loginForm.registerInfo")}{" "}
+          <Link to="/register">{t("loginForm.register")}</Link>
         </h4>
       </Form>
     </div>
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

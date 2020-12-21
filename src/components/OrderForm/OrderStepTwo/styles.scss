@@ -1,1 +1,118 @@
 /* The component style is inserted here. */
+
+
+/* The component style is inserted here. */
+
+.summary {
+    &-cart {
+        &__list {
+            display: inline-grid;
+            width: 35%;
+            overflow-y: auto;
+            max-height: 65vh;
+            float: left;
+            padding: 4vh 0;
+            h3 {
+                line-height: 20px;
+            }
+            &-gross {
+                text-align: left;
+                line-height: normal;
+                padding-top: 10px;
+                font-size: 15px;
+            }
+            &-net {
+                text-align: left;
+                line-height: normal;
+                font-size: 14px;
+                color: rgba(128, 128, 128, 0.8);
+            }
+        }
+    }
+    &-container {
+        padding: 4vh 0;
+        float: left;
+        width: 60%;
+        padding-right: 20px;
+        h3 {
+            line-height: 20px;
+            text-align: left;
+        }
+        &__confirmButton {
+            background-color: rgba(255, 178, 11, 0.919);
+            text-transform: uppercase;
+            &:hover {
+                background-color: rgba(238, 169, 19, 0.919);
+                color: black;
+                font-weight: bold;
+                border: 1px solid rgba(226, 164, 29, 0.919)
+            }
+        }
+        &__goBack {
+            top: 0;
+            position: absolute;
+            line-height: 10px;
+            font-size: 18px;
+            color: rgba(3, 97, 118, 0.7);
+            &:hover {
+                color: rgba(1, 17, 21, 0.9);
+            }
+        }
+        &__mechanic {
+            display: flex;
+            flex-flow: column;
+            text-align: left;
+            &-messageButton {
+                &__true {
+                    background-color: rgba(128, 128, 128, 0.5);
+                    &:hover {
+                        background-color: rgba(128, 128, 128, 0.8);
+                        color: black;
+                        border: 1px solid rgba(128, 128, 128, 1);
+                    }
+                }
+                &__false {
+                    display: none;
+                }
+            }
+            &-messageLabel {
+                line-height: normal;
+                padding: 10px 0 0px;
+            }
+            &-avatar {
+                &__src {
+                    max-width: 100px;
+                    max-height: 100px;
+                }
+            }
+            &-description {
+                &__names {
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    margin-left: 5px;
+                    line-height: 20px;
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+                &__address {
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    margin-left: 5px;
+                    line-height: 20px;
+                    font-size: 15px;
+                }
+                &__perHour {
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    margin-left: 5px;
+                    line-height: 20px;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+.dcrRsu .pop {
+    display: flex !important;
+}

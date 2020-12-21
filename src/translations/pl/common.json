@@ -7,34 +7,109 @@
         "submitOrder": "Złóż zamówienie",
         "toPay": "Do zapłaty"
     },
+    "error": {
+        "emailForm": "Błędny format adresu email!",
+        "loginForm": "Login powinien zawierać conajmniej 4 znaki",
+        "passwordForm": "Hasło musi składać się z conajmniej 5 znaków",
+        "repeatPassword": "Dwa wpisane hasła się nie zgadzają!",
+        "username": "Użytkownik o podanym loginie już istnieje!"
+    },
     "homePage": "Strona główna",
+    "language": {
+        "changed": "Język został zmieniony",
+        "english": "Angielski",
+        "label": "Język",
+        "polish": "Polski"
+    },
     "loginForm": {
+        "error": "Wprowadzono niepoprawne dane. Wprowadź prawidłowe dane!",
         "logIn": "Zaloguj się",
         "loginError": "Login nie może być pusty!",
         "password": "Hasło",
         "passwordError": "Hasło nie może być puste!",
-        "rememberMe": "Zapamiętaj mnie"
-
+        "successLogin": "Zalogowano się pomyślnie!",
+        "rememberMe": "Zapamiętaj mnie",
+        "register": "Zarejestruj się",
+        "registerIn": "Zarejestruj się",
+        "registerInfo": "Nie masz jeszcze konta?"
+    },
+    "mechanics": {
+        "address": "Adres",
+        "backToList": "Confij do listy",
+        "city": "Miasto",
+        "detailTitle": "Profil mechanika",
+        "emailAddress": "Adres email",
+        "hourlyRate": "Stawka godzinowa",
+        "phone": "Numer telefonu",
+        "title": "Mechanicy"
+    },
+    "menu": {
+        "chooseLanguage": "Wybierz język",
+        "logout": "Wyloguj się",
+        "myOrders": "Moje zamówienia",
+        "settings": "Ustawienia konta"
+    },
+    "navbar": {
+        "mechanics": "Mechanicy",
+        "products": "Produkty"
+    },
+    "order": {
+        "back": "Cofnij",
+        "backToShopping": "Wróć do zakupów",
+        "chooseMechanicFromList": "Wybierz mechanika z listy poniżej",
+        "chooseMechanic": "Wybór mechanika",
+        "choosedMechanic": "Wybierz mechanika",
+        "choosedMechanicSummary": "Wybrany mechanik",
+        "confirmOrder": "Potwierdź swoje zamówienie",
+        "editMessage": "Edytuj wiadomość",
+        "extraMessage": "Napisz dodatkową wiadomość do mechanika",
+        "mechanic": "Mechanik",
+        "mechanicReceived": "otrzymał Twoje zamówienie, skontaktuje się z Tobą poprzez adres email. Jeśli chcesz zrobić to pierwszy/a to kliknij w profil mechanika",
+        "mechanicReceived2": "by dowiedzieć się więcej.",
+        "mechanicReceivedRef": "profil mechanika",
+        "messageToMechanic": "Wiadomość do mechanika",
+        "title": "Zamówienie",
+        "submitOrder": "Złóż zamówienie",
+        "summaryOrder": "Podsumowanie zamówienia",
+        "step": "Krok",
+        "stepOf": "z",
+        "thanks": "Dziękujemy za złożone zamówienie",
+        "yourProducts": "Twoje produkty"
     },
     "registerForm": {
         "email": "Adres e-mail",
         "firstName": "Imię",
         "lastName": "Nazwisko",
         "password": "Password",
+        "registeredSuccessfully": "Zarejestrowano pomyślnie. System automatycznie zalogował Ciebie do systemu.",
         "repeatPassword": "Powtórz hasło",
         "signUp": "Załóż konto"
     },
     "product": {
+        "addToCart": "Dodaj do koszyka",
+        "addToCart0Error": "Nie możesz dodać ilości produktu równej 0",
         "amount": "Ilość produktów",
         "backToShopping": "Wróć do zakupów",
         "goToCart": "Przejdź do koszyka",
         "noSpecification": "Produkt nie posiada specyfikacji",
+        "priceDetails": "Szczegóły ceny",
         "priceGross": "Cena brutto",
         "priceNet": "Cena netto",
+        "quantity_0": " z {{count}} sztuki",
+        "quantity_1": " z {{count}} sztuk",
+        "quantity_2": " z {{count}} sztuk",
         "sortBy": "Sortuj po",
+        "specification": "Specyfikacja",
+        "specificationValue": "Wartość",
         "successfullyAdded": "Pomyślnie dodano do koszyka",
         "warranty": "Gwarancja",
         "value": "zł."
+    },
+    "sortBy": {
+        "nameDown": "Nazwa malejąco",
+        "nameUp": "Nazwa rosnąco",
+        "priceDown": "Cena malejąco",
+        "priceUp": "Cena rosnąco"
     },
     "warrantyYear_0": "{{count}} rok",
     "warrantyYear_1": "{{count}} lata",

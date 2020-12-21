@@ -50,15 +50,13 @@ const ProductListView: React.FC<props> = ({ location }) => {
   useEffect(() => {
     setCategory({} as Category);
     setProducts([]);
-    if(location.state)
-    {
-    fetchProducts({ category: location.state.id, ordering: "name" })(
-      dispatchPr
-    );
-    fetchCategory(location.state.id)(dispatchCat);
-    }
-    else{
-      fetchProducts({ordering:"name"})(dispatchPr)
+    if (location.state) {
+      fetchProducts({ category: location.state.id, ordering: "name" })(
+        dispatchPr
+      );
+      fetchCategory(location.state.id)(dispatchCat);
+    } else {
+      fetchProducts({ ordering: "name" })(dispatchPr);
     }
   }, [location.state]);
   useEffect(() => {
@@ -80,10 +78,10 @@ const ProductListView: React.FC<props> = ({ location }) => {
     <div>
       <div className="category-baner">
         <div className="category-baner__name">
-          {!categoryRed.loading && Object.keys(category).length > 0 ?  (
+          {!categoryRed.loading && Object.keys(category).length > 0 ? (
             <p className="category-baner__name-content">{category.name}</p>
-          ) :  (
-            <p className="category-baner__name-content">{t('allProducts')}</p>
+          ) : (
+            <p className="category-baner__name-content">{t("allProducts")}</p>
           )}
         </div>
       </div>
@@ -106,16 +104,16 @@ const ProductListView: React.FC<props> = ({ location }) => {
             onChange={sortChange}
           >
             <Option value="name_up">
-              <ArrowUpOutlined /> Nazwa rosnąco
+              <ArrowUpOutlined /> {t("sortBy.nameUp")}
             </Option>
             <Option value="name_down">
-              <ArrowDownOutlined /> Nazwa malejąco
+              <ArrowDownOutlined /> {t("sortBy.nameDown")}
             </Option>
             <Option value="price_up">
-              <ArrowUpOutlined /> Cena rosnąco
+              <ArrowUpOutlined /> {t("sortBy.priceUp")}
             </Option>
             <Option value="price_down">
-              <ArrowDownOutlined /> Cena malejąco
+              <ArrowDownOutlined /> {t("sortBy.priceDown")}
             </Option>
           </Select>
         </div>

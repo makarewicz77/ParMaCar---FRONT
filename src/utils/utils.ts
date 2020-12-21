@@ -28,8 +28,8 @@ export const LogoIcon = logo;
 
 export const getWarranty = (t: TFunction, warranty: string) => {
   const warrs = warranty.split("+");
-  const years = t("warrantyYear", { count: Number(warrs[0]) });
-  const months = t("warrantyMonth", { count: Number(warrs[1]) });
+  const years = t(`warrantyYear_${Number(warrs[0]) === 1 ? 0 : Number(warrs[0]) < 5 ? 1 : 2}`, { count: Number(warrs[0]) });
+  const months = t(`warrantyMonth_${Number(warrs[1]) === 1 ? 0 : Number(warrs[1]) < 5 ? 1 : 2}`, { count: Number(warrs[1]) });
   return `${warrs[0] && warrs[0] !== "0" ? years : ""} ${warrs[1] && warrs[1] !== "0" ? months : ""}`;
 };
 

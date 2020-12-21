@@ -6,7 +6,7 @@ import { Card, Col, Popover, Row } from "antd";
 import { cutDescription, getImageUrl } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
 import noAvailable from "../../../static/images/noavailable.jpg";
-import { useHistory } from "react-router-dom"
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import slugify from "react-slugify";
 type productsListProps = {
   products: Product[];
@@ -20,23 +20,29 @@ const fullDescription = (description: string) => {
   );
 };
 
-export const fullPriceDetails = (vat: number, net : number) => {
-  return(
+export const fullPriceDetails = (vat: number, net: number) => {
+  return (
     <div className="products_list-item_detail-price">
-      <p><strong>Cena netto:</strong> {net} zł.</p>
-      <p><strong>VAT:</strong> {vat} %</p>
+      <p>
+        <strong>Cena netto:</strong> {net}
+      </p>
+      <p>
+        <strong>VAT:</strong> {vat} %
+      </p>
     </div>
-  )
-}
+  );
+};
 
-
-const ProductList: React.FC<productsListProps> = ({ products }) => {
-  let history = useHistory();
+const ProductList: React.FC<productsListProps & RouteComponentProps> = ({
+  products,
+  history,
+}) => {
   const { t } = useTranslation("common");
-  const goToProduct = (product:Product) =>{
-    //history.push(`/product/`)
-    history.push(`/product/${slugify(product.name)}/${product.id}/`,{id:product.id});
-  }
+  const goToProduct = (product: Product) => {
+    history.push(`/product/${slugify(product.name)}/${product.id}/`, {
+      id: product.id,
+    });
+  };
   return (
     <>
       {products.length > 0 ? (
@@ -47,7 +53,10 @@ const ProductList: React.FC<productsListProps> = ({ products }) => {
                 <div className="products_list-item" key={product.id}>
                   <Col className="products_list-item-col" span={8}>
                     <Card
-                      style={{ width: 160 }}
+                      style={{
+                        width: "170px",
+                        border: "1px solid rgba(128,128,128,0.8)",
+                      }}
                       cover={
                         <>
                           {product.image === null ? (
@@ -97,7 +106,10 @@ const ProductList: React.FC<productsListProps> = ({ products }) => {
                           </p>
                         </div>
                       )}
-                      <Popover content={fullPriceDetails(product.vat, product.net)} title="Szczegóły ceny">
+                      <Popover
+                        content={fullPriceDetails(product.vat, product.net)}
+                        title={t("product.priceDetails")}
+                      >
                         <h5 className="products_list-item-price">
                           {product.gross} {t("product.value")}
                         </h5>
@@ -116,4 +128,4 @@ const ProductList: React.FC<productsListProps> = ({ products }) => {
   );
 };
 
-export default ProductList;
+export default withRouter(ProductList);

@@ -1,0 +1,28 @@
+/* The component style is inserted here. */
+
+.profile {
+    &-container {
+        &__avatar {
+            max-width: 30vh;
+            max-height: 30vh;
+            &-div {
+                display: block;
+                float: left;
+            }
+        }
+        &__informations {
+            width: 40%;
+            float: left;
+            margin-left: 10px;
+            h2 {
+                text-align: left;
+                line-height: normal;
+            }
+            h3 {
+                text-align: left;
+                line-height: normal;
+                font-weight: normal;
+            }
+        }
+    }
+}

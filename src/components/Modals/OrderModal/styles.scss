@@ -1,0 +1,81 @@
+/* The component style is inserted here. */
+
+.order {
+    &-modal {
+        .ant-modal-content {
+            width: auto;
+        }
+        .ant-modal-title {
+            h3 {
+                text-align: center;
+                line-height: normal;
+                margin-bottom: 0px;
+            }
+        }
+        .ant-modal-body {
+            p {
+                text-align: justify;
+                -webkit-animation: fadein 3s;
+                -moz-animation: fadein 3s;
+                -ms-animation: fadein 3s;
+                -o-animation: fadein 3s;
+                animation: fadein 3s;
+            }
+            @keyframes fadein {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+            @-moz-keyframes fadein {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+            @-webkit-keyframes fadein {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+            @-ms-keyframes fadein {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+            @-o-keyframes fadein {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+            div {
+                display: flex;
+                justify-content: center;
+                margin: 0 0 30px 0;
+                button {
+                    background-color: rgba(0, 238, 255, 0.919);
+                    text-transform: uppercase;
+                    &:hover {
+                        background-color: rgba(4, 207, 221, 0.919);
+                        color: black;
+                        border: 1px solid rgba(4, 167, 179, 0.919);
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}

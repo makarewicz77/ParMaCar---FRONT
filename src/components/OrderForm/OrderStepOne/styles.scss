@@ -43,6 +43,10 @@
                 &__avatar {
                     float: left;
                     margin: 10px;
+                    &-src {
+                        max-width: 75px;
+                        max-height: 75px;
+                    }
                 }
                 &__description {
                     float: left;

@@ -5,10 +5,8 @@ import {
   baseUserUrl,
   baseLogoutUrl,
   baseRegisterUrl,
-  baseUsersUrl,
+  baseMechanicsUrl,
 } from "./urls";
-
-type UserParams = {};
 
 export const LoginApi = {
   loginUser: (partialUser: Partial<User>) => {
@@ -32,18 +30,23 @@ export const LoginApi = {
     });
   },
   registerUser: (user: Partial<User>) => {
-    axios
+    return axios
       .request({
         url: baseRegisterUrl,
         method: "POST",
         data: user,
       })
-      .then((res) => console.log(res));
   },
-  getUsersByGroup: (group: string) =>{
+  getMechanics: () => {
     return axios.request({
-      url: `${baseUsersUrl}?group=${group}`,
-      method: 'GET',
-    })
-  }
+      url: `${baseMechanicsUrl}`,
+      method: "GET",
+    });
+  },
+  getMechanic: (id: number) => {
+    return axios.request({
+      url: `${baseMechanicsUrl}${id}/`,
+      method: "GET",
+    });
+  },
 };

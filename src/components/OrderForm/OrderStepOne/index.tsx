@@ -1,24 +1,26 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, List, Radio, Skeleton } from "antd";
+import { Avatar, Button, Radio } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 
-import React, { useState } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import Loader from "react-loader-spinner";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { User } from "../../../models/user";
+import { Mechanic } from "../../../models/user";
 import { getImageUrl } from "../../../utils/utils";
 
 import "./styles.scss";
 
 interface OneProps {
-  setPickedMechanic: React.Dispatch<React.SetStateAction<User>>;
-  pickedMechanic: User;
+  setPickedMechanic: React.Dispatch<React.SetStateAction<Mechanic>>;
+  pickedMechanic: Mechanic;
   loading: boolean;
   setPercent: React.Dispatch<React.SetStateAction<number>>;
-  mechanicList: User[];
+  mechanicList: Mechanic[];
   setStep: React.Dispatch<React.SetStateAction<number>>;
   setNotes: React.Dispatch<React.SetStateAction<string>>;
+  notes: string;
 }
 
 const OrderStepOne: React.FC<OneProps & RouteComponentProps> = ({
@@ -30,22 +32,26 @@ const OrderStepOne: React.FC<OneProps & RouteComponentProps> = ({
   loading,
   pickedMechanic,
   mechanicList,
+  notes,
 }) => {
-  console.log(pickedMechanic);
   const onGoToStepTwo = () => {
-    setStep(1);
+    setStep(2);
+    setPercent(100);
     history.push("/order/2/");
   };
+  const { t } = useTranslation("common");
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
         <>
-          <h2>Wybór mechanika</h2>
+          <h2>{t("order.chooseMechanic")}</h2>
           <div className="order-container__mechanicList">
-            {mechanicList.map((mechanic, index) => {
-              const val = mechanic.id === pickedMechanic.id ? true : false;
+            {mechanicList.map((mechanicPerson, index) => {
+              const val =
+                mechanicPerson.id === pickedMechanic.id ? true : false;
+              const { avatar, user: mechanic, hourly_rate } = mechanicPerson;
               return (
                 <div
                   className="order-container__mechanicList-mechanic"
@@ -53,13 +59,14 @@ const OrderStepOne: React.FC<OneProps & RouteComponentProps> = ({
                 >
                   <div className="order-container__mechanicList-mechanic__avatar">
                     {" "}
-                    {mechanic.avatar ? (
+                    {avatar ? (
                       <img
-                        src={getImageUrl(mechanic.avatar)}
+                        src={getImageUrl(avatar)}
                         alt="mechanic avatar"
+                        className="order-container__mechanicList-mechanic__avatar-src"
                       />
                     ) : (
-                      <Avatar size={50} icon={<UserOutlined />} />
+                      <Avatar size={75} icon={<UserOutlined />} />
                     )}
                   </div>
                   <div className="order-container__mechanicList-mechanic__description">
@@ -70,14 +77,14 @@ const OrderStepOne: React.FC<OneProps & RouteComponentProps> = ({
                       ul. Kościelna 80 16-315 Lipsk
                     </p>
                     <p className="order-container__mechanicList-mechanic__description-perHour">
-                      Stawka na godzinę: 15zł/h
+                      {t("mechanics.hourlyRate")}: {hourly_rate} zł/h
                     </p>
                   </div>
                   <div className="order-container__mechanicList-mechanic__description-radio">
                     <Radio
                       onChange={() => {
                         setPercent(50);
-                        setPickedMechanic(mechanic);
+                        setPickedMechanic(mechanicPerson);
                       }}
                       value={val}
                       defaultChecked={val}
@@ -91,10 +98,11 @@ const OrderStepOne: React.FC<OneProps & RouteComponentProps> = ({
           <>
             <div className="order-container__div">
               <p className="order-container__extramessage">
-                Napisz dodatkową wiadomość do mechanika{" "}
-                {pickedMechanic && (
+                {t("order.extraMessage")}{" "}
+                {pickedMechanic.user && (
                   <>
-                    : {pickedMechanic.first_name} {pickedMechanic.last_name}
+                    : {pickedMechanic.user.first_name}{" "}
+                    {pickedMechanic.user.last_name}
                   </>
                 )}
               </p>
@@ -103,16 +111,18 @@ const OrderStepOne: React.FC<OneProps & RouteComponentProps> = ({
               className="order-container__textarea"
               autoSize={{ minRows: 3 }}
               onChange={(ev) => setNotes(ev.target.value)}
+              defaultValue={notes}
             />
             <Button
               disabled={pickedMechanic.id ? false : true}
               className="order-container__button"
               onClick={() => onGoToStepTwo()}
             >
-              Wybierz mechanika{" "}
-              {pickedMechanic && (
+              {t("order.chooseMechanic")}{" "}
+              {pickedMechanic.user && (
                 <>
-                  : {pickedMechanic.first_name} {pickedMechanic.last_name}
+                  : {pickedMechanic.user.first_name}{" "}
+                  {pickedMechanic.user.last_name}
                 </>
               )}
             </Button>

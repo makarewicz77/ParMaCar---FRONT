@@ -50,7 +50,7 @@ div#root {
 }
 
 .top_bar {
-    background-color: rgb(0 0 121 / 10%);
+    background-color: darkgray;
     display: block;
     height: 50px;
     line-height: 50px;

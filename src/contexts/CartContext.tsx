@@ -6,22 +6,28 @@ import { UserContext } from "./UserContext";
 
 export interface CartContextInterface {
   setCart: (obj: any) => void;
+  getCart: Cart;
   addToCart: (quantity: number, product: number) => void;
   clearCart: () => void;
   deleteFromCart: (line_id: number) => void;
   getProductQuantity: (product_id: number) => number;
+  getCartResponse: () => void;
   getPriceGross: () => number;
+  getPriceNet: () => number;
   updateLine: (line_id: number, quantity: number) => void;
   count: number;
   lines: CartLine[];
 }
 export const CartContext = createContext<CartContextInterface>({
   setCart: () => {},
+  getCart: {} as Cart,
   addToCart: () => {},
   clearCart: () => {},
   deleteFromCart: () => {},
   getProductQuantity: () => 0,
+  getCartResponse: () => {},
   getPriceGross: () => 0,
+  getPriceNet: () => 0,
   updateLine: () => {},
   count: 0,
   lines: [] as CartLine[],
@@ -35,11 +41,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [lines, setLines] = useState<CartLine[]>([] as CartLine[]);
   const [count, setCount] = useState<number>(0);
   const [gross, setGross] = useState<number>(0);
+  const [net, setNet] = useState<number>(0);
   const addToCart = (quantity: number, product: number) => {
     const line: Partial<CartLine> = { quantity, product, cart: cart.id };
     CartApi.addToCart(line).then((res) => {
       setLinesAndCount(res.data.line);
       setGross(res.data.sum_gross);
+      setNet(res.data.sum_net);
     });
   };
   const clearCart = () => {
@@ -49,6 +57,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           setCart(res.data[0]);
           setLinesAndCount(res.data[0].line);
           setGross(res.data[0].sum_gross);
+          setNet(res.data[0].sum_net);
         });
     });
   };
@@ -60,6 +69,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     CartApi.removeFromCart(line_id).then((res) => {
       setLinesAndCount(res.data.line);
       setGross(res.data.sum_gross);
+      setNet(res.data.sum_net);
     });
   };
   const getProductQuantity = (product_id: number) => {
@@ -69,6 +79,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
   const getPriceGross = () => {
     return gross;
+  };
+  const getPriceNet = () => {
+    return net;
   };
   const updateLine = (line_id: number, quantity: number) => {
     const lineToUpdate = lines.find((line) => line.id === line_id);
@@ -80,30 +93,35 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         tmpLines[ind] = lineToUpdate;
         setLines(tmpLines);
         setGross(res.data.sum_gross);
+        setNet(res.data.sum_net);
       });
     }
   };
-  useEffect(() => {
+  const getCartResponse = () => {
     if (isLogged && user)
       CartApi.getCart(user.id).then((res) => {
         setCart(res.data[0]);
         setLinesAndCount(res.data[0].line);
         setGross(res.data[0].sum_gross);
+        setNet(res.data[0].sum_net);
       });
-    else if (!isLogged && !user) {
-      //User not logged but has got cart in localStorage!!!!
-    }
+  };
+  useEffect(() => {
+    getCartResponse();
   }, [isLogged]);
 
   return (
     <CartContext.Provider
       value={{
         setCart,
+        getCart: cart,
+        getCartResponse,
         addToCart,
         clearCart,
         deleteFromCart,
         getProductQuantity,
         getPriceGross,
+        getPriceNet,
         updateLine,
         lines,
         count,

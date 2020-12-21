@@ -1,8 +1,9 @@
-import { message, Progress, Skeleton } from "antd";
+import { message, Progress } from "antd";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import { LoginApi } from "../../api/loginApi";
-import { User } from "../../models/user";
+import { Mechanic } from "../../models/user";
 import OrderStepOne from "./OrderStepOne";
 import OrderStepTwo from "./OrderStepTwo";
 
@@ -10,30 +11,33 @@ import "./styles.scss";
 
 const OrderForm: React.FC = () => {
   const [percent, setPercent] = useState(0);
-  const [success, setSuccess] = useState(0);
   const [notes, setNotes] = useState("");
   const [step, setStep] = useState(1);
-  const [pickedMechanic, setPickedMechanic] = useState<User>({} as User);
-  const [mechanicList, setMechanicList] = useState<User[]>([] as User[]);
+  const [pickedMechanic, setPickedMechanic] = useState<Mechanic>(
+    {} as Mechanic
+  );
+  const [mechanicList, setMechanicList] = useState<Mechanic[]>(
+    [] as Mechanic[]
+  );
   const [loading, setLoading] = useState<boolean>(true);
+  const { t } = useTranslation("common");
   useEffect(() => {
-    LoginApi.getUsersByGroup("Mechanic")
+    LoginApi.getMechanics()
       .then((res) => {
         setMechanicList(res.data);
         setLoading(false);
       })
       .catch((e) => {
         message.error("ERROR");
-        console.log(e);
       });
   }, []);
   return (
     <div className="order-container">
-      <h1>Złóż zamówienie</h1>
+      <h1>{t("order.submitOrder")}</h1>
       <Progress
         type="circle"
         percent={percent}
-        format={(percent) => `Krok ${step} z 2`}
+        format={() => `${t("order.step")} ${step} ${t("order.stepOf")} 2`}
         className="order-container__progress"
       />
       {}
@@ -44,6 +48,7 @@ const OrderForm: React.FC = () => {
             render={() => (
               <OrderStepOne
                 setPickedMechanic={setPickedMechanic}
+                notes={notes}
                 mechanicList={mechanicList}
                 loading={loading}
                 pickedMechanic={pickedMechanic}
@@ -53,7 +58,17 @@ const OrderForm: React.FC = () => {
               />
             )}
           />
-          <Route path="/order/2/" component={OrderStepTwo} />
+          <Route
+            path="/order/2/"
+            render={() => (
+              <OrderStepTwo
+                mechanic={pickedMechanic}
+                note={notes}
+                setPercent={setPercent}
+                setStep={setStep}
+              />
+            )}
+          />
           <Route path="/order/3/" component={OrderStepOne} />
         </Switch>
       </Route>

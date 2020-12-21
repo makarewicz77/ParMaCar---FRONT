@@ -3,6 +3,7 @@ import {
   Breadcrumb,
   Button,
   Card,
+  Divider,
   InputNumber,
   message,
   Modal,
@@ -45,12 +46,12 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
   const { t } = useTranslation("common");
   const columns = [
     {
-      title: "Specyfikacja",
+      title: t("product.specification"),
       dataIndex: "key",
       render: (key: string) => <strong>{key}</strong>,
     },
     {
-      title: "Wartość",
+      title: t("product.specificationValue"),
       dataIndex: "value",
     },
   ];
@@ -77,7 +78,7 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
           setCartModal(true);
         }
       }
-    } else message.info("Nie możesz dodać ilości produktu: 0");
+    } else message.info(t("product.addToCart0Error"));
   };
   const [cartModal, setCartModal] = useState(false);
   const handleCancel = () => {
@@ -104,6 +105,7 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
       </Button>
     </div>
   );
+
   return (
     <div className="container">
       <div className="container-categories">
@@ -138,6 +140,7 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
                 </a>
               </Breadcrumb.Item>
             </Breadcrumb>
+            <Divider />
           </div>
 
           <div className="product-description__column">
@@ -170,9 +173,15 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
                 onChange={setQuantityToCart}
                 defaultValue={0}
               />
-              <p> z {product.quantity} sztuk</p>
+              <p>
+                {" "}
+                {t(`product.quantity_${product.quantity === 1 ? 1 : 2}`, {
+                  count: product.quantity,
+                  postProcess: "interval",
+                })}
+              </p>
               <Button onClick={addToCartClick}>
-                <ShoppingCartOutlined /> Dodaj do koszyka
+                <ShoppingCartOutlined /> {t("product.addToCart")}
               </Button>
             </div>
           </div>

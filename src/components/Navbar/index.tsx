@@ -1,6 +1,7 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Button, Col, Row } from "antd";
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import { User } from "../../models/user";
@@ -14,8 +15,13 @@ type NavbarProps = {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({ user, setModalVisible, history }) => {
+const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({
+  user,
+  setModalVisible,
+  history,
+}) => {
   const count = useContext(CartContext).count;
+  const { t } = useTranslation("common");
   return (
     <>
       <Row>
@@ -24,36 +30,42 @@ const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({ user, setModalVis
             <img src={LogoIcon} alt="logo" className="navbar_logo" />
           </Link>
         </Col>
-        <Col xs={6} sm={6} md={8} lg={10}>
-          <Link to="/home">Produkty</Link>
-        </Col>
-        <Col xs={6} sm={3} md={2} lg={1}>
-          <Badge count={count} size="small" className="navbar-cart__badge" >
-            <ShoppingCartOutlined className="navbar-cart" onClick={()=> history.push(`/cart`)}/>
+        <div className="navbar">
+          <Link to="/products">
+            <p className="navbar-item">{t("navbar.products")}</p>
+          </Link>
+          <Link to="/profile-list">
+            {" "}
+            <p className="navbar-item">{t("navbar.mechanics")}</p>
+          </Link>
+        </div>
+        <Col xs={6} sm={3} md={2} lg={user ? 1 : 2} offset={user ? 12 : 9}>
+          <Badge count={count} size="small" className="navbar-cart__badge">
+            <ShoppingCartOutlined
+              className="navbar-cart"
+              onClick={() => history.push(`/cart`)}
+            />
           </Badge>
-        </Col>
-        <Col xs={6} sm={6} md={8} lg={10}>
-          {" "}
-          {user === undefined && (
-            <>
-              <Button
-                type="primary"
-                className="login_button"
-                onClick={() => setModalVisible(true)}
-              >
-                <Link to="/login">Zaloguj sie</Link>
-              </Button>
-              <Button type="primary" className="register_button">
-                <Link to="/register">Zarejestruj sie</Link>
-              </Button>
-            </>
-          )}
-          {user !== undefined && (
-            <div>
-              <UserOptions user={user} />
-            </div>
-          )}
-        </Col>
+        </Col>{" "}
+        {user === undefined && (
+          <Col xs={6} sm={3} md={2} lg={5} offset={0}>
+            <Button
+              type="primary"
+              className="login_button"
+              onClick={() => setModalVisible(true)}
+            >
+              <Link to="/login">{t("loginForm.logIn")}</Link>
+            </Button>
+            <Button type="primary" className="register_button">
+              <Link to="/register">{t("loginForm.registerIn")}</Link>
+            </Button>
+          </Col>
+        )}
+        {user !== undefined && (
+          <Col xs={6} sm={6} md={8} lg={2} offset={1}>
+            <UserOptions user={user} />
+          </Col>
+        )}
       </Row>
     </>
   );

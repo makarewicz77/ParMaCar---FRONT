@@ -9,3 +9,5 @@ export const baseCategoriesUrl = `${environment.apiUrl}api/categories/`;
 export const baseCartUrl = `${environment.apiUrl}api/cart/`;
 export const baseCartLineUrl = `${environment.apiUrl}api/cart-lines/`
 export const baseUsersUrl = `${environment.apiUrl}api/auth/users/`
+export const baseMechanicsUrl = `${environment.apiUrl}api/auth/mechanics/`
+export const baseOrderUrl = `${environment.apiUrl}api/order/`
