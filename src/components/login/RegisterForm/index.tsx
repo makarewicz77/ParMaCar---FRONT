@@ -27,7 +27,7 @@ const RegisterForm: React.FC<RouteComponentProps> = ({ history }) => {
   const user = useContext(UserContext);
   const onSave = (partialUser: Partial<User>) => {
     user
-      .registerUser({ ...partialUser, group: "Client" })
+      .registerUser({ ...partialUser }, "Client")
       .then((res: any) => {
         user.loginFromRegister(res.data).then((res) => {
           message.success(

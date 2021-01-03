@@ -29,18 +29,21 @@ export const LoginApi = {
       method: "POST",
     });
   },
-  registerUser: (user: Partial<User>) => {
+  registerUser: (user: Partial<User>,group:string) => {
     return axios
       .request({
         url: baseRegisterUrl,
         method: "POST",
-        data: user,
+        data: {...user, group},
       })
   },
-  getMechanics: () => {
+  getMechanics: (id?:number) => {
     return axios.request({
       url: `${baseMechanicsUrl}`,
       method: "GET",
+      params:{
+        user_id: id
+      }
     });
   },
   getMechanic: (id: number) => {

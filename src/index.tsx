@@ -23,7 +23,7 @@ ReactDOM.render(
 );
 
 i18next.use(intervalPlural).init({
-  debug: true,
+  debug: false,
   interpolation: { escapeValue: false }, // React already does escaping
   lng: localStorage.getItem("language") === "pl" ? "pl" : "en-US", // language to use
   resources: {

@@ -34,18 +34,17 @@ const OrderStepTwo: React.FC<StepTwoProps> = ({
   const [visible, setVisible] = useState<boolean>(false);
   const user = useContext(UserContext).user;
   const { getCart: cart, getCartResponse } = useContext(CartContext);
+  const backToStepOne = () => {
+    setStep(1);
+    setPercent(50);
+  };
+
   return (
     <>
       {mechanicUser ? (
         <>
           <div>
-            <Link
-              to="/order/1/"
-              onClick={() => {
-                setStep(1);
-                setPercent(50);
-              }}
-            >
+            <Link to="/order/1/" onClick={() => backToStepOne()}>
               <h5 className="summary-container__goBack">{t("order.back")}</h5>
             </Link>
             <h2>{t("order.summaryOrder")}</h2>
@@ -104,7 +103,7 @@ const OrderStepTwo: React.FC<StepTwoProps> = ({
                             note,
                             mechanic: id,
                             user: user?.id,
-                            cart: cart.id,
+                            cart: cart,
                           }).then(() => {
                             setVisible(true);
                             getCartResponse();

@@ -3,10 +3,8 @@ import React, { useContext } from "react";
 import "./styles.scss";
 import { Dropdown, Menu, message } from "antd";
 import {
-  UserOutlined,
   LogoutOutlined,
   SettingOutlined,
-  UnorderedListOutlined,
   CommentOutlined,
 } from "@ant-design/icons";
 import { User } from "../../../models/user";
@@ -17,17 +15,20 @@ import SubMenu from "antd/lib/menu/SubMenu";
 import { useTranslation } from "react-i18next";
 import Poland from "../../../static/images/Flag_of_Poland.svg";
 import England from "../../../static/images/Flag_of_the_United_Kingdom.svg";
+import { CartContext } from "../../../contexts/CartContext";
 type userProps = {
   user: User;
 } & RouteComponentProps;
 
 const UserOptions: React.FC<userProps> = ({ user, history }) => {
   const { logout } = useContext(UserContext);
+  const { clearCart } = useContext(CartContext);
   const { t } = useTranslation("common");
   const handleMenuClick = (e: any) => {
-    if (e.key === "1") history.push("/user-config");
-    if (e.key === "2") history.push("/my-orders");
-    if (e.key === "4") logout();
+    if (e.key === "4") {
+      clearCart(true);
+      logout();
+    }
     if (e.key === "sub1") {
       i18next.changeLanguage("pl-PL");
       localStorage.setItem("language", "pl");
@@ -42,12 +43,6 @@ const UserOptions: React.FC<userProps> = ({ user, history }) => {
 
   const menu = (
     <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1" icon={<UserOutlined />}>
-        {t("menu.settings")}
-      </Menu.Item>
-      <Menu.Item key="2" icon={<UnorderedListOutlined />}>
-        {t("menu.myOrders")}
-      </Menu.Item>
       <SubMenu
         key="sub"
         icon={<CommentOutlined />}

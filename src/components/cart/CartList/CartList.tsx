@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { CartContext } from "../../../contexts/CartContext";
+import { UserContext } from "../../../contexts/UserContext";
 import { CartLine } from "../../../models/cart";
 import noAvailable from "../../../static/images/noavailable.jpg";
 import { getImageUrl, getLinkToProduct } from "../../../utils/utils";
@@ -18,6 +19,7 @@ const CartList: React.FC<RouteComponentProps> = ({ history }) => {
     updateLine,
     clearCart,
   } = useContext(CartContext);
+  const { isLogged } = useContext(UserContext);
   const { t } = useTranslation("common");
   const deleteLine = (line_id: number) => {
     deleteFromCart(line_id);
@@ -28,6 +30,9 @@ const CartList: React.FC<RouteComponentProps> = ({ history }) => {
   ) => {
     if (value === 0) deleteFromCart(id);
     else updateLine(id, Number(value));
+  };
+  const goToOrder = () => {
+    history.push("/order/1/");
   };
   return (
     <div>
@@ -93,38 +98,45 @@ const CartList: React.FC<RouteComponentProps> = ({ history }) => {
               </div>
             );
           })
-        ) : (
+        ) : isLogged ? (
           <h2>Twój koszyk jest pusty</h2>
+        ) : (
+          <h2>
+            Ta funkcjonalność jest przeznaczona tylko dla zalogowanych
+            użytkowników
+          </h2>
         )}
       </div>
-      <div className="cart-order">
-        <h2 className="cart-order__toPay">{t("cart.toPay")}: </h2>
-        <h2 className="cart-order__gross">
-          {getPriceGross()} {t("product.value")}
-        </h2>
-        <div className="cart-order__actions">
-          <Button
-            className="cart-order__actions-order"
-            disabled={!count}
-            onClick={() => history.push("/order/1/")}
-          >
-            {t("cart.submitOrder")}
-          </Button>
-          <Button
-            className="cart-order__actions-goBack"
-            onClick={() => history.goBack()}
-          >
-            {t("cart.continueShopping")}
-          </Button>
-          <Button
-            className="cart-order__actions-clearCart"
-            disabled={!count}
-            onClick={clearCart}
-          >
-            {t("cart.clearCart")}
-          </Button>
+      {isLogged && (
+        <div className="cart-order">
+          <h2 className="cart-order__toPay">{t("cart.toPay")}: </h2>
+          <h2 className="cart-order__gross">
+            {getPriceGross()} {t("product.value")}
+          </h2>
+          <div className="cart-order__actions">
+            <Button
+              className="cart-order__actions-order"
+              disabled={!count}
+              onClick={() => goToOrder()}
+            >
+              {t("cart.submitOrder")}
+            </Button>
+            <Button
+              className="cart-order__actions-goBack"
+              onClick={() => history.goBack()}
+            >
+              {t("cart.continueShopping")}
+            </Button>
+            <Button
+              className="cart-order__actions-clearCart"
+              disabled={!count}
+              onClick={() => clearCart(false)}
+            >
+              {t("cart.clearCart")}
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -6,21 +6,23 @@ import { User } from "../models/user";
 
 export interface UserContextInterface {
   setCart: (obj: any) => void;
-  registerUser: (user: Partial<User>) => Promise<unknown>;
+  registerUser: (user: Partial<User>, group: string) => Promise<unknown>;
   loginFromRegister: (user: any) => Promise<unknown>;
   loginUser: (user: Partial<User>) => Promise<AxiosResponse<User>>;
   logout: () => void;
   user: User | undefined;
   isLogged: boolean;
+  mechanicId: number | undefined;
 }
 export const UserContext = createContext<UserContextInterface>({
   setCart: () => {},
   registerUser: () => ({} as Promise<unknown>),
-  loginFromRegister: (user: any) => ({} as Promise<unknown>),
+  loginFromRegister: () => ({} as Promise<unknown>),
   loginUser: () => ({} as Promise<AxiosResponse<User>>),
   logout: () => {},
   user: undefined,
   isLogged: false,
+  mechanicId: undefined,
 });
 
 export const UserProvider: React.FC = ({ children }) => {
@@ -28,10 +30,11 @@ export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [cookies, , removeCookie] = useCookies(["token"]);
   const [, setToken] = useState<string>("");
+  const [mechanicId, setMechanicId] = useState<number | undefined>(undefined);
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const registerUser = (user: Partial<User>) => {
-    const promise = new Promise((resolve, reject) => {
-      resolve(LoginApi.registerUser(user));
+  const registerUser = (user: Partial<User>, group: string) => {
+    const promise = new Promise((resolve) => {
+      resolve(LoginApi.registerUser(user, group));
     });
     return promise;
   };
@@ -41,16 +44,23 @@ export const UserProvider: React.FC = ({ children }) => {
       setToken(res.data.token);
       setUser(res.data.user);
       setIsLogged(true);
+      if (res.data.user.groups[0].name === "Mechanic") {
+        LoginApi.getMechanics(res.data.user.id).then((mechanic) => {
+          setMechanicId(mechanic.data[0].id);
+        });
+      }
     });
     return response;
   };
   const logout = () => {
     removeCookie("token");
-    LoginApi.logoutUser(cookies.token).then(() => setUser(undefined));
+    LoginApi.logoutUser(cookies.token).then(() => {
+      setUser(undefined);
+      setIsLogged(false);
+    });
   };
   const loginFromRegister = (user: any) => {
-    console.log(user);
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       setToken(user.token);
       setUser(user.user);
       setToken(user.token);
@@ -65,6 +75,11 @@ export const UserProvider: React.FC = ({ children }) => {
         setUser(res.data);
         setToken(cookies.token);
         setIsLogged(true);
+        if (res.data.groups[0].name === "Mechanic") {
+          LoginApi.getMechanics(res.data.id).then((mechanic) => {
+            setMechanicId(mechanic.data[0].id);
+          });
+        }
       });
   }, [cookies.token]);
 
@@ -78,6 +93,7 @@ export const UserProvider: React.FC = ({ children }) => {
         logout,
         user,
         isLogged,
+        mechanicId,
       }}
     >
       {children}

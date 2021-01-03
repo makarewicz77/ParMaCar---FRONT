@@ -1,0 +1,13 @@
+/* The component style is inserted here. */
+
+.orderDetails {
+    &-content {
+        position: relative;
+    }
+    &-status {
+        top: 130px;
+        position: absolute;
+        line-height: 10px;
+        font-size: 18px;
+    }
+}

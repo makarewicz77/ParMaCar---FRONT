@@ -38,8 +38,22 @@ const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({
             {" "}
             <p className="navbar-item">{t("navbar.mechanics")}</p>
           </Link>
+          {user && (
+            <Link to="/my-orders">
+              {" "}
+              <p className="navbar-item">{t("menu.myOrders")}</p>
+            </Link>
+          )}
         </div>
-        <Col xs={6} sm={3} md={2} lg={user ? 1 : 2} offset={user ? 12 : 9}>
+        <Col
+          xs={6}
+          sm={3}
+          md={2}
+          lg={user ? 1 : 2}
+          offset={
+            user ? (localStorage.getItem("language") === "pl" ? 6 : 6) : 9
+          }
+        >
           <Badge count={count} size="small" className="navbar-cart__badge">
             <ShoppingCartOutlined
               className="navbar-cart"
@@ -59,6 +73,29 @@ const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({
             <Button type="primary" className="register_button">
               <Link to="/register">{t("loginForm.registerIn")}</Link>
             </Button>
+          </Col>
+        )}
+        {user && user.groups[0].name === "Mechanic" && (
+          <Col
+            xs={6}
+            sm={6}
+            md={8}
+            lg={localStorage.getItem("language") === "en" ? 4 : 3}
+            offset={0}
+          >
+            {t("navbar.accountType")}:{" "}
+            <strong>{t(`navbar.typeMechanic`)}</strong>
+          </Col>
+        )}
+        {user && user.groups[0].name === "Client" && (
+          <Col
+            xs={6}
+            sm={6}
+            md={8}
+            lg={localStorage.getItem("language") === "en" ? 4 : 3}
+            offset={0}
+          >
+            {t("navbar.accountType")}: <strong>{t(`navbar.typeClient`)}</strong>
           </Col>
         )}
         {user !== undefined && (

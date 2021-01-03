@@ -13,7 +13,6 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { ProductApi } from "../../../api/productApi";
-import { environment } from "../../../environment";
 import { Product } from "../../../models/product";
 import Categories from "../../categories";
 import noAvailable from "../../../static/images/noavailable.jpg";
@@ -29,6 +28,7 @@ import { useTranslation } from "react-i18next";
 import { HomeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { fullPriceDetails } from "../ProductList/ProductList";
 import { CartContext } from "../../../contexts/CartContext";
+import { UserContext } from "../../../contexts/UserContext";
 
 type locationState = {
   id: number;
@@ -40,9 +40,6 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
   const id = location.state
     ? location.state.id
     : Number(history.location.pathname.split("/")[3]);
-  const imgSrc = (src: string) => {
-    return `${environment.apiToImages}${src}`;
-  };
   const { t } = useTranslation("common");
   const columns = [
     {
@@ -64,21 +61,23 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
   const { addToCart, getProductQuantity, lines, updateLine } = useContext(
     CartContext
   );
+  const { isLogged } = useContext(UserContext);
   const addToCartClick = (
     event: React.MouseEvent<HTMLElement, MouseEvent> | undefined
   ) => {
-    if (quantity > 0) {
-      if (quantityInCart === 0) {
-        addToCart(quantity, product.id);
-        setCartModal(true);
-      } else {
-        const line = lines.find((line) => (line.product = product.id));
-        if (line) {
-          updateLine(line.id, quantity + line.quantity);
+    if (isLogged)
+      if (quantity > 0) {
+        if (quantityInCart === 0) {
+          addToCart(quantity, product.id);
           setCartModal(true);
+        } else {
+          const line = lines.find((line) => (line.product = product.id));
+          if (line) {
+            updateLine(line.id, quantity + line.quantity);
+            setCartModal(true);
+          }
         }
-      }
-    } else message.info(t("product.addToCart0Error"));
+      } else message.info(t("product.addToCart0Error"));
   };
   const [cartModal, setCartModal] = useState(false);
   const handleCancel = () => {
@@ -145,7 +144,7 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
 
           <div className="product-description__column">
             <img
-              src={product.image ? imgSrc(product.image) : noAvailable}
+              src={product.image ? getImageUrl(product.image) : noAvailable}
               alt={product.name}
               className="product-description__image"
             />

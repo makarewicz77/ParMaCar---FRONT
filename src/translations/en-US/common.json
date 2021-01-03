@@ -51,11 +51,15 @@
         "settings": "Profile settings"
     },
     "navbar": {
+        "accountType": "Account type",
         "mechanics": "Mechanics",
-        "products": "Products"
+        "products": "Products",
+        "typeClient": "Client",
+        "typeMechanic": "Mechanic"
     },
     "order": {
         "back": "Back",
+        "backToList": "Back to order list",
         "backToShopping": "Back to shopping",
         "chooseMechanicFromList": "Choose mechanic from list below",
         "chooseMechanic": "Choose mechanic",
@@ -76,6 +80,39 @@
         "stepOf": "of",
         "thanks": "Thanks for your order",
         "yourProducts": "Your products"
+    },
+    "orderList": {
+        "cancel": "Cancel",
+        "cancelOrder": "Cancel order",
+        "changeStatus": "Change order status",
+        "changedSuccess": "Successfully changed the status of the order",
+        "confirm": "Confirm",
+        "deleteQuestion": "Are you sure to cancel order",
+        "details": "Details",
+        "modalTitle": "Order cancelling",
+        "orderAssigned": "Orders assigned to me",
+        "orderId": "Order-id",
+        "orderDetails": "Order details",
+        "orderStatus": "Order status",
+        "status": {
+            "Accepted": "Accepted",
+            "Declined": "Declined",
+            "Finished": "Finished",
+            "In_progress": "In progress",
+            "In Progress": "In progress",
+            "New": "New",
+            "new": "New"
+        },
+        "successfullyCancel": "Successfully canceled the order",
+        "table": {
+            "action": "Action",
+            "changeOrderStatus": "Change order status",
+            "changeStatus": "Change status",
+            "date": "Date",
+            "orderId": "Order ID",
+            "status": "Status"
+        },
+        "title": "My orders"
     },
     "registerForm": {
         "email": "E-mail",

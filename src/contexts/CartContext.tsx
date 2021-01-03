@@ -8,7 +8,7 @@ export interface CartContextInterface {
   setCart: (obj: any) => void;
   getCart: Cart;
   addToCart: (quantity: number, product: number) => void;
-  clearCart: () => void;
+  clearCart: (logout: boolean) => void;
   deleteFromCart: (line_id: number) => void;
   getProductQuantity: (product_id: number) => number;
   getCartResponse: () => void;
@@ -50,16 +50,24 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       setNet(res.data.sum_net);
     });
   };
-  const clearCart = () => {
-    CartApi.clearCart(cart.user).then((res) => {
-      if (user)
-        CartApi.getCart(user.id).then((res) => {
-          setCart(res.data[0]);
-          setLinesAndCount(res.data[0].line);
-          setGross(res.data[0].sum_gross);
-          setNet(res.data[0].sum_net);
-        });
-    });
+  const clearCart = (logout: boolean) => {
+    if (!logout) {
+      CartApi.clearCart(cart.user).then((res) => {
+        if (user)
+          CartApi.getCart(user.id).then((res) => {
+            setCart(res.data[0]);
+            setLinesAndCount(res.data[0].line);
+            setGross(res.data[0].sum_gross);
+            setNet(res.data[0].sum_net);
+          });
+      });
+    }
+    if (logout) {
+      setCart({} as Cart);
+      setLinesAndCount([]);
+      setGross(0);
+      setNet(0);
+    }
   };
   const setLinesAndCount = (data: any) => {
     setLines(data);
