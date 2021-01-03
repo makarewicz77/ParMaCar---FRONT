@@ -1,0 +1,12 @@
+/* The component style is inserted here. */
+
+.order {
+    &-container {
+        position: relative;
+        &__progress {
+            position: absolute;
+            margin-top: 40px;
+            left: 0;
+        }
+    }
+}

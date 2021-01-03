@@ -1,17 +1,157 @@
 {
-  "loginForm": {
-    "password": "Hasło",
-    "logIn": "Zaloguj się"
-  },
-  "registerForm": {
-    "password": "Password",
-    "firstName": "Imię",
-    "lastName": "Nazwisko",
-    "email": "Adres e-mail",
-    "repeatPassword": "Powtórz hasło",
-    "signUp": "Załóż konto"
-  },
-  "product":{
-    "value":"zł."
-  }
+    "allProducts": "Wszystkie produkty",
+    "categories": "Kategorie",
+    "cart": {
+        "clearCart": "Wyczyść koszyk",
+        "continueShopping": "Kontynuuj zakupy",
+        "submitOrder": "Złóż zamówienie",
+        "toPay": "Do zapłaty"
+    },
+    "error": {
+        "emailForm": "Błędny format adresu email!",
+        "loginForm": "Login powinien zawierać conajmniej 4 znaki",
+        "passwordForm": "Hasło musi składać się z conajmniej 5 znaków",
+        "repeatPassword": "Dwa wpisane hasła się nie zgadzają!",
+        "username": "Użytkownik o podanym loginie już istnieje!"
+    },
+    "homePage": "Strona główna",
+    "language": {
+        "changed": "Język został zmieniony",
+        "english": "Angielski",
+        "label": "Język",
+        "polish": "Polski"
+    },
+    "loginForm": {
+        "error": "Wprowadzono niepoprawne dane. Wprowadź prawidłowe dane!",
+        "logIn": "Zaloguj się",
+        "loginError": "Login nie może być pusty!",
+        "password": "Hasło",
+        "passwordError": "Hasło nie może być puste!",
+        "successLogin": "Zalogowano się pomyślnie!",
+        "rememberMe": "Zapamiętaj mnie",
+        "register": "Zarejestruj się",
+        "registerIn": "Zarejestruj się",
+        "registerInfo": "Nie masz jeszcze konta?"
+    },
+    "mechanics": {
+        "address": "Adres",
+        "backToList": "Confij do listy",
+        "city": "Miasto",
+        "detailTitle": "Profil mechanika",
+        "emailAddress": "Adres email",
+        "hourlyRate": "Stawka godzinowa",
+        "phone": "Numer telefonu",
+        "title": "Mechanicy"
+    },
+    "menu": {
+        "chooseLanguage": "Wybierz język",
+        "logout": "Wyloguj się",
+        "myOrders": "Moje zamówienia",
+        "settings": "Ustawienia konta"
+    },
+    "navbar": {
+        "accountType": "Typ konta",
+        "mechanics": "Mechanicy",
+        "products": "Produkty",
+        "typeClient": "Klient",
+        "typeMechanic": "Mechanik"
+    },
+    "order": {
+        "back": "Cofnij",
+        "backToList": "Wróć do listy",
+        "backToShopping": "Wróć do zakupów",
+        "chooseMechanicFromList": "Wybierz mechanika z listy poniżej",
+        "chooseMechanic": "Wybór mechanika",
+        "choosedMechanic": "Wybierz mechanika",
+        "choosedMechanicSummary": "Wybrany mechanik",
+        "confirmOrder": "Potwierdź swoje zamówienie",
+        "editMessage": "Edytuj wiadomość",
+        "extraMessage": "Napisz dodatkową wiadomość do mechanika",
+        "mechanic": "Mechanik",
+        "mechanicReceived": "otrzymał Twoje zamówienie, skontaktuje się z Tobą poprzez adres email. Jeśli chcesz zrobić to pierwszy/a to kliknij w profil mechanika",
+        "mechanicReceived2": "by dowiedzieć się więcej.",
+        "mechanicReceivedRef": "profil mechanika",
+        "messageToMechanic": "Wiadomość do mechanika",
+        "title": "Zamówienie",
+        "submitOrder": "Złóż zamówienie",
+        "summaryOrder": "Podsumowanie zamówienia",
+        "step": "Krok",
+        "stepOf": "z",
+        "thanks": "Dziękujemy za złożone zamówienie",
+        "yourProducts": "Twoje produkty"
+    },
+    "orderList": {
+        "cancel": "Anuluj",
+        "cancelOrder": "Anuluj zamówienie",
+        "changeStatus": "Zmiana statusu zamówienia",
+        "changedSuccess": "Pomyślnie zmieniono status zamówienia",
+        "confirm": "Potwierdź",
+        "deleteQuestion": "Czy jesteś pewien aby anulować zamówienie",
+        "details": "Szczegóły",
+        "modalTitle": "Anulowanie zamowienia",
+        "orderAssigned": "Zamówienia przypisane do mnie",
+        "orderId": "Zamówienie-nr",
+        "orderDetails": "Szczegóły zamówienia",
+        "orderStatus": "Status zamówienia",
+        "status": {
+            "Accepted": "Zaakceptowane",
+            "Declined": "Odrzucone",
+            "Finished": "Zakończone",
+            "In_progress": "W trakcie rozpatrywania",
+            "In Progress": "W trakcie rozpatrywania",
+            "New": "Nowe",
+            "new": "Nowe"
+        },
+        "successfullyCancel": "Pomyślnie anulowano zamówienie",
+        "table": {
+            "action": "Akcja",
+            "changeOrderStatus": "Zmień status zamówienia",
+            "changeStatus": "Zmień status",
+            "date": "Data",
+            "orderId": "Numer zamowienia",
+            "status": "Status"
+        },
+        "title": "Moje zamówienia"
+    },
+    "registerForm": {
+        "email": "Adres e-mail",
+        "firstName": "Imię",
+        "lastName": "Nazwisko",
+        "password": "Password",
+        "registeredSuccessfully": "Zarejestrowano pomyślnie. System automatycznie zalogował Ciebie do systemu.",
+        "repeatPassword": "Powtórz hasło",
+        "signUp": "Załóż konto"
+    },
+    "product": {
+        "addToCart": "Dodaj do koszyka",
+        "addToCart0Error": "Nie możesz dodać ilości produktu równej 0",
+        "amount": "Ilość produktów",
+        "backToShopping": "Wróć do zakupów",
+        "goToCart": "Przejdź do koszyka",
+        "noSpecification": "Produkt nie posiada specyfikacji",
+        "priceDetails": "Szczegóły ceny",
+        "priceGross": "Cena brutto",
+        "priceNet": "Cena netto",
+        "quantity_0": " z {{count}} sztuki",
+        "quantity_1": " z {{count}} sztuk",
+        "quantity_2": " z {{count}} sztuk",
+        "sortBy": "Sortuj po",
+        "specification": "Specyfikacja",
+        "specificationValue": "Wartość",
+        "successfullyAdded": "Pomyślnie dodano do koszyka",
+        "warranty": "Gwarancja",
+        "value": "zł."
+    },
+    "sortBy": {
+        "nameDown": "Nazwa malejąco",
+        "nameUp": "Nazwa rosnąco",
+        "priceDown": "Cena malejąco",
+        "priceUp": "Cena rosnąco"
+    },
+    "warrantyYear_0": "{{count}} rok",
+    "warrantyYear_1": "{{count}} lata",
+    "warrantyYear_2": "{{count}} lat",
+    "warrantyMonth_0": "{{count}} miesiąc",
+    "warrantyMonth_1": "{{count}} miesiące",
+    "warrantyMonth_2": "{{count}} miesięcy"
 }

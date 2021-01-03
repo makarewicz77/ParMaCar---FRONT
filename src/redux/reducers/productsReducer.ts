@@ -16,11 +16,11 @@ export const initialProductsState = {
   loading: false,
 };
 
-export function fetchProducts() {
+export function fetchProducts(params: {ordering?:string,price_to?:number, price_from?:number,category?:number }) {
   return (dispatch: any) => {
     dispatch(fetchProductsBegin());
     axios
-      .get<Product[]>(baseProductsUrl)
+      .get<Product[]>(baseProductsUrl,{params:{...params}})
       .then((res) => res.data)
       .then((res) => dispatch(fetchProductSuccess(res)))
       .catch((error) => dispatch(fetchProductFailure(error)));

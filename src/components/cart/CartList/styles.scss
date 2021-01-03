@@ -1,0 +1,99 @@
+/* The component style is inserted here. */
+
+.cart {
+    &-title {
+        text-align: left;
+    }
+    &-list {
+        .ant-input-number-handler-wrap {
+            opacity: 1;
+        }
+        display: inline-grid;
+        width: 50%;
+        overflow-y: auto;
+        max-height: 70vh;
+        float: left;
+        &__line {
+            display: flex;
+            height: 10vh;
+            border-bottom: 1px solid rgb(128, 128, 128);
+            align-items: center;
+            &-input {
+                margin-left: auto;
+                margin-right: 10px;
+            }
+            &-image {
+                height: 7vh;
+                width: 7vh;
+            }
+            &-detail {
+                margin-left: 10px;
+                height: 6vh;
+                &__name {
+                    font-size: 18px;
+                    line-height: 16px;
+                    text-align: left;
+                }
+                &__price {
+                    font-size: 15px;
+                    line-height: 15px;
+                    text-align: left;
+                    font-weight: bold;
+                }
+            }
+            &-delete {
+                margin-right: 10px;
+                &__icon {
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+    &-order {
+        width: 50%;
+        float: left;
+        &__actions {
+            display: inline-grid;
+            width: inherit;
+            button {
+                margin-bottom: 10px;
+            }
+            &-order {
+                background-color: rgba(255, 178, 11, 0.919);
+                text-transform: uppercase;
+                &:hover {
+                    background-color: rgba(238, 169, 19, 0.919);
+                    color: black;
+                    font-weight: bold;
+                    border: 1px solid rgba(226, 164, 29, 0.919)
+                }
+            }
+            &-goBack {
+                background-color: rgba(0, 238, 255, 0.919);
+                text-transform: uppercase;
+                &:hover {
+                    background-color: rgba(4, 207, 221, 0.919);
+                    color: black;
+                    border: 1px solid rgba(4, 167, 179, 0.919);
+                    font-weight: bold;
+                }
+            }
+            &-clearCart {
+                text-transform: uppercase;
+                &:hover {
+                    color: black;
+                    border: 1px solid rgba(128, 128, 128, 0.919);
+                    font-weight: bold;
+                }
+            }
+        }
+        &__gross {
+            line-height: 3vh;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        &__toPay {
+            line-height: 3vh;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    }
+}

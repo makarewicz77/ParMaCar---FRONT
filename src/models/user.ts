@@ -6,6 +6,7 @@ export class User {
   username: string;
   email: string;
   password: string;
+  groups: Group[];
   constructor(obj: User) {
     this.id = obj.id;
     this.name = obj.name;
@@ -14,5 +15,36 @@ export class User {
     this.email = obj.email;
     this.username = obj.username;
     this.password = obj.password;
+    this.groups = obj.groups;
   }
 }
+
+export class Mechanic{
+  id: number;
+  user: User;
+  avatar: string;
+  hourly_rate: string;
+  street: string;
+  postal_code: string;
+  city: string;
+  phone: string;
+  constructor(obj:Mechanic){
+    this.id = obj.id;
+    this.user = obj.user;
+    this.avatar = obj.avatar;
+    this.hourly_rate = obj.hourly_rate;
+    this.city = obj.city;
+    this.postal_code = obj.postal_code;
+    this.street = obj.street;
+    this.phone = obj.phone;
+  }
+}
+
+export class Group{
+  id:number;
+  name:string;
+  constructor(obj:Group)
+{
+  this.id = obj.id;
+  this.name = obj.name;
+}}

@@ -1,16 +1,16 @@
 import { Button, Input, message } from "antd";
 import Form from "antd/lib/form";
 import { FormInstance } from "antd/lib/form/Form";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
-import { LoginApi } from "../../../api/loginApi";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { UserContext } from "../../../contexts/UserContext";
 import { User } from "../../../models/user";
 import { useFormWithRef } from "../../../utils/utils";
 
 import "./styles.css";
 
-const RegisterForm: React.FC = () => {
+const RegisterForm: React.FC<RouteComponentProps> = ({ history }) => {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 12 },
@@ -24,11 +24,28 @@ const RegisterForm: React.FC = () => {
   const tailLayout = {
     wrapperCol: { span: 26 },
   };
-  const history = useHistory();
-  const [loading, setLoading] = useState(false);
+  const user = useContext(UserContext);
   const onSave = (partialUser: Partial<User>) => {
-    setLoading(true);
-    LoginApi.registerUser(partialUser);
+    user
+      .registerUser({ ...partialUser }, "Client")
+      .then((res: any) => {
+        user.loginFromRegister(res.data).then((res) => {
+          message.success(
+            "Zarejestrowano pomyślnie. System automatycznie zalogował Cię do systemu.",
+            3
+          );
+          history.push("/");
+        });
+      })
+      .catch((e) => {
+        const data = e.response.data;
+        if (data.username) {
+          message.error(t("error.username"));
+        } else if (data.email) {
+          //@@email poprawić
+          message.error("email error");
+        }
+      });
   };
   return (
     <div className="register_form">
@@ -43,14 +60,27 @@ const RegisterForm: React.FC = () => {
         <Form.Item
           label="Login"
           name="username"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[
+            {
+              required: true,
+              message: t("error.loginForm"),
+              type: "string",
+              min: 4,
+            },
+          ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label={t("registerForm.email")}
           name="email"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[
+            {
+              required: true,
+              message: t("error.emailForm"),
+              type: "email",
+            },
+          ]}
         >
           <Input />
         </Form.Item>
@@ -72,14 +102,36 @@ const RegisterForm: React.FC = () => {
         <Form.Item
           label={t("loginForm.password")}
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          hasFeedback
+          rules={[
+            { required: true, message: "Please input your password!" },
+            {
+              type: "string",
+              min: 5,
+              message: t("error.passwordForm"),
+            },
+          ]}
         >
           <Input.Password />
         </Form.Item>
         <Form.Item
           label={t("registerForm.repeatPassword")}
           name="repeatPassword"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            { required: true, message: "Please input your password!" },
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  "The two passwords that you entered do not match!"
+                );
+              },
+            }),
+          ]}
         >
           <Input.Password />
         </Form.Item>
@@ -101,4 +153,4 @@ const RegisterForm: React.FC = () => {
   );
 };
 
-export default RegisterForm;
+export default withRouter(RegisterForm);

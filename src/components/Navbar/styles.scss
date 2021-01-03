@@ -1,0 +1,27 @@
+/* The component style is inserted here. */
+
+.navbar {
+    display: contents;
+    &-cart {
+        font-size: 25px;
+        &__badge {
+            .ant-scroll-number {
+                background-color: black;
+                height: 15px;
+            }
+        }
+    }
+    &-item {
+        background-color: darkgrey;
+        color: aliceblue;
+        padding: 0px 20px;
+        &:hover {
+            background-color: gray;
+            color: aliceblue;
+            font-weight: bold;
+        }
+    }
+    &-user {
+        display: contents;
+    }
+}

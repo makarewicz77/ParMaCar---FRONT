@@ -1,0 +1,86 @@
+/* The component style is inserted here. */
+
+.order {
+    &-container {
+        position: relative;
+        .ant-progress-text {
+            font-size: smaller;
+        }
+        &__button {
+            margin-top: 10px;
+        }
+        &__textarea {
+            margin-top: 10px;
+        }
+        &__div {
+            width: -webkit-fill-available;
+        }
+        &__extramessage {
+            margin-bottom: 0;
+            margin-top: 10px;
+            margin-left: 5px;
+            line-height: 20px;
+            font-size: 15px;
+            text-align: left !important;
+            align-items: baseline !important;
+        }
+        &__progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        &__mechanicList {
+            margin: auto;
+            display: flex;
+            flex-flow: column;
+            overflow: auto;
+            max-height: 50vh;
+            align-items: center;
+            width: max-content;
+            &-mechanic {
+                padding-bottom: 10px;
+                border: 1px solid rgba(128, 128, 128, 0.5);
+                &__avatar {
+                    float: left;
+                    margin: 10px;
+                    &-src {
+                        max-width: 75px;
+                        max-height: 75px;
+                    }
+                }
+                &__description {
+                    float: left;
+                    text-align: left;
+                    margin-top: 8px;
+                    &-names {
+                        margin-bottom: 0;
+                        margin-top: 0;
+                        margin-left: 5px;
+                        line-height: 20px;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                    &-address {
+                        margin-bottom: 0;
+                        margin-top: 0;
+                        margin-left: 5px;
+                        line-height: 20px;
+                        font-size: 15px;
+                    }
+                    &-perHour {
+                        margin-bottom: 0;
+                        margin-top: 0;
+                        margin-left: 5px;
+                        line-height: 20px;
+                        font-size: 15px;
+                    }
+                    &-radio {
+                        float: left;
+                        margin-left: 10px;
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

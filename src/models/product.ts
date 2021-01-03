@@ -16,10 +16,12 @@ export class Product {
   quantity: number;
   net: number;
   gross: number;
-  VAT: number;
+  vat: number;
   producer: string;
-  specifactions: Detail[];
+  specifications: Detail[];
   image: string;
+  warranty: string;
+  category_name: string;
   constructor(obj: Product) {
     this.id = obj.id;
     this.name = obj.name;
@@ -29,9 +31,11 @@ export class Product {
     this.quantity = obj.quantity;
     this.net = obj.net;
     this.gross = obj.gross;
-    this.VAT = obj.VAT;
+    this.vat = obj.vat;
     this.producer = obj.producer;
-    this.specifactions = obj.specifactions;
+    this.specifications = obj.specifications;
     this.image = obj.image;
+    this.warranty = obj.warranty;
+    this.category_name = obj.category_name;
   }
 }

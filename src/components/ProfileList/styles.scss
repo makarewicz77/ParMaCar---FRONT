@@ -1,0 +1,14 @@
+/* The component style is inserted here. */
+
+.mechanic {
+    &-list {
+        cursor: pointer;
+        h4 {
+            text-align: left;
+        }
+        &__avatar {
+            width: 200px;
+            height: 200px;
+        }
+    }
+}

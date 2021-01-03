@@ -1,43 +1,55 @@
 import axios from "axios";
-
-import { crud } from "../hooks";
 import { User } from "../models/user";
-import { register } from "../serviceWorker";
 import {
   baseLoginUrl,
   baseUserUrl,
   baseLogoutUrl,
   baseRegisterUrl,
+  baseMechanicsUrl,
 } from "./urls";
 
-type UserParams = {};
-
 export const LoginApi = {
-  ...crud<User, UserParams>(baseLoginUrl),
-  getUser: (token: string, setLogedUser: Function) => {
-    axios
-      .request({
-        url: baseUserUrl,
-        headers: { Authorization: "Token " + token },
-      })
-      .then((res) => setLogedUser(res.data));
+  loginUser: (partialUser: Partial<User>) => {
+    return axios.request({
+      url: baseLoginUrl,
+      data: partialUser,
+      method: "POST",
+    });
   },
-  logoutUser: (token: string, setLogedUser: Function) => {
-    axios
-      .request({
-        url: baseLogoutUrl,
-        headers: { Authorization: "Token " + token },
-        method: "POST",
-      })
-      .then((res) => setLogedUser(undefined));
+  getUser: (token: string) => {
+    return axios.request({
+      url: baseUserUrl,
+      headers: { Authorization: "Token " + token },
+    });
   },
-  registerUser: (user: Partial<User>) => {
-    axios
+  logoutUser: (token: string) => {
+    return axios.request({
+      url: baseLogoutUrl,
+      headers: { Authorization: "Token " + token },
+      method: "POST",
+    });
+  },
+  registerUser: (user: Partial<User>,group:string) => {
+    return axios
       .request({
         url: baseRegisterUrl,
         method: "POST",
-        data: user,
+        data: {...user, group},
       })
-      .then((res) => console.log(res));
+  },
+  getMechanics: (id?:number) => {
+    return axios.request({
+      url: `${baseMechanicsUrl}`,
+      method: "GET",
+      params:{
+        user_id: id
+      }
+    });
+  },
+  getMechanic: (id: number) => {
+    return axios.request({
+      url: `${baseMechanicsUrl}${id}/`,
+      method: "GET",
+    });
   },
 };

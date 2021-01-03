@@ -1,0 +1,50 @@
+/* The component style is inserted here. */
+
+.orderList {
+    &-changeStatus {
+        color: red;
+        &:hover {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+    &-status {
+        &__New {
+            color: royalblue;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        &__new {
+            color: royalblue;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        &__Declined {
+            color: red;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        &__In_progress {
+            color: rgba(255, 128, 0, 1);
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        &__Finished {
+            color: rgb(11, 167, 2);
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        &__Accepted {
+            color: violet;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+    }
+    &-cancel {
+        color: red;
+        &:hover {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+}
