@@ -14,7 +14,17 @@
         "repeatPassword": "The two passwords that you entered do not match!",
         "username": "A user with that username already exists!"
     },
-    "homePage": "Home page",
+    "homePage": {
+        "are": "Are you",
+        "dreamCar": "dream car",
+        "info": "This serivce is designed for automotive fans as well as car mechanics. On our website you can submit your",
+        "mechanic": "mechanic?",
+        "offer": "Do you want to offer your service here? Write to email",
+        "pick": "Browse. Choose. Search.",
+        "title": "Home page",
+        "wait": "We are waiting for your contanct.",
+        "welcome": "Welcome in our service"
+    },
     "language": {
         "changed": "Language has been changed",
         "english": "English",
