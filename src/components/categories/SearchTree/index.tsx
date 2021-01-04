@@ -4,8 +4,8 @@ import { Tree } from "antd";
 import categoriesReducer, {
   fetchCategories,
   initialCategoriesState,
-} from "../../redux/reducers/categoriesReducer";
-import { Category } from "../../models/category";
+} from "../../../redux/reducers/categoriesReducer";
+import { Category } from "../../../models/category";
 import slugify from "react-slugify";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
