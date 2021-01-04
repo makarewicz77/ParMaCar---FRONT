@@ -126,35 +126,24 @@ const OrderStepTwo: React.FC<StepTwoProps> = ({
                     product_name,
                     product_gross,
                   } = line;
-                  const linkToProduct = getLinkToProduct(product, product_name);
                   return (
                     <div className="cart-list__line" key={id}>
                       {!product_image ? (
-                        <Link
-                          to={{
-                            pathname: linkToProduct,
-                            state: { id: product },
-                          }}
-                        >
-                          <img
-                            alt="example"
-                            src={noAvailable}
-                            className="cart-list__line-image"
-                          />
-                        </Link>
+                        <img
+                          alt="example"
+                          src={noAvailable}
+                          className="cart-list__line-image"
+                        />
                       ) : (
-                        <Link to={linkToProduct}>
-                          {" "}
-                          <img
-                            alt="example"
-                            src={getImageUrl(product_image)}
-                            className="cart-list__line-image"
-                          />
-                        </Link>
+                        <img
+                          alt="example"
+                          src={getImageUrl(product_image)}
+                          className="cart-list__line-image"
+                        />
                       )}
                       <div className="cart-list__line-detail">
                         <p className="cart-list__line-detail__name">
-                          <Link to={linkToProduct}>{product_name}</Link>
+                          {product_name}
                         </p>
                         <p className="cart-list__line-detail__price">
                           {product_gross} {t("product.value")}

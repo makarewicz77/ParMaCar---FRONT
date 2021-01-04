@@ -1,9 +1,5 @@
 div#root {
     /* background-color: rgb(85, 120, 190); biały tekst */
-    background-color: rgb(227, 235, 240);
-    background-image: url('./static/images/ParMaCar_background.jpg');
-    background-attachment: fixed;
-    background-size: cover;
     /*cursor: url('./static/images/ParMaCar-cursor.cur'), auto;*/
     /* czarny tekst */
 }
@@ -12,7 +8,6 @@ div#root {
     /* text-align: center; */
     margin: 0 auto;
     width: 1150px;
-    height: 1200px;
 }
 
 .App-logo {

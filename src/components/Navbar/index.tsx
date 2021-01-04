@@ -31,15 +31,15 @@ const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({
           </Link>
         </Col>
         <div className="navbar">
-          <Link to="/products">
+          <Link to="/products" style={{ width: "100px" }}>
             <p className="navbar-item">{t("navbar.products")}</p>
           </Link>
-          <Link to="/profile-list">
+          <Link to="/profile-list" style={{ width: "100px" }}>
             {" "}
             <p className="navbar-item">{t("navbar.mechanics")}</p>
           </Link>
           {user && (
-            <Link to="/my-orders">
+            <Link to="/my-orders" style={{ width: "120px" }}>
               {" "}
               <p className="navbar-item">{t("menu.myOrders")}</p>
             </Link>
@@ -53,6 +53,7 @@ const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({
           offset={
             user ? (localStorage.getItem("language") === "pl" ? 6 : 6) : 9
           }
+          className="cart-col"
         >
           <Badge count={count} size="small" className="navbar-cart__badge">
             <ShoppingCartOutlined

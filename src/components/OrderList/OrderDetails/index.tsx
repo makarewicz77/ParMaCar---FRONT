@@ -46,7 +46,7 @@ const OrderDetails: React.FC<RouteComponentProps> = ({ history }) => {
               className={`orderList-status__${order.status.replace(" ", "_")}`}
               style={{ display: "contents" }}
             >
-              {t(`orderList.status.${order.status}`)}
+              {t(`orderList.status.${order.status.replace(" ", "_")}`)}
             </div>
           </h3>
           <h2>

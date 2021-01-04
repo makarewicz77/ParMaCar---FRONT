@@ -14,7 +14,7 @@
     &-item {
         background-color: darkgrey;
         color: aliceblue;
-        padding: 0px 20px;
+        text-align: center;
         &:hover {
             background-color: gray;
             color: aliceblue;
@@ -24,4 +24,11 @@
     &-user {
         display: contents;
     }
+}
+
+.cart-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
 }

@@ -23,6 +23,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
         keyboard
         visible={visible}
         onCancel={() => setModalVisible(false)}
+        maskClosable={false}
       >
         <LoginForm />
       </Modal>

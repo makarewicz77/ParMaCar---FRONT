@@ -118,7 +118,7 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
                 <Breadcrumb.Item>
                   {" "}
                   <p className="text">
-                    <HomeOutlined /> {t("homePage")}
+                    <HomeOutlined /> {t("homePage.title")}
                   </p>
                 </Breadcrumb.Item>
               </Link>
