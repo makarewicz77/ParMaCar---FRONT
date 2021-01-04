@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CartLine } from "../models/cart";
+import { getCookie } from "../utils/utils";
 import { baseCartLineUrl, baseCartUrl } from "./urls";
 
 export const CartApi = {
@@ -7,6 +8,9 @@ export const CartApi = {
     return axios.request({
       url: `${baseCartUrl}?user_id=${user}`,
       method: "GET",
+      headers: {
+        Authorization: `Token ${getCookie("token")}`,
+      },
     });
   },
   addToCart: (line: Partial<CartLine>) => {
@@ -14,25 +18,37 @@ export const CartApi = {
       method: "POST",
       url: `${baseCartLineUrl}`,
       data: line,
+      headers: {
+        Authorization: `Token ${getCookie("token")}`,
+      },
     });
   },
   removeFromCart: (line_id: number) => {
     return axios.request({
       method: "DELETE",
       url: `${baseCartLineUrl}${line_id}/`,
+      headers: {
+        Authorization: `Token ${getCookie("token")}`,
+      },
     });
   },
-  updateCartLine:(line:CartLine) =>{
+  updateCartLine: (line: CartLine) => {
     return axios.request({
-      method: 'PUT',
+      method: "PUT",
       url: `${baseCartLineUrl}${line.id}/`,
-      data: line
-    })
+      data: line,
+      headers: {
+        Authorization: `Token ${getCookie("token")}`,
+      },
+    });
   },
-  clearCart:(user_id:number)=>{
+  clearCart: (user_id: number) => {
     return axios.request({
-      method:'DELETE',
+      method: "DELETE",
       url: `${baseCartUrl}?user_id=${user_id}`,
-    })
-  }
+      headers: {
+        Authorization: `Token ${getCookie("token")}`,
+      },
+    });
+  },
 };

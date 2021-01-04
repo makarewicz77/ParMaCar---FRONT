@@ -28,15 +28,41 @@ export const LogoIcon = logo;
 
 export const getWarranty = (t: TFunction, warranty: string) => {
   const warrs = warranty.split("+");
-  const years = t(`warrantyYear_${Number(warrs[0]) === 1 ? 0 : Number(warrs[0]) < 5 ? 1 : 2}`, { count: Number(warrs[0]) });
-  const months = t(`warrantyMonth_${Number(warrs[1]) === 1 ? 0 : Number(warrs[1]) < 5 ? 1 : 2}`, { count: Number(warrs[1]) });
-  return `${warrs[0] && warrs[0] !== "0" ? years : ""} ${warrs[1] && warrs[1] !== "0" ? months : ""}`;
+  const years = t(
+    `warrantyYear_${Number(warrs[0]) === 1 ? 0 : Number(warrs[0]) < 5 ? 1 : 2}`,
+    { count: Number(warrs[0]) }
+  );
+  const months = t(
+    `warrantyMonth_${
+      Number(warrs[1]) === 1 ? 0 : Number(warrs[1]) < 5 ? 1 : 2
+    }`,
+    { count: Number(warrs[1]) }
+  );
+  return `${warrs[0] && warrs[0] !== "0" ? years : ""} ${
+    warrs[1] && warrs[1] !== "0" ? months : ""
+  }`;
 };
 
-export const getLinkToProduct = (id:number,name:string) =>{
-  return `/product/${name}/${id}/`
-}
+export const getLinkToProduct = (id: number, name: string) => {
+  return `/product/${name}/${id}/`;
+};
 
-export const getLinkToCategory = (id:number, name:string) =>{
-  return `/category/${name}/${id}/`
-}
+export const getLinkToCategory = (id: number, name: string) => {
+  return `/category/${name}/${id}/`;
+};
+
+export const getCookie = (cname: any) => {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) === " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+};
