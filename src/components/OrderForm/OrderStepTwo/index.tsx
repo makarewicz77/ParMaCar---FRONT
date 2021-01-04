@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../../../contexts/CartContext";
 import { CartLine } from "../../../models/cart";
 import { Mechanic } from "../../../models/user";
-import { getImageUrl, getLinkToProduct } from "../../../utils/utils";
+import { getImageUrl } from "../../../utils/utils";
 import noAvailable from "../../../static/images/noavailable.jpg";
 import "./styles.scss";
 import OrderModal from "../../Modals/OrderModal";
@@ -121,7 +121,6 @@ const OrderStepTwo: React.FC<StepTwoProps> = ({
                 {lines.map((line: CartLine) => {
                   const {
                     id,
-                    product,
                     product_image,
                     product_name,
                     product_gross,
