@@ -3,6 +3,7 @@ div#root {
     background-color: rgb(227, 235, 240);
     background-image: url('./static/images/ParMaCar_background.jpg');
     background-attachment: fixed;
+    background-size: cover;
     /*cursor: url('./static/images/ParMaCar-cursor.cur'), auto;*/
     /* czarny tekst */
 }

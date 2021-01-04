@@ -14,7 +14,17 @@
         "repeatPassword": "Dwa wpisane hasła się nie zgadzają!",
         "username": "Użytkownik o podanym loginie już istnieje!"
     },
-    "homePage": "Strona główna",
+    "homePage": {
+        "are": "Jesteś",
+        "dreamCar": "samochód marzeń",
+        "info": "Jest to serwis przeznaczony dla fanów motoryzacji jak i mechaników samochodowych. Na naszej stronie internetowej możesz złożyć swój",
+        "mechanic": "mechanikiem?",
+        "offer": "Chcesz zaoferować swoje uslugi w naszym serwisie? Pisz na email",
+        "pick": "Przeglądaj. Wybieraj. Szukaj.",
+        "title": "Strona główna",
+        "wait": "Czekamy na Twój kontakt.",
+        "welcome": "Witaj w naszym serwisie"
+    },
     "language": {
         "changed": "Język został zmieniony",
         "english": "Angielski",

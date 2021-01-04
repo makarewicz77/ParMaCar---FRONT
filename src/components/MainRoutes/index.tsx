@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import CartList from "../cart/CartList/CartList";
 import RegisterForm from "../login/RegisterForm";
@@ -22,6 +23,7 @@ const MainRoutes: React.FC<MainRoutesProps> = ({
   modalVisible,
   setModalVisible,
 }) => {
+  const { t } = useTranslation("common");
   return (
     <>
       <Switch>
@@ -43,6 +45,30 @@ const MainRoutes: React.FC<MainRoutesProps> = ({
         <Route path="/profile-list" component={ProfileList} />
         <Route path="/my-orders" component={OrderList} />
         <Route path="/order-details" component={OrderDetails} />
+        <Route
+          path="/"
+          render={() => (
+            <div>
+              <h1>{t("homePage.title")}</h1>
+              <h2>
+                {t("homePage.welcome")} <strong>ParMaCar</strong>!
+              </h2>
+              <h3>
+                {t("homePage.info")}{" "}
+                <strong>
+                  <i>{t("homePage.dreamCar")}</i>
+                </strong>
+                !
+              </h3>
+              <h3>{t("homePage.pick")} </h3>
+              <h3>
+                {t("homePage.are")} <strong>{t("homePage.mechanic")}</strong>{" "}
+                {t("homePage.offer")}: <i>parmacarofficial@gmail.com</i>!{" "}
+                {t("homePage.wait")}
+              </h3>
+            </div>
+          )}
+        />
       </Switch>
     </>
   );
