@@ -5,7 +5,6 @@ import { LoginApi } from "../api/loginApi";
 import { User } from "../models/user";
 
 export interface UserContextInterface {
-  setCart: (obj: any) => void;
   registerUser: (user: Partial<User>, group: string) => Promise<unknown>;
   loginFromRegister: (user: any) => Promise<unknown>;
   loginUser: (user: Partial<User>) => Promise<AxiosResponse<User>>;
@@ -15,7 +14,6 @@ export interface UserContextInterface {
   mechanicId: number | undefined;
 }
 export const UserContext = createContext<UserContextInterface>({
-  setCart: () => {},
   registerUser: () => ({} as Promise<unknown>),
   loginFromRegister: () => ({} as Promise<unknown>),
   loginUser: () => ({} as Promise<AxiosResponse<User>>),
@@ -26,7 +24,6 @@ export const UserContext = createContext<UserContextInterface>({
 });
 
 export const UserProvider: React.FC = ({ children }) => {
-  const [, setCart] = useState({});
   const [user, setUser] = useState<User | undefined>(undefined);
   const [cookies, , removeCookie] = useCookies(["token"]);
   const [, setToken] = useState<string>("");
@@ -86,7 +83,6 @@ export const UserProvider: React.FC = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        setCart,
         registerUser,
         loginFromRegister,
         loginUser,

@@ -4,8 +4,11 @@
     "cart": {
         "clearCart": "Wyczyść koszyk",
         "continueShopping": "Kontynuuj zakupy",
+        "empty": "Twój koszyk jest pusty",
+        "error": "Ta funkcjonalność jest przeznaczona tylko dla zalogowanych użytkowników ",
         "submitOrder": "Złóż zamówienie",
-        "toPay": "Do zapłaty"
+        "toPay": "Do zapłaty",
+        "title": "Twój koszyk"
     },
     "error": {
         "emailForm": "Błędny format adresu email!",

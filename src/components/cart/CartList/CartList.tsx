@@ -36,7 +36,7 @@ const CartList: React.FC<RouteComponentProps> = ({ history }) => {
   };
   return (
     <div>
-      <h1 className="cart-title">Twój koszyk</h1>
+      <h1 className="cart-title">{t("cart.title")}</h1>
       <Divider />
       <div className="cart-list">
         {lines.length > 0 ? (
@@ -99,12 +99,9 @@ const CartList: React.FC<RouteComponentProps> = ({ history }) => {
             );
           })
         ) : isLogged ? (
-          <h2>Twój koszyk jest pusty</h2>
+          <h2>{t("cart.empty")}</h2>
         ) : (
-          <h2>
-            Ta funkcjonalność jest przeznaczona tylko dla zalogowanych
-            użytkowników
-          </h2>
+          <h2>{t("cart.error")}</h2>
         )}
       </div>
       {isLogged && (

@@ -4,8 +4,11 @@
     "cart": {
         "clearCart": "Clear cart",
         "continueShopping": "Continue shopping",
+        "empty": "Your cart is empty",
+        "error": "This functionality is intended for logged users",
         "submitOrder": "Submit your order",
-        "toPay": "To pay"
+        "toPay": "To pay",
+        "title": "Your cart"
     },
     "error": {
         "emailForm": "Błędny format adresu email!",
