@@ -145,7 +145,12 @@ const SearchTree: React.FC<RouteComponentProps> = ({ history }) => {
           <span>{item.title}</span>
         );
       if (item.children) {
-        return { title, key: item.key, children: loop(item.children) };
+        return {
+          title,
+          key: item.key,
+          children: loop(item.children),
+          selectable: false,
+        };
       }
 
       return {
