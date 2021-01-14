@@ -13,6 +13,9 @@ import "./styles.scss";
 import OrderModal from "../../Modals/OrderModal";
 import { OrderApi } from "../../../api/orderApi";
 import { UserContext } from "../../../contexts/UserContext";
+import { environment } from "../../../environment";
+import Axios from "axios";
+import axios from "axios";
 
 interface StepTwoProps {
   mechanic: Mechanic;
@@ -99,14 +102,28 @@ const OrderStepTwo: React.FC<StepTwoProps> = ({
                       <Button
                         className="summary-container__confirmButton"
                         onClick={() => {
-                          OrderApi.sendOrder({
-                            note,
-                            mechanic: id,
-                            user: user?.id,
-                            cart: cart,
-                          }).then(() => {
-                            setVisible(true);
-                            getCartResponse();
+                          const arr: any = [];
+                          lines.map((line) => {
+                            arr.push(
+                              axios.patch(
+                                `${environment.apiUrl}api/products/${line.product}/`,
+                                {
+                                  quantity:
+                                    line.available_quantity - line.quantity,
+                                }
+                              )
+                            );
+                          });
+                          axios.all(arr).then((res) => {
+                            OrderApi.sendOrder({
+                              note,
+                              mechanic: id,
+                              user: user?.id,
+                              cart: cart,
+                            }).then(() => {
+                              setVisible(true);
+                              getCartResponse();
+                            });
                           });
                         }}
                       >
