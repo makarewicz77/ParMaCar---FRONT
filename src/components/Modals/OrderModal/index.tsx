@@ -2,7 +2,6 @@ import SuccessAnimation from "actually-accessible-react-success-animation";
 import { Button } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Mechanic } from "../../../models/user";
 
@@ -21,11 +20,10 @@ const OrderModal: React.FC<OrderProps> = ({
 }) => {
   const { user } = mechanic;
   const { first_name, last_name } = user;
-  const { t } = useTranslation("common");
   return (
     <>
       <Modal
-        title={<h3>{t("order.title")}</h3>}
+        title={<h3>Zamówienie</h3>}
         footer={null}
         keyboard
         visible={visible}
@@ -35,22 +33,22 @@ const OrderModal: React.FC<OrderProps> = ({
         <SuccessAnimation
           color="#00ff00"
           style={{ display: "flex" }}
-          text={t("order.thanks")}
+          text={"Dziękujemy za złożone zamówienie"}
         />
         <p>
-          {t("order.mechanic")}{" "}
+          Mechanik{" "}
           <strong>
             {first_name} {last_name}
           </strong>{" "}
-          {t("order.mechanicReceived")}{" "}
-          <Link to={`/profile/${mechanic.id}/`}>
-            {t("order.mechanicReceivedRef")}{" "}
-          </Link>{" "}
-          {t("order.mechanicReceived2")}
+          {
+            "otrzymał Twoje zamówienie, skontaktuje się z Tobą poprzez adres email. Jeśli chcesz zrobić to pierwszy/a to kliknij w profil mechanika"
+          }{" "}
+          <Link to={`/profile/${mechanic.id}/`}>{"profil mechanika"} </Link>{" "}
+          {"by dowiedzieć się więcej."}
         </p>
         <div>
           <Link to="/">
-            <Button>{t("order.backToShopping")}</Button>
+            <Button>Wróć do zakupów</Button>
           </Link>
         </div>
       </Modal>

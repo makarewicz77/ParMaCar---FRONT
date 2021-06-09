@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CloseSquareOutlined, EditOutlined } from "@ant-design/icons";
+import { CloseSquareOutlined } from "@ant-design/icons";
 import { Divider, message, Modal, Select, Table } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,22 +12,20 @@ import "./styles.scss";
 
 const OrderList: React.FC = () => {
   const { t } = useTranslation("common");
-  const [orderList, setOrderList] = useState<Order[]>([] as Order[]);
+  const [orderList, setOrderList] = useState<Order[] | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
-  const { isLogged, user, mechanicId } = useContext(UserContext);
+  const { isLogged, user } = useContext(UserContext);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [orderToCancel, setOrderToCancel] = useState<number | null>(null);
   const { Option } = Select;
-  const [orderToChange, setOrderToChange] = useState<Order | undefined>(
-    undefined
-  );
-  const [mechanicOrders, setMechanicsOrders] = useState<Order[]>([] as Order[]);
+  const [orderToChange, setOrderToChange] =
+    useState<Order | undefined>(undefined);
   const [changeModal, setChangeModal] = useState<boolean>(false);
   const [status, setStatus] = useState<string>("");
   const columns = [
-    { dataIndex: "id", title: t("orderList.table.orderId"), width: "15%" },
+    { dataIndex: "id", title: "Numer zamówienia", width: "15%" },
     {
-      title: t("orderList.table.status"),
+      title: "Status",
       dataIndex: "status",
       render: (text: string) => (
         <div
@@ -40,7 +38,7 @@ const OrderList: React.FC = () => {
     },
     {
       dataIndex: "date",
-      title: t("orderList.table.date"),
+      title: "Data",
       width: "20%",
       render: (date: string) => {
         return new Date(date).toLocaleString();
@@ -48,104 +46,22 @@ const OrderList: React.FC = () => {
     },
     {
       dataIndex: "mechanic_full_name",
-      title:
-        user?.groups[0].name === "Client"
-          ? t("order.mechanic")
-          : t("orderList.table.changeOrderStatus"),
-      render: (name: string, obj: any) =>
-        user?.groups[0].name === "Client" ? (
-          <Link to={`/profile/${obj.mechanic}/`} key={obj.id}>
-            {name}
-          </Link>
-        ) : (
-          <div
-            className="orderList-changeStatus"
-            onClick={(ev) => {
-              setOrderToChange(obj);
-              setChangeModal(true);
-            }}
-          >
-            <EditOutlined /> {t("orderList.table.changeStatus")}
-          </div>
-        ),
-    },
-    {
-      dataIndex: "id",
-      title: t("orderList.table.action"),
+      title: "Mechanik",
       render: (name: string, obj: any) => (
-        <>
-          <Link to={`/order-details/${obj.id}/`} key={`${obj.id}_action`}>
-            {t("orderList.details")}
-          </Link>
-          {obj.status === "New" && user?.groups[0].name === "Client" && (
-            <div
-              className="orderList-cancel"
-              onClick={() => {
-                setModalVisible(true);
-                setOrderToCancel(obj.id);
-              }}
-            >
-              <CloseSquareOutlined /> {t("orderList.cancelOrder")}
-            </div>
-          )}
-        </>
-      ),
-    },
-  ];
-  const columns2 = [
-    { dataIndex: "id", title: t("orderList.table.orderId"), width: "15%" },
-    {
-      title: t("orderList.table.status"),
-      dataIndex: "status",
-      render: (text: string) => (
-        <div
-          className={`orderList-status__${text.replace(" ", "_")}`}
-          key={text}
-        >
-          {t(`orderList.status.${text.replace(" ", "_")}`)}
-        </div>
+        <Link to={`/profile/${obj.mechanic}/`} key={obj.id}>
+          {name}
+        </Link>
       ),
     },
     {
-      dataIndex: "date",
-      title: t("orderList.table.date"),
-      width: "20%",
-      render: (date: string) => {
-        return new Date(date).toLocaleString();
-      },
-    },
-    {
-      dataIndex: "mechanic_full_name",
-      title:
-        user?.groups[0].name !== "Client"
-          ? t("order.mechanic")
-          : t("orderList.table.changeOrderStatus"),
-      render: (name: string, obj: any) =>
-        user?.groups[0].name !== "Client" ? (
-          <Link to={`/profile/${obj.mechanic}/`} key={obj.id}>
-            {name}
-          </Link>
-        ) : (
-          <div
-            className="orderList-changeStatus"
-            onClick={(ev) => {
-              setOrderToChange(obj);
-              setChangeModal(true);
-            }}
-          >
-            <EditOutlined /> {t("orderList.table.changeStatus")}
-          </div>
-        ),
-    },
-    {
       dataIndex: "id",
-      title: t("orderList.table.action"),
+      title: "Akcja",
       render: (name: string, obj: any) => (
         <>
           <Link to={`/order-details/${obj.id}/`} key={`${obj.id}_action`}>
-            {t("orderList.details")}
+            Szczegóły
           </Link>
-          {obj.status === "New" && user?.groups[0].name !== "Client" && (
+          {obj.status === "New" && (
             <div
               className="orderList-cancel"
               onClick={() => {
@@ -173,34 +89,15 @@ const OrderList: React.FC = () => {
   };
   const getOrders = () => {
     if (user && isLogged) {
-      if (user.groups[0].name === "Client")
-        OrderApi.getUserOrders(user.id)
-          .then((res) => {
-            setOrderList(res.data);
-            setLoading(false);
-          })
-          .catch((e) => {
-            message.error("Error");
-            setLoading(false);
-          });
-      if (user.groups[0].name === "Mechanic" && mechanicId) {
-        OrderApi.getMechanicOrders(mechanicId)
-          .then((res) => {
-            setOrderList(res.data);
-          })
-          .catch((e) => {
-            message.error("Error");
-          });
-        OrderApi.getUserOrders(user.id)
-          .then((res) => {
-            setMechanicsOrders(res.data);
-            setLoading(false);
-          })
-          .catch((e) => {
-            message.error("Error");
-            setLoading(false);
-          });
-      }
+      OrderApi.getUserOrders(user.id)
+        .then((res) => {
+          setOrderList(res.data);
+          setLoading(false);
+        })
+        .catch((e) => {
+          message.error("Error");
+          setLoading(false);
+        });
     }
   };
   const changeStatus = () => {
@@ -219,11 +116,7 @@ const OrderList: React.FC = () => {
   }, [isLogged, user]);
   return (
     <>
-      {user?.groups[0].name === "Client" ? (
-        <h1>{t("orderList.title")}</h1>
-      ) : (
-        <h1>{t("orderList.orderAssigned")}</h1>
-      )}
+      <h1>Moje zamówienia</h1>
       <Divider />
       <Table
         loading={loading}
@@ -231,12 +124,6 @@ const OrderList: React.FC = () => {
         columns={columns}
         key="table"
       />
-      {user?.groups[0].name === "Mechanic" && (
-        <>
-          <h1>{t("orderList.title")}</h1> <Divider />{" "}
-          <Table dataSource={mechanicOrders} columns={columns2} />
-        </>
-      )}
       <Modal
         destroyOnClose
         visible={modalVisible}

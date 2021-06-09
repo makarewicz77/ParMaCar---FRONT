@@ -19,19 +19,17 @@ export class User {
   }
 }
 
-export class Mechanic{
+export class Mechanic {
   id: number;
   user: User;
-  avatar: string;
   hourly_rate: string;
   street: string;
   postal_code: string;
   city: string;
   phone: string;
-  constructor(obj:Mechanic){
+  constructor(obj: Mechanic) {
     this.id = obj.id;
     this.user = obj.user;
-    this.avatar = obj.avatar;
     this.hourly_rate = obj.hourly_rate;
     this.city = obj.city;
     this.postal_code = obj.postal_code;
@@ -40,11 +38,11 @@ export class Mechanic{
   }
 }
 
-export class Group{
-  id:number;
-  name:string;
-  constructor(obj:Group)
-{
-  this.id = obj.id;
-  this.name = obj.name;
-}}
+export class Group {
+  id: number;
+  name: string;
+  constructor(obj: Group) {
+    this.id = obj.id;
+    this.name = obj.name;
+  }
+}

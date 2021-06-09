@@ -1,9 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-import { Select } from "antd";
 import React, { useEffect, useReducer } from "react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import Loader from "react-loader-spinner";
 import { RouteComponentProps } from "react-router-dom";
 import { Category } from "../../../models/category";
@@ -28,25 +25,16 @@ type locationState = {
 type props = RouteComponentProps<{}, {}, locationState>;
 
 const ProductListView: React.FC<props> = ({ location }) => {
-  const { t } = useTranslation("common");
-  const { Option } = Select;
   const [products, setProducts] = useState([] as Product[]);
   const [category, setCategory] = useState({} as Category);
   const [productsRed, dispatchPr] = useReducer(
     productsReducer,
     initialProductsState
   );
-  const [sort, setSort] = useState<string>("");
   const [categoryRed, dispatchCat] = useReducer(
     categoriesReducer,
     initialCategoriesState
   );
-  const sortChange = (value: string) => {
-    if (value === "name_up") setSort("name");
-    else if (value === "name_down") setSort("-name");
-    else if (value === "price_up") setSort("gross");
-    else setSort("-gross");
-  };
   useEffect(() => {
     setCategory({} as Category);
     setProducts([]);
@@ -67,12 +55,6 @@ const ProductListView: React.FC<props> = ({ location }) => {
   useEffect(() => {
     setCategory(categoryRed.category);
   }, [categoryRed.loading]);
-  useEffect(() => {
-    if (sort !== "")
-      fetchProducts({ category: location.state.id, ordering: sort })(
-        dispatchPr
-      );
-  }, [sort]);
 
   return (
     <div>
@@ -81,7 +63,7 @@ const ProductListView: React.FC<props> = ({ location }) => {
           {!categoryRed.loading && Object.keys(category).length > 0 ? (
             <p className="category-baner__name-content">{category.name}</p>
           ) : (
-            <p className="category-baner__name-content">{t("allProducts")}</p>
+            <p className="category-baner__name-content">Wszystkie produkty</p>
           )}
         </div>
       </div>
@@ -91,32 +73,9 @@ const ProductListView: React.FC<props> = ({ location }) => {
       </div>
       <div className="products-counter">
         <p>
-          {t("product.amount")}:{" "}
+          Ilość produktów:{" "}
           <strong>{products.length ? products.length : ""}</strong>
         </p>
-      </div>
-      <div className="products-sort">
-        <p>{t("product.sortBy")}:</p>
-        <div className="products-sort__select">
-          <Select
-            defaultValue="name_up"
-            style={{ width: 150 }}
-            onChange={sortChange}
-          >
-            <Option value="name_up">
-              <ArrowUpOutlined /> {t("sortBy.nameUp")}
-            </Option>
-            <Option value="name_down">
-              <ArrowDownOutlined /> {t("sortBy.nameDown")}
-            </Option>
-            <Option value="price_up">
-              <ArrowUpOutlined /> {t("sortBy.priceUp")}
-            </Option>
-            <Option value="price_down">
-              <ArrowDownOutlined /> {t("sortBy.priceDown")}
-            </Option>
-          </Select>
-        </div>
       </div>
       {!!products ? (
         <div className="prod_list_div">

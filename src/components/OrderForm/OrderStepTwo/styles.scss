@@ -15,16 +15,11 @@
             h3 {
                 line-height: 20px;
             }
-            &-gross {
-                text-align: left;
-                line-height: normal;
-                padding-top: 10px;
-                font-size: 15px;
-            }
             &-net {
                 text-align: left;
                 line-height: normal;
-                font-size: 14px;
+                font-size: 20px;
+                margin-top: 10px;
                 color: rgba(128, 128, 128, 0.8);
             }
         }

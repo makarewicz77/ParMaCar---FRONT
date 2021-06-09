@@ -1,12 +1,9 @@
-import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Card, Divider, message } from "antd";
+import { Card, Divider, message } from "antd";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import Loader from "react-loader-spinner";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { LoginApi } from "../../api/loginApi";
 import { Mechanic } from "../../models/user";
-import { getImageUrl } from "../../utils/utils";
 
 import "./styles.scss";
 
@@ -26,17 +23,16 @@ const ProfileList: React.FC<RouteComponentProps> = ({ history }) => {
   const goToProfile = (ev: number) => {
     history.push(`/profile/${ev}/`);
   };
-  const { t } = useTranslation("common");
   return (
     <div>
-      <h1>{t("mechanics.title")}</h1>
+      <h1>Lista mechaników</h1>
       <div className="mechanic">
         <Card>
           {loading ? (
             <Loader />
           ) : (
             mechanics.map((mechanic: Mechanic) => {
-              const { id, avatar, user, hourly_rate, city } = mechanic;
+              const { id, user, hourly_rate, city } = mechanic;
               const { first_name, last_name } = user;
               return (
                 <div
@@ -50,27 +46,13 @@ const ProfileList: React.FC<RouteComponentProps> = ({ history }) => {
                       textAlign: "center",
                     }}
                   >
-                    {avatar ? (
-                      <img
-                        src={getImageUrl(mechanic.avatar)}
-                        alt="mechanic avatar"
-                        className="mechanic-list__avatar"
-                      />
-                    ) : (
-                      <Avatar size={200} icon={<UserOutlined />} />
-                    )}
                     <Divider />
                     <h3>
                       {first_name} {last_name}
                     </h3>
+                    <h4>Miasto: {city ? city : "Brak danych"}</h4>
                     <h4>
-                      {t("mechanics.city")}: {city ? city : "Brak danych"}
-                    </h4>
-                    <h4>
-                      <>
-                        {t("mechanics.hourlyRate")}: {hourly_rate}{" "}
-                        {t("product.value")}/h
-                      </>
+                      <>Stawka godzinowa: {hourly_rate} zł./h</>
                     </h4>
                   </Card.Grid>
                 </div>

@@ -1,6 +1,5 @@
 import { message, Progress } from "antd";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import { LoginApi } from "../../api/loginApi";
 import { Mechanic } from "../../models/user";
@@ -20,7 +19,6 @@ const OrderForm: React.FC = () => {
     [] as Mechanic[]
   );
   const [loading, setLoading] = useState<boolean>(true);
-  const { t } = useTranslation("common");
   useEffect(() => {
     LoginApi.getMechanics()
       .then((res) => {
@@ -33,11 +31,11 @@ const OrderForm: React.FC = () => {
   }, []);
   return (
     <div className="order-container">
-      <h1>{t("order.submitOrder")}</h1>
+      <h1>{"Złóż zamówienie"}</h1>
       <Progress
         type="circle"
         percent={percent}
-        format={() => `${t("order.step")} ${step} ${t("order.stepOf")} 2`}
+        format={() => `Krok ${step} z 2`}
         className="order-container__progress"
       />
       {}

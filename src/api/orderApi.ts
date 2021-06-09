@@ -4,13 +4,13 @@ import { getCookie } from "../utils/utils";
 import { baseOrderUrl } from "./urls";
 
 export const OrderApi = {
-  sendOrder: (data: Partial<Order>) => {
+  sendOrder: (data: Partial<Order>, token: string) => {
     return Axios.request({
       method: "POST",
       data: { ...data, cart: data.cart && data.cart.id },
       url: baseOrderUrl,
       headers: {
-        Authorization: `Token ${getCookie("token")}`,
+        Authorization: `Token ${token}`,
       },
     });
   },

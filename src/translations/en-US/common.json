@@ -1,171 +1,25 @@
 {
-    "allProducts": "All products",
-    "categories": "Categories",
-    "cart": {
-        "clearCart": "Clear cart",
-        "continueShopping": "Continue shopping",
-        "empty": "Your cart is empty",
-        "error": "This functionality is intended for logged users",
-        "submitOrder": "Submit your order",
-        "toPay": "To pay",
-        "title": "Your cart"
-    },
-    "error": {
-        "emailForm": "Błędny format adresu email!",
-        "loginForm": "Login powinien zawierać conajmniej 4 znaki",
-        "passwordForm": "Password must have at least 5 characters",
-        "repeatPassword": "The two passwords that you entered do not match!",
-        "username": "A user with that username already exists!"
-    },
-    "homePage": {
-        "are": "Are you",
-        "dreamCar": "dream car",
-        "info": "This serivce is designed for automotive fans as well as car mechanics. On our website you can submit your",
-        "mechanic": "mechanic?",
-        "offer": "Do you want to offer your service here? Write to email",
-        "pick": "Browse. Choose. Search.",
-        "title": "Home page",
-        "wait": "We are waiting for your contact.",
-        "welcome": "Welcome in our service"
-    },
-    "language": {
-        "changed": "Language has been changed",
-        "english": "English",
-        "label": "Language",
-        "polish": "Polish"
-    },
-    "loginForm": {
-        "error": "Invalid login or password. Enter valid data!",
-        "loginError": "Please input your username!",
-        "logIn": "Log in",
-        "password": "Password",
-        "passwordError": "Please input your password!",
-        "successLogin": "You have been logged successfully!",
-        "rememberMe": "Remember me",
-        "register": "Register here",
-        "registerIn": "Register",
-        "registerInfo": "You didn't have an account?"
-
-    },
-    "mechanics": {
-        "address": "Address",
-        "backToList": "Back to list",
-        "city": "City",
-        "detailTitle": "Mechanic profile",
-        "emailAddress": "Email address",
-        "hourlyRate": "Hourly rate",
-        "phone": "Phone number",
-        "title": "Mechanics"
-    },
-    "menu": {
-        "chooseLanguage": "Pick language",
-        "logout": "Logout",
-        "myOrders": "My orders",
-        "settings": "Profile settings"
-    },
-    "navbar": {
-        "accountType": "Account type",
-        "mechanics": "Mechanics",
-        "products": "Products",
-        "typeClient": "Client",
-        "typeMechanic": "Mechanic"
-    },
-    "order": {
-        "back": "Back",
-        "backToList": "Back to order list",
-        "backToShopping": "Back to shopping",
-        "chooseMechanicFromList": "Choose mechanic from list below",
-        "chooseMechanic": "Choose mechanic",
-        "choosedMechanic": "Choosed mechanic",
-        "choosedMechanicSummary": "Choosed mechanik",
-        "confirmOrder": "Confirm your order",
-        "editMessage": "Edit message",
-        "extraMessage": "Write extra message to mechanic",
-        "mechanic": "Mechanic",
-        "mechanicReceived": "has received your order, he will contact you by email address. If you want to do it first, just click",
-        "mechanicReceived2": "to get more informations.",
-        "messageToMechanic": "Message to mechanic",
-        "mechanicReceivedRef": "mechanic's profile",
-        "title": "Order",
-        "submitOrder": "Submit your order",
-        "summaryOrder": "Order summary",
-        "step": "Step",
-        "stepOf": "of",
-        "thanks": "Thanks for your order",
-        "yourProducts": "Your products"
-    },
-    "orderList": {
-        "cancel": "Cancel",
-        "cancelOrder": "Cancel order",
-        "changeStatus": "Change order status",
-        "changedSuccess": "Successfully changed the status of the order",
-        "confirm": "Confirm",
-        "deleteQuestion": "Are you sure to cancel order",
-        "details": "Details",
-        "modalTitle": "Order cancelling",
-        "orderAssigned": "Orders assigned to me",
-        "orderId": "Order-id",
-        "orderDetails": "Order details",
-        "orderStatus": "Order status",
-        "status": {
-            "Accepted": "Accepted",
-            "Declined": "Declined",
-            "Finished": "Finished",
-            "In_progress": "In progress",
-            "In Progress": "In progress",
-            "New": "New",
-            "new": "New"
-        },
-        "successfullyCancel": "Successfully canceled the order",
-        "table": {
-            "action": "Action",
-            "changeOrderStatus": "Change order status",
-            "changeStatus": "Change status",
-            "date": "Date",
-            "orderId": "Order ID",
-            "status": "Status"
-        },
-        "title": "My orders"
-    },
-    "registerForm": {
-        "email": "E-mail",
-        "firstName": "First name",
-        "lastName": "Last name",
-        "password": "Password",
-        "registeredSuccessfully": "Registered successfully. System will log you in.",
-        "repeatPassword": "Repeat password",
-        "signUp": "Sign up"
-    },
-    "product": {
-        "addToCart": "Add to cart",
-        "addToCart0Error": "You can't add quantity equals 0",
-        "amount": "Amount of products",
-        "backToShopping": "Back to shopping",
-        "goToCart": "Go to cart",
-        "noSpecification": "Product doesn't have specification",
-        "priceDetails": "Price details",
-        "priceGross": "Gross price",
-        "priceNet": "Net price",
-        "quantity_0": " out of {{count}} piece",
-        "quantity_1": " out of {{count}} pieces",
-        "quantity_2": " out of {{count}} pieces",
-        "sortBy": "Sort by",
-        "specification": "Specification",
-        "specificationValue": "Value",
-        "successfullyAdded": "Successfully added to cart",
-        "warranty": "Warranty",
-        "value": "PLN"
-    },
-    "sortBy": {
-        "nameDown": "Name descending",
-        "nameUp": "Name descending",
-        "priceDown": "Price descending",
-        "priceUp": "Price ascending"
-    },
-    "warrantyYear_0": "{{count}} year",
-    "warrantyYear_1": "{{count}} years",
-    "warrantyYear_2": "{{count}} years",
-    "warrantyMonth_0": "{{count}} month",
-    "warrantyMonth_1": "{{count}} months",
-    "warrantyMonth_2": "{{count}} months"
+  "orderList": {
+    "cancel": "Cancel",
+    "cancelOrder": "Cancel order",
+    "changeStatus": "Change order status",
+    "changedSuccess": "Successfully changed the status of the order",
+    "confirm": "Confirm",
+    "deleteQuestion": "Are you sure to cancel order",
+    "details": "Details",
+    "modalTitle": "Order cancelling",
+    "orderAssigned": "Orders assigned to me",
+    "orderId": "Order-id",
+    "orderDetails": "Order details",
+    "orderStatus": "Order status",
+    "status": {
+      "Accepted": "Accepted",
+      "Declined": "Declined",
+      "Finished": "Finished",
+      "In_progress": "In progress",
+      "In Progress": "In progress",
+      "New": "New",
+      "new": "New"
+    }
+  }
 }

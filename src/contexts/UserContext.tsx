@@ -11,7 +11,7 @@ export interface UserContextInterface {
   logout: () => void;
   user: User | undefined;
   isLogged: boolean;
-  mechanicId: number | undefined;
+  token: string;
 }
 export const UserContext = createContext<UserContextInterface>({
   registerUser: () => ({} as Promise<unknown>),
@@ -20,14 +20,13 @@ export const UserContext = createContext<UserContextInterface>({
   logout: () => {},
   user: undefined,
   isLogged: false,
-  mechanicId: undefined,
+  token: "",
 });
 
 export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [cookies, , removeCookie] = useCookies(["token"]);
-  const [, setToken] = useState<string>("");
-  const [mechanicId, setMechanicId] = useState<number | undefined>(undefined);
+  const [token, setToken] = useState<string>("");
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const registerUser = (user: Partial<User>, group: string) => {
     const promise = new Promise((resolve) => {
@@ -41,11 +40,6 @@ export const UserProvider: React.FC = ({ children }) => {
       setToken(res.data.token);
       setUser(res.data.user);
       setIsLogged(true);
-      if (res.data.user.groups[0].name === "Mechanic") {
-        LoginApi.getMechanics(res.data.user.id).then((mechanic) => {
-          setMechanicId(mechanic.data[0].id);
-        });
-      }
     });
     return response;
   };
@@ -72,11 +66,6 @@ export const UserProvider: React.FC = ({ children }) => {
         setUser(res.data);
         setToken(cookies.token);
         setIsLogged(true);
-        if (res.data.groups[0].name === "Mechanic") {
-          LoginApi.getMechanics(res.data.id).then((mechanic) => {
-            setMechanicId(mechanic.data[0].id);
-          });
-        }
       });
   }, [cookies.token]);
 
@@ -89,7 +78,7 @@ export const UserProvider: React.FC = ({ children }) => {
         logout,
         user,
         isLogged,
-        mechanicId,
+        token,
       }}
     >
       {children}

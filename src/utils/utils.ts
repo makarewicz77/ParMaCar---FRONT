@@ -2,7 +2,6 @@ import Form, { FormInstance } from "antd/lib/form";
 import { TFunction } from "i18next";
 import { useImperativeHandle, Ref } from "react";
 import { environment } from "../environment";
-import logo from "../static/images/ParMaCar2.png";
 
 export const useFormWithRef = (ref?: Ref<FormInstance>) => {
   const form = Form.useForm();
@@ -23,8 +22,6 @@ export const getImageUrl = (image: string) => {
 export const cutDescription = (description: string) => {
   return description.slice(0, 56) + `...`;
 };
-
-export const LogoIcon = logo;
 
 export const getWarranty = (t: TFunction, warranty: string) => {
   const warrs = warranty.split("+");

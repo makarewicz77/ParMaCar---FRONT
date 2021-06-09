@@ -28,26 +28,26 @@ const LoginForm: React.FC<RouteComponentProps> = ({ history }) => {
     wrapperCol: { span: 26 },
   };
   const ref = useRef<FormInstance>(null);
-  const { t } = useTranslation("common");
   const [form] = useFormWithRef(ref);
   const [loading, setLoading] = useState(false);
   const [cookies, setCookie] = useCookies(["token"]);
   const user = useContext(UserContext);
-  // const [checked, setChecked] = useState(false);
   const onSave = (partialUser: Partial<User>) => {
     setLoading(true);
     user
       .loginUser(partialUser)
       .then((res: any) => {
         if (!res.error) {
-          message.success(t("loginForm.successLogin"));
+          message.success("Zalogowano się pomyślnie!");
           setCookie("token", res.data.token, { expires: addHours(8) });
           setLoading(false);
           history.push("/");
         }
       })
       .catch((e) => {
-        message.error(t("loginForm.error"));
+        message.error(
+          "Wprowadzono niepoprawne dane. Wprowadź prawidłowe dane!"
+        );
         setTimeout(() => message.destroy(), 2000);
         setLoading(false);
       });
@@ -80,15 +80,15 @@ const LoginForm: React.FC<RouteComponentProps> = ({ history }) => {
         <Form.Item
           label="Login"
           name="username"
-          rules={[{ required: true, message: t("loginForm.loginError") }]}
+          rules={[{ required: true, message: "Login nie może być pusty!" }]}
           initialValue={localStorage.getItem("login")}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label={t("loginForm.password")}
+          label={"Hasło"}
           name="password"
-          rules={[{ required: true, message: t("loginForm.passwordError") }]}
+          rules={[{ required: true, message: "Hasło nie może być puste!" }]}
           initialValue={localStorage.getItem("password")}
         >
           <Input.Password />
@@ -99,7 +99,7 @@ const LoginForm: React.FC<RouteComponentProps> = ({ history }) => {
             onChange={onChange}
             defaultChecked={localStorage.getItem("remember") ? true : false}
           >
-            {t("loginForm.rememberMe")}
+            {"Zapamiętaj mnie"}
           </Checkbox>
         </div>
         <Button
@@ -115,13 +115,8 @@ const LoginForm: React.FC<RouteComponentProps> = ({ history }) => {
           }
           {...tailLayout}
         >
-          {loading && <LoadingOutlined />} {t("loginForm.logIn")}
+          {loading && <LoadingOutlined />} Zaloguj się
         </Button>
-        <Divider className="ant-divider-horizontale" />
-        <h4 className="register_info">
-          {t("loginForm.registerInfo")}{" "}
-          <Link to="/register">{t("loginForm.register")}</Link>
-        </h4>
       </Form>
     </div>
   );

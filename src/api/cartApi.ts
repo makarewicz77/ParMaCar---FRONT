@@ -4,12 +4,12 @@ import { getCookie } from "../utils/utils";
 import { baseCartLineUrl, baseCartUrl } from "./urls";
 
 export const CartApi = {
-  getCart: (user: number) => {
+  getCart: (user: number, token: string) => {
     return axios.request({
       url: `${baseCartUrl}?user_id=${user}`,
       method: "GET",
       headers: {
-        Authorization: `Token ${getCookie("token")}`,
+        Authorization: `Token ${token}`,
       },
     });
   },

@@ -1,34 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  Breadcrumb,
-  Button,
-  Card,
-  Divider,
-  InputNumber,
-  message,
-  Modal,
-  Popover,
-  Table,
-} from "antd";
+import { Button, Card, InputNumber, message, Modal, Table } from "antd";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { ProductApi } from "../../../api/productApi";
-import { Product } from "../../../models/product";
+import { Detail, Product } from "../../../models/product";
 import Categories from "../../categories";
-import noAvailable from "../../../static/images/noavailable.jpg";
 import "./styles.scss";
-import {
-  getImageUrl,
-  getLinkToCategory,
-  getLinkToProduct,
-  getWarranty,
-} from "../../../utils/utils";
 import Loader from "react-loader-spinner";
-import { useTranslation } from "react-i18next";
-import { HomeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { fullPriceDetails } from "../ProductList/ProductList";
 import { CartContext } from "../../../contexts/CartContext";
 import { UserContext } from "../../../contexts/UserContext";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 type locationState = {
   id: number;
@@ -40,15 +21,14 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
   const id = location.state
     ? location.state.id
     : Number(history.location.pathname.split("/")[3]);
-  const { t } = useTranslation("common");
   const columns = [
     {
-      title: t("product.specification"),
+      title: "Specyfikacja",
       dataIndex: "key",
       render: (key: string) => <strong>{key}</strong>,
     },
     {
-      title: t("product.specificationValue"),
+      title: "Wartość",
       dataIndex: "value",
     },
   ];
@@ -58,9 +38,8 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
   const setQuantityToCart = (e: string | number | undefined) => {
     setQuantity(Number(e));
   };
-  const { addToCart, getProductQuantity, lines, updateLine } = useContext(
-    CartContext
-  );
+  const { addToCart, getProductQuantity, lines, updateLine } =
+    useContext(CartContext);
   const { isLogged } = useContext(UserContext);
   const addToCartClick = (
     event: React.MouseEvent<HTMLElement, MouseEvent> | undefined
@@ -77,13 +56,15 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
             setCartModal(true);
           }
         }
-      } else message.info(t("product.addToCart0Error"));
+      } else message.info("Nie możesz dodać ilości produktu równej 0");
   };
   const [cartModal, setCartModal] = useState(false);
   const handleCancel = () => {
     setCartModal(false);
   };
   const [quantityInCart, setQuantityInCart] = useState<number>(0);
+  const [specificationList, setSpecificationList] =
+    useState<Detail[] | undefined>(undefined);
   useEffect(() => {
     ProductApi.getProduct(id, setProduct);
     setQuantity(getProductQuantity(id));
@@ -94,17 +75,22 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
       setQuantityInCart(getProductQuantity(id));
     }
   }, [lines.length]);
+  useEffect(() => {
+    if (product) {
+      ProductApi.getSpecifications(
+        product.specifications,
+        setSpecificationList
+      );
+    }
+  }, [product]);
   const footer = (
     <div className="footer-content">
       <Button onClick={() => history.push(`/cart`)}>
-        {t("product.goToCart")}
+        {"Przejdź do koszyka"}
       </Button>
-      <Button onClick={() => setCartModal(false)}>
-        {t("product.backToShopping")}
-      </Button>
+      <Button onClick={() => setCartModal(false)}>{"Wróć do zakupów"}</Button>
     </div>
   );
-
   return (
     <div className="container">
       <div className="container-categories">
@@ -112,59 +98,15 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
       </div>
       {productDisplay ? (
         <div className="product-description">
-          <div>
-            <Breadcrumb>
-              <Link to="/">
-                <Breadcrumb.Item>
-                  {" "}
-                  <p className="text">
-                    <HomeOutlined /> {t("homePage.title")}
-                  </p>
-                </Breadcrumb.Item>
-              </Link>
-
-              <Breadcrumb.Item>
-                <a
-                  href={getLinkToCategory(
-                    product.category_id,
-                    product.category_name
-                  )}
-                >
-                  <p className="text">{product.category_name}</p>
-                </a>
-              </Breadcrumb.Item>
-              <Breadcrumb.Item>
-                <a href={getLinkToProduct(product.id, product.name)}>
-                  <p className="text">{product.name}</p>
-                </a>
-              </Breadcrumb.Item>
-            </Breadcrumb>
-            <Divider />
-          </div>
-
-          <div className="product-description__column">
-            <img
-              src={product.image ? getImageUrl(product.image) : noAvailable}
-              alt={product.name}
-              className="product-description__image"
-            />
-          </div>
           <div className="product-description__column-2">
             <h1>{product.name}</h1>
             <h2 className="product-description__column-2__producer">
               {product.producer}
             </h2>
-            <h3>
-              {t("product.priceGross")}: {product.gross} {t("product.value")}
-            </h3>
             <h3 className="product-description__column-2__net">
-              {t("product.priceNet")}: {product.net} {t("product.value")}
+              Cena: {product.net} zł.
             </h3>
             <h4>{product.description}</h4>
-            <h4>
-              {t("product.warranty")}:{" "}
-              <strong>{getWarranty(t, product.warranty)}</strong>{" "}
-            </h4>
             <div style={{ alignItems: "baseline", display: "flex" }}>
               <InputNumber
                 min={0}
@@ -172,24 +114,18 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
                 onChange={setQuantityToCart}
                 defaultValue={0}
               />
-              <p>
-                {" "}
-                {t(`product.quantity_${product.quantity === 1 ? 1 : 2}`, {
-                  count: product.quantity,
-                  postProcess: "interval",
-                })}
-              </p>
+              <p>z {product.quantity} sztuk</p>
               <Button onClick={addToCartClick}>
-                <ShoppingCartOutlined /> {t("product.addToCart")}
+                <ShoppingCartOutlined /> Dodaj do koszyka
               </Button>
             </div>
           </div>
           <div className="product-description__specification">
             <Table
               columns={columns}
-              dataSource={product.specifications}
+              dataSource={specificationList}
               size="small"
-              locale={{ emptyText: t("product.noSpecification") }}
+              locale={{ emptyText: "Brak specyfikacji" }}
             />
           </div>
 
@@ -197,11 +133,11 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
             visible={cartModal}
             title={
               <h3 className="product-modal__title">
-                {t("product.successfullyAdded")}
+                {"Pomyślnie dodano do koszyka"}
               </h3>
             }
-            okText={t("product.goToCart")}
-            cancelText={t("product.backToShopping")}
+            okText={"Przejdź do koszyka"}
+            cancelText={"Wróć do zakupów"}
             onCancel={handleCancel}
             closable={false}
             footer={footer}
@@ -211,32 +147,10 @@ const ProductView: React.FC<productProps> = ({ location, history }) => {
                 style={{ width: 160, margin: "auto" }}
                 cover={
                   <>
-                    {product.image === null ? (
-                      <img
-                        alt="example"
-                        src={noAvailable}
-                        className="product-modal__image"
-                      />
-                    ) : (
-                      <img
-                        alt="example"
-                        src={getImageUrl(product.image)}
-                        className="product-modal__image"
-                      />
-                    )}
                     <h5 className="product-modal__name">{product.name}</h5>
                   </>
                 }
-              >
-                <Popover
-                  content={fullPriceDetails(product.vat, product.net)}
-                  title="Szczegóły ceny"
-                >
-                  <h5 className="product-modal__price">
-                    {product.gross} {t("product.value")}
-                  </h5>
-                </Popover>
-              </Card>
+              ></Card>
             </div>
           </Modal>
         </div>

@@ -1,11 +1,9 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Button, Col, Row } from "antd";
 import React, { useContext } from "react";
-import { useTranslation } from "react-i18next";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import { User } from "../../models/user";
-import { LogoIcon } from "../../utils/utils";
 import UserOptions from "../login/UserOptions";
 
 import "./styles.scss";
@@ -21,38 +19,30 @@ const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({
   history,
 }) => {
   const count = useContext(CartContext).count;
-  const { t } = useTranslation("common");
   return (
     <>
       <Row>
-        <Col xs={12} sm={5} md={4} lg={3}>
-          <Link to="/">
-            <img src={LogoIcon} alt="logo" className="navbar_logo" />
-          </Link>
-        </Col>
         <div className="navbar">
           <Link to="/products" style={{ width: "100px" }}>
-            <p className="navbar-item">{t("navbar.products")}</p>
+            <p className="navbar-item">Produkty</p>
           </Link>
           <Link to="/profile-list" style={{ width: "100px" }}>
             {" "}
-            <p className="navbar-item">{t("navbar.mechanics")}</p>
+            <p className="navbar-item">Mechanicy</p>
           </Link>
           {user && (
             <Link to="/my-orders" style={{ width: "120px" }}>
               {" "}
-              <p className="navbar-item">{t("menu.myOrders")}</p>
+              <p className="navbar-item">Moje zamówienia</p>
             </Link>
           )}
         </div>
         <Col
-          xs={6}
-          sm={3}
-          md={2}
+          xs={7}
+          sm={4}
+          md={3}
           lg={user ? 1 : 2}
-          offset={
-            user ? (localStorage.getItem("language") === "pl" ? 6 : 6) : 9
-          }
+          offset={12}
           className="cart-col"
         >
           <Badge count={count} size="small" className="navbar-cart__badge">
@@ -69,34 +59,11 @@ const Navbar: React.FC<NavbarProps & RouteComponentProps> = ({
               className="login_button"
               onClick={() => setModalVisible(true)}
             >
-              <Link to="/login">{t("loginForm.logIn")}</Link>
+              <Link to="/login">Zaloguj się</Link>
             </Button>
             <Button type="primary" className="register_button">
-              <Link to="/register">{t("loginForm.registerIn")}</Link>
+              <Link to="/register">Zarejestruj się</Link>
             </Button>
-          </Col>
-        )}
-        {user && user.groups[0].name === "Mechanic" && (
-          <Col
-            xs={6}
-            sm={6}
-            md={8}
-            lg={localStorage.getItem("language") === "en" ? 4 : 3}
-            offset={0}
-          >
-            {t("navbar.accountType")}:{" "}
-            <strong>{t(`navbar.typeMechanic`)}</strong>
-          </Col>
-        )}
-        {user && user.groups[0].name === "Client" && (
-          <Col
-            xs={6}
-            sm={6}
-            md={8}
-            lg={localStorage.getItem("language") === "en" ? 4 : 3}
-            offset={0}
-          >
-            {t("navbar.accountType")}: <strong>{t(`navbar.typeClient`)}</strong>
           </Col>
         )}
         {user !== undefined && (

@@ -1,10 +1,11 @@
-class Detail{
-    key: string;
-    value: string;
-    constructor(obj:Detail){
-        this.key = obj.key;
-        this.value = obj.value;
-    }
+export interface Detail {
+  id: number;
+  key: string;
+  value: string;
+}
+
+export interface SpecificationLinks {
+  link: string;
 }
 
 export class Product {
@@ -15,12 +16,8 @@ export class Product {
   description: string;
   quantity: number;
   net: number;
-  gross: number;
-  vat: number;
   producer: string;
-  specifications: Detail[];
-  image: string;
-  warranty: string;
+  specifications: SpecificationLinks[];
   category_name: string;
   constructor(obj: Product) {
     this.id = obj.id;
@@ -30,12 +27,8 @@ export class Product {
     this.description = obj.description;
     this.quantity = obj.quantity;
     this.net = obj.net;
-    this.gross = obj.gross;
-    this.vat = obj.vat;
     this.producer = obj.producer;
     this.specifications = obj.specifications;
-    this.image = obj.image;
-    this.warranty = obj.warranty;
     this.category_name = obj.category_name;
   }
 }

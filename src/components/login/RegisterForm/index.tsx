@@ -2,7 +2,6 @@ import { Button, Input, message } from "antd";
 import Form from "antd/lib/form";
 import { FormInstance } from "antd/lib/form/Form";
 import React, { useContext, useRef } from "react";
-import { useTranslation } from "react-i18next";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import { User } from "../../../models/user";
@@ -19,7 +18,6 @@ const RegisterForm: React.FC<RouteComponentProps> = ({ history }) => {
     console.log("Failed:", errorInfo);
   };
   const ref = useRef<FormInstance>(null);
-  const { t } = useTranslation("common");
   const [form] = useFormWithRef(ref);
   const tailLayout = {
     wrapperCol: { span: 26 },
@@ -40,10 +38,10 @@ const RegisterForm: React.FC<RouteComponentProps> = ({ history }) => {
       .catch((e) => {
         const data = e.response.data;
         if (data.username) {
-          message.error(t("error.username"));
+          message.error("Użytkownik o podanym loginie już istnieje!");
         } else if (data.email) {
           //@@email poprawić
-          message.error("email error");
+          message.error("Email istnieje");
         }
       });
   };
@@ -57,27 +55,16 @@ const RegisterForm: React.FC<RouteComponentProps> = ({ history }) => {
         onFinishFailed={onFinishFailed}
         form={form}
       >
-        <Form.Item
-          label="Login"
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: t("error.loginForm"),
-              type: "string",
-              min: 4,
-            },
-          ]}
-        >
+        <Form.Item label="Login" name="username">
           <Input />
         </Form.Item>
         <Form.Item
-          label={t("registerForm.email")}
+          label={"Adres e-mail"}
           name="email"
           rules={[
             {
               required: true,
-              message: t("error.emailForm"),
+              message: "Błędny format adresu email!",
               type: "email",
             },
           ]}
@@ -85,54 +72,21 @@ const RegisterForm: React.FC<RouteComponentProps> = ({ history }) => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={t("registerForm.firstName")}
+          label={"Imię"}
           name="first_name"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
           <Input autoComplete="newpassword" />
         </Form.Item>
         <Form.Item
-          label={t("registerForm.lastName")}
+          label={"Nazwisko"}
           name="last_name"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
           <Input autoComplete="newpassword" />
         </Form.Item>
 
-        <Form.Item
-          label={t("loginForm.password")}
-          name="password"
-          hasFeedback
-          rules={[
-            { required: true, message: "Please input your password!" },
-            {
-              type: "string",
-              min: 5,
-              message: t("error.passwordForm"),
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item
-          label={t("registerForm.repeatPassword")}
-          name="repeatPassword"
-          dependencies={["password"]}
-          hasFeedback
-          rules={[
-            { required: true, message: "Please input your password!" },
-            ({ getFieldValue }) => ({
-              validator(rule, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  "The two passwords that you entered do not match!"
-                );
-              },
-            }),
-          ]}
-        >
+        <Form.Item label="Hasło" name="password">
           <Input.Password />
         </Form.Item>
         <Button
@@ -146,7 +100,7 @@ const RegisterForm: React.FC<RouteComponentProps> = ({ history }) => {
           }
           {...tailLayout}
         >
-          <h3>{t("registerForm.signUp")}</h3>
+          <h3>{"Załóż konto"}</h3>
         </Button>
       </Form>
     </div>
